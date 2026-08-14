@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- JMC 3-Diamond Triangle -->
+  <g transform="translate(18, 16)">
+    <polygon points="24,6 36,26 12,26" fill="#DC2626" />
+    <polygon points="14,28 26,48 2,48" fill="#111827" />
+    <polygon points="34,28 46,48 22,48" fill="#DC2626" />
+  </g>
+  <text x="80" y="49" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" letter-spacing="4" fill="#111827">JMC</text>
+</svg>

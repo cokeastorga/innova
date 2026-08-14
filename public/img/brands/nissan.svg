@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- Nissan Modern Monogram -->
+  <g transform="translate(18, 16)">
+    <!-- Top Arc -->
+    <path d="M 12 24 A 20 20 0 0 1 48 24" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <!-- Bottom Arc -->
+    <path d="M 12 24 A 20 20 0 0 0 48 24" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <!-- Nissan Text Inside -->
+    <text x="30" y="27" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-size="7.5" letter-spacing="1.5" fill="#111827">NISSAN</text>
+  </g>
+  <text x="82" y="47" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="22" letter-spacing="3" fill="#111827">NISSAN</text>
+</svg>

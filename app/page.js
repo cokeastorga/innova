@@ -1,0 +1,38 @@
+'use client';
+
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import BrandsCarousel from '@/components/BrandsCarousel';
+import AboutUs from '@/components/AboutUs';
+import Brands from '@/components/Brands';
+import Catalog from '@/components/Catalog';
+import Motorsport from '@/components/Motorsport';
+import WhyBuyHere from '@/components/WhyBuyHere';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
+import QuoteCart from '@/components/QuoteCart';
+import SocialFab from '@/components/SocialFab';
+
+export default function Home() {
+  useScrollReveal();
+
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <BrandsCarousel />
+        <AboutUs />
+        <Brands />
+        <Catalog />
+        <Motorsport />
+        <WhyBuyHere />
+        <Contact />
+      </main>
+      <Footer />
+      <QuoteCart />
+      <SocialFab />
+    </>
+  );
+}

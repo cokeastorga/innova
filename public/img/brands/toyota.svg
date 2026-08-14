@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- Toyota Ellipses -->
+  <g transform="translate(20, 16)">
+    <!-- Outer Ellipse -->
+    <ellipse cx="25" cy="24" rx="24" ry="17" stroke="#EB0A1E" stroke-width="3" fill="none" />
+    <!-- Inner Vertical Ellipse -->
+    <ellipse cx="25" cy="24" rx="8" ry="16" stroke="#EB0A1E" stroke-width="2.6" fill="none" />
+    <!-- Inner Horizontal Ellipse -->
+    <ellipse cx="25" cy="16" rx="16" ry="6" stroke="#EB0A1E" stroke-width="2.6" fill="none" />
+  </g>
+  <!-- TOYOTA Text -->
+  <text x="80" y="47" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="22" letter-spacing="3" fill="#111827">TOYOTA</text>
+</svg>

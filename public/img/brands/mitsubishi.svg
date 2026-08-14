@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- Mitsubishi 3 Red Diamonds -->
+  <g transform="translate(18, 16)">
+    <!-- Top Diamond -->
+    <polygon points="24,2 34,18 24,34 14,18" fill="#E60012" />
+    <!-- Bottom Left Diamond -->
+    <polygon points="14,18 4,34 14,50 24,34" fill="#E60012" />
+    <!-- Bottom Right Diamond -->
+    <polygon points="34,18 24,34 34,50 44,34" fill="#E60012" />
+  </g>
+  <!-- MITSUBISHI Text -->
+  <text x="76" y="47" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="16" letter-spacing="2.5" fill="#111827">MITSUBISHI</text>
+</svg>

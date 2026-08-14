@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- Maxus 3-triangles emblem -->
+  <defs>
+    <linearGradient id="maxusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#374151" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+    <linearGradient id="maxusAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(15, 12)">
+    <!-- Top Left Triangle -->
+    <polygon points="25,4 42,32 8,32" fill="url(#maxusGrad)" stroke="#1F2937" stroke-width="1.5" />
+    <!-- Top Right Triangle -->
+    <polygon points="45,4 62,32 28,32" fill="url(#maxusGrad)" stroke="#1F2937" stroke-width="1.5" />
+    <!-- Bottom Triangle (Inverted) -->
+    <polygon points="27,34 43,8 59,34" fill="url(#maxusAccent)" stroke="#EA580C" stroke-width="1.5" />
+  </g>
+  <!-- MAXUS Text -->
+  <text x="92" y="44" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="22" letter-spacing="3" fill="#111827">MAXUS</text>
+  <text x="94" y="56" font-family="'Inter', sans-serif" font-weight="700" font-size="7" letter-spacing="2" fill="#F97316">PRO REPUESTOS</text>
+</svg>

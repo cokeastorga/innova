@@ -1,0 +1,221 @@
+.quote-cart__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.quote-cart__panel {
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease forwards;
+}
+
+.quote-cart__header {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.quote-cart__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.quote-cart__count {
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.quote-cart__close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.quote-cart__close:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.quote-cart__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.quote-cart__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.quote-cart__empty-icon {
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.quote-cart__empty-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.quote-cart__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quote-cart__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.quote-cart__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.quote-cart__item-info {
+  flex: 1;
+  padding-right: 16px;
+}
+
+.quote-cart__item-name {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0 0 4px 0;
+}
+
+.quote-cart__item-brands {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.quote-cart__item-remove {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.quote-cart__item-remove:hover {
+  color: #EF4444;
+  background-color: #FEF2F2;
+}
+
+.quote-cart__footer {
+  padding: 24px;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.quote-cart__notes {
+  margin-bottom: 16px;
+}
+
+.quote-cart__notes-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.quote-cart__notes-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  resize: vertical;
+  background-color: var(--color-bg);
+  transition: border-color 0.2s ease;
+}
+
+.quote-cart__notes-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.quote-cart__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.quote-cart__btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.quote-cart__clear {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 8px;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.quote-cart__clear:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}

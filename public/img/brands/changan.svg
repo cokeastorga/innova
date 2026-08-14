@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- Changan Winged Shield / V -->
+  <g transform="translate(18, 16)">
+    <circle cx="24" cy="24" r="22" stroke="#2563EB" stroke-width="2.5" fill="none" />
+    <!-- V wing -->
+    <path d="M 12 16 L 24 34 L 36 16 L 28 16 L 24 24 L 20 16 Z" fill="#2563EB" />
+  </g>
+  <text x="76" y="49" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="20" letter-spacing="3" fill="#111827">CHANGAN</text>
+</svg>
