@@ -188,7 +188,7 @@ export const products = [
     id: 'kit-distribucion',
     name: 'Kit de Distribución Completo',
     category: 'motor',
-    image: null,
+    image: '/img/products/kit-distribucion.jpg',
     description: 'Kit completo con correa o cadena dentada de alta resistencia, tensores automáticos y poleas de guía. Calidad OEM.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'JMC', 'Mitsubishi', 'Volkswagen', 'Great Wall'],
     compatibleModels: {
@@ -208,7 +208,7 @@ export const products = [
     id: 'bomba-agua',
     name: 'Bomba de Agua Refrigeración',
     category: 'motor',
-    image: null,
+    image: '/img/products/bomba-agua.jpg',
     description: 'Bomba de agua con rodamiento sellado y sellos cerámicos de alta eficiencia para óptima refrigeración del motor.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'Volkswagen'],
     compatibleModels: {
@@ -224,7 +224,7 @@ export const products = [
     id: 'empaquetaduras',
     name: 'Juego de Empaquetaduras Motor',
     category: 'motor',
-    image: null,
+    image: '/img/products/kit-distribucion.jpg',
     description: 'Juegos de empaquetaduras de culata multilámina, múltiple de admisión/escape y tapa de válvulas reforzadas para turbo diésel.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JMC', 'Great Wall'],
     compatibleModels: {
@@ -240,7 +240,7 @@ export const products = [
     id: 'correa-accesorios',
     name: 'Correa de Accesorios Poly-V',
     category: 'motor',
-    image: null,
+    image: '/img/products/kit-distribucion.jpg',
     description: 'Correas Poly-V estriadas de alta durabilidad para alternador, bomba de dirección y compresor de aire acondicionado.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Great Wall', 'JAC', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -257,7 +257,7 @@ export const products = [
     id: 'tensor-correa',
     name: 'Tensor de Correa Automático',
     category: 'motor',
-    image: null,
+    image: '/img/products/kit-distribucion.jpg',
     description: 'Tensor automático con rodamiento sellado y mecanismo de resorte para mantener tensión constante en la correa de distribución.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'Mitsubishi'],
     compatibleModels: {
@@ -272,7 +272,7 @@ export const products = [
     id: 'polea-guia',
     name: 'Polea de Guía y Desvío',
     category: 'motor',
-    image: null,
+    image: '/img/products/kit-distribucion.jpg',
     description: 'Polea guía lisa con rodamiento blindado de alta durabilidad para correa de distribución y accesorios.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Volkswagen'],
     compatibleModels: {
@@ -288,7 +288,7 @@ export const products = [
     id: 'filtro-aceite',
     name: 'Filtro de Aceite Blindado',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-aceite.jpg',
     description: 'Filtro de aceite blindado giratorio con elemento filtrante sintético y válvula anti-retorno para protección del motor.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'SsangYong', 'DFSK', 'Changan'],
     compatibleModels: {
@@ -311,7 +311,7 @@ export const products = [
     id: 'filtro-aire',
     name: 'Filtro de Aire Motor',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-aire.jpg',
     description: 'Filtro de aire celulósico plisado de alta retención para caminos polvorientos y trabajo pesado.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'Volkswagen'],
     compatibleModels: {
@@ -330,7 +330,7 @@ export const products = [
     id: 'filtro-petroleo',
     name: 'Filtro de Petróleo / Diésel',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-petroleo.jpg',
     description: 'Filtro de combustible diésel con trampa separadora de agua de alta micrometría para protección de inyectores Common Rail.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'SsangYong'],
     compatibleModels: {
@@ -348,7 +348,7 @@ export const products = [
     id: 'filtro-habitaculo',
     name: 'Filtro de Polen / Habitáculo',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-aire.jpg',
     description: 'Filtro anti-polen con capa de carbón activado para aire limpio en la cabina. Retención de partículas PM2.5 y olores.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'Changan'],
     compatibleModels: {
@@ -365,7 +365,7 @@ export const products = [
     id: 'aceite-5w30',
     name: 'Aceite Wolver 5W-30 Sintético 4L',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-aceite.jpg',
     description: 'Aceite 100% sintético Wolver especificación ACEA C3 / API SN. 4 litros. Máxima protección del motor, ideal para filtros DPF diésel.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -386,7 +386,7 @@ export const products = [
     id: 'aceite-transmision',
     name: 'Aceite de Transmisión 75W-90 GL-5',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-aceite.jpg',
     description: 'Aceite de transmisión manual, diferencial y caja de transferencia 75W-90 sintético de alto rendimiento bajo cargas extremas.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall'],
     compatibleModels: {
@@ -404,7 +404,7 @@ export const products = [
     id: 'bandeja-suspension',
     name: 'Bandeja de Suspensión Delantera',
     category: 'suspension',
-    image: null,
+    image: '/img/products/bandeja-suspension.jpg',
     description: 'Bandejas de suspensión delantera completas con rótula prensada y bujes vulcanizados de alta durabilidad.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Great Wall', 'JAC', 'Volkswagen'],
     compatibleModels: {
@@ -421,7 +421,7 @@ export const products = [
     id: 'rotula',
     name: 'Rótulas de Suspensión Reforzadas',
     category: 'suspension',
-    image: null,
+    image: '/img/products/rotula.jpg',
     description: 'Rótulas de suspensión superior e inferior de alta carga para terrenos exigentes. Con guardapolvo de nitrilo incluido.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall'],
     compatibleModels: {
@@ -439,7 +439,7 @@ export const products = [
     id: 'terminal-direccion',
     name: 'Terminales y Axiales de Dirección',
     category: 'suspension',
-    image: null,
+    image: '/img/products/rotula.jpg',
     description: 'Terminal de dirección interior y exterior con bota de caucho reforzada y pasador cónico de acero templado.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JMC', 'JAC', 'Mitsubishi', 'Great Wall'],
     compatibleModels: {
@@ -456,7 +456,7 @@ export const products = [
     id: 'cremallera',
     name: 'Cremallera de Dirección Hidráulica',
     category: 'suspension',
-    image: null,
+    image: '/img/products/bandeja-suspension.jpg',
     description: 'Cremallera de dirección hidráulica y asistida electrónicamente con retenes de alta presión y fuelles nuevos.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen'],
     compatibleModels: {
@@ -471,7 +471,7 @@ export const products = [
     id: 'amortiguador',
     name: 'Amortiguadores Delanteros y Traseros',
     category: 'suspension',
-    image: null,
+    image: '/img/products/amortiguador.jpg',
     description: 'Amortiguadores de gas nitrógeno presurizado para suspensión delantera y trasera. Máxima estabilidad en caminos de ripio y carga.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Great Wall', 'Volkswagen', 'JAC', 'Changan'],
     compatibleModels: {
@@ -491,7 +491,7 @@ export const products = [
     id: 'kit-embrague',
     name: 'Kit de Embrague Reforzado',
     category: 'embrague',
-    image: null,
+    image: '/img/products/kit-embrague.jpg',
     description: 'Kit de embrague que incluye disco de alta fricción, prensa con diafragma reforzado y rodamiento de empuje. Calidad OEM.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -512,7 +512,7 @@ export const products = [
     id: 'disco-embrague',
     name: 'Disco de Embrague de Repuesto',
     category: 'embrague',
-    image: null,
+    image: '/img/products/kit-embrague.jpg',
     description: 'Disco de embrague orgánico con muelles amortiguadores progresivos para acople suave y prolongada vida útil.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC'],
     compatibleModels: {
@@ -527,7 +527,7 @@ export const products = [
     id: 'rodamiento-empuje',
     name: 'Rodamiento de Empuje / Collarín Hidráulico',
     category: 'embrague',
-    image: null,
+    image: '/img/products/kit-embrague.jpg',
     description: 'Rodamiento de empuje y actuador concéntrico hidráulico (CSC) con cuerpo reforzado para embragues diésel.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'Great Wall', 'Volkswagen'],
     compatibleModels: {
@@ -543,7 +543,7 @@ export const products = [
     id: 'cruceta-cardan',
     name: 'Cruceta de Cardán y Transmisión',
     category: 'embrague',
-    image: null,
+    image: '/img/products/kit-embrague.jpg',
     description: 'Cruceta de cardán con rodamientos de aguja sellados y grasera central. Elimina vibraciones a alta velocidad.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Great Wall', 'JAC', 'JMC'],
     compatibleModels: {
@@ -562,7 +562,7 @@ export const products = [
     id: 'pastillas-freno',
     name: 'Pastillas de Freno Cerámicas Delanteras',
     category: 'frenos',
-    image: null,
+    image: '/img/products/pastillas-freno.jpg',
     description: 'Pastillas de freno cerámicas de compuesto bajo polvo y silenciosas. Excelente frenado en frío y en pendientes prolongadas.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'Volkswagen', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -584,7 +584,7 @@ export const products = [
     id: 'discos-freno',
     name: 'Discos de Freno Ventilados',
     category: 'frenos',
-    image: null,
+    image: '/img/products/discos-freno.jpg',
     description: 'Discos de freno ventilados de fundición gris de alta disipación térmica. Balanceados de fábrica para evitar vibración al frenar.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'Changan'],
     compatibleModels: {
@@ -602,7 +602,7 @@ export const products = [
     id: 'tambor-freno',
     name: 'Tambores y Balatas Traseras',
     category: 'frenos',
-    image: null,
+    image: '/img/products/discos-freno.jpg',
     description: 'Tambor de freno trasero mecanizado con precisión y juego de balatas de frenado uniforme para pick-ups de carga.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'JMC', 'Great Wall', 'Mitsubishi'],
     compatibleModels: {
@@ -619,7 +619,7 @@ export const products = [
     id: 'cilindro-freno',
     name: 'Cilindro de Rueda / Freno Trasero',
     category: 'frenos',
-    image: null,
+    image: '/img/products/pastillas-freno.jpg',
     description: 'Cilindro hidráulico de rueda trasera con pistones tratados y retenes EPDM resistentes al líquido de freno DOT 4.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC'],
     compatibleModels: {
@@ -636,7 +636,7 @@ export const products = [
     id: 'ampolletas',
     name: 'Kit de Ampolletas Halógenas / LED',
     category: 'electrico',
-    image: null,
+    image: '/img/products/alternador.jpg',
     description: 'Ampolletas de alta potencia y visibilidad H4, H7, H11 en 12V con filtro UV para focos de camioneta.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'Volkswagen', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -657,7 +657,7 @@ export const products = [
     id: 'alternador',
     name: 'Alternador de Alto Amperaje',
     category: 'electrico',
-    image: null,
+    image: '/img/products/alternador.jpg',
     description: 'Alternador nuevo con regulador de voltaje incorporado y polea libre (OAP) para abastecer baterías y accesorios 4x4.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC'],
     compatibleModels: {
@@ -673,7 +673,7 @@ export const products = [
     id: 'motor-partida',
     name: 'Motor de Partida / Arranque Reforzado',
     category: 'electrico',
-    image: null,
+    image: '/img/products/motor-partida.jpg',
     description: 'Motor de partida con piñón Bendix reforzado y solenoide de alta potencia para arranques inmediatos en frío.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'Great Wall'],
     compatibleModels: {
@@ -689,7 +689,7 @@ export const products = [
     id: 'sensor-abs',
     name: 'Sensor de Velocidad ABS',
     category: 'electrico',
-    image: null,
+    image: '/img/products/alternador.jpg',
     description: 'Sensor de rueda ABS con cable apantallado y conector sellado original para control de tracción y estabilidad.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall'],
     compatibleModels: {
@@ -705,7 +705,7 @@ export const products = [
     id: 'desengrasante',
     name: 'Desengrasante Automotriz Concentrado',
     category: 'filtros',
-    image: null,
+    image: '/img/products/filtro-petroleo.jpg',
     description: 'Desengrasante biodegradable de grado profesional para lavado de motor, chasis y componentes mecánicos.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
