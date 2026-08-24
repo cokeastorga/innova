@@ -240,7 +240,7 @@ export const products = [
     id: 'correa-accesorios',
     name: 'Correa de Accesorios Poly-V',
     category: 'motor',
-    image: '/img/products/kit-distribucion.jpg',
+    image: '/img/products/correa-accesorios.jpg',
     description: 'Correas Poly-V estriadas de alta durabilidad para alternador, bomba de dirección y compresor de aire acondicionado.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Great Wall', 'JAC', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -365,7 +365,7 @@ export const products = [
     id: 'aceite-5w30',
     name: 'Aceite Wolver 5W-30 Sintético 4L',
     category: 'filtros',
-    image: '/img/products/filtro-aceite.jpg',
+    image: '/img/products/aceite-5w30.jpg',
     description: 'Aceite 100% sintético Wolver especificación ACEA C3 / API SN. 4 litros. Máxima protección del motor, ideal para filtros DPF diésel.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -386,7 +386,7 @@ export const products = [
     id: 'aceite-transmision',
     name: 'Aceite de Transmisión 75W-90 GL-5',
     category: 'filtros',
-    image: '/img/products/filtro-aceite.jpg',
+    image: '/img/products/aceite-transmision.jpg',
     description: 'Aceite de transmisión manual, diferencial y caja de transferencia 75W-90 sintético de alto rendimiento bajo cargas extremas.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall'],
     compatibleModels: {
@@ -439,7 +439,7 @@ export const products = [
     id: 'terminal-direccion',
     name: 'Terminales y Axiales de Dirección',
     category: 'suspension',
-    image: '/img/products/rotula.jpg',
+    image: '/img/products/terminal-direccion.jpg',
     description: 'Terminal de dirección interior y exterior con bota de caucho reforzada y pasador cónico de acero templado.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JMC', 'JAC', 'Mitsubishi', 'Great Wall'],
     compatibleModels: {
@@ -456,7 +456,7 @@ export const products = [
     id: 'cremallera',
     name: 'Cremallera de Dirección Hidráulica',
     category: 'suspension',
-    image: '/img/products/bandeja-suspension.jpg',
+    image: '/img/products/cremallera.jpg',
     description: 'Cremallera de dirección hidráulica y asistida electrónicamente con retenes de alta presión y fuelles nuevos.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen'],
     compatibleModels: {
@@ -527,7 +527,7 @@ export const products = [
     id: 'rodamiento-empuje',
     name: 'Rodamiento de Empuje / Collarín Hidráulico',
     category: 'embrague',
-    image: '/img/products/kit-embrague.jpg',
+    image: '/img/products/rodamiento-empuje.jpg',
     description: 'Rodamiento de empuje y actuador concéntrico hidráulico (CSC) con cuerpo reforzado para embragues diésel.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'Great Wall', 'Volkswagen'],
     compatibleModels: {
@@ -543,7 +543,7 @@ export const products = [
     id: 'cruceta-cardan',
     name: 'Cruceta de Cardán y Transmisión',
     category: 'embrague',
-    image: '/img/products/kit-embrague.jpg',
+    image: '/img/products/cruceta-cardan.jpg',
     description: 'Cruceta de cardán con rodamientos de aguja sellados y grasera central. Elimina vibraciones a alta velocidad.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Great Wall', 'JAC', 'JMC'],
     compatibleModels: {
@@ -602,7 +602,7 @@ export const products = [
     id: 'tambor-freno',
     name: 'Tambores y Balatas Traseras',
     category: 'frenos',
-    image: '/img/products/discos-freno.jpg',
+    image: '/img/products/tambor-freno.jpg',
     description: 'Tambor de freno trasero mecanizado con precisión y juego de balatas de frenado uniforme para pick-ups de carga.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'JMC', 'Great Wall', 'Mitsubishi'],
     compatibleModels: {
@@ -619,7 +619,7 @@ export const products = [
     id: 'cilindro-freno',
     name: 'Cilindro de Rueda / Freno Trasero',
     category: 'frenos',
-    image: '/img/products/pastillas-freno.jpg',
+    image: '/img/products/cilindro-freno.jpg',
     description: 'Cilindro hidráulico de rueda trasera con pistones tratados y retenes EPDM resistentes al líquido de freno DOT 4.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC'],
     compatibleModels: {
@@ -636,7 +636,7 @@ export const products = [
     id: 'ampolletas',
     name: 'Kit de Ampolletas Halógenas / LED',
     category: 'electrico',
-    image: '/img/products/alternador.jpg',
+    image: '/img/products/ampolletas.jpg',
     description: 'Ampolletas de alta potencia y visibilidad H4, H7, H11 en 12V con filtro UV para focos de camioneta.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'Volkswagen', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
@@ -689,7 +689,7 @@ export const products = [
     id: 'sensor-abs',
     name: 'Sensor de Velocidad ABS',
     category: 'electrico',
-    image: '/img/products/alternador.jpg',
+    image: '/img/products/sensor-abs.jpg',
     description: 'Sensor de rueda ABS con cable apantallado y conector sellado original para control de tracción y estabilidad.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall'],
     compatibleModels: {
@@ -705,7 +705,7 @@ export const products = [
     id: 'desengrasante',
     name: 'Desengrasante Automotriz Concentrado',
     category: 'filtros',
-    image: '/img/products/filtro-petroleo.jpg',
+    image: '/img/products/desengrasante.jpg',
     description: 'Desengrasante biodegradable de grado profesional para lavado de motor, chasis y componentes mecánicos.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
