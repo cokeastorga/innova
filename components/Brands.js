@@ -126,6 +126,8 @@ export default function Brands() {
 
   return (
     <section id="marcas" className="brands section section--surface">
+      <div id="repuestos" style={{ position: 'relative', top: '-80px', visibility: 'hidden' }} />
+      <div id="productos" style={{ position: 'relative', top: '-80px', visibility: 'hidden' }} />
       <div className="container reveal">
         <div className="brands__header">
           <span className="section-tag">MARCAS &amp; MODELOS</span>

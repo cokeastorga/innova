@@ -4,11 +4,10 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import Preloader from '@/components/Preloader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Brands from '@/components/Brands';
+import Motorsport from '@/components/Motorsport';
 import BrandsCarousel from '@/components/BrandsCarousel';
 import AboutUs from '@/components/AboutUs';
-import Brands from '@/components/Brands';
-import Catalog from '@/components/Catalog';
-import Motorsport from '@/components/Motorsport';
 import WhyBuyHere from '@/components/WhyBuyHere';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -25,7 +24,6 @@ export default function Home() {
       <main>
         <Hero />
         <Brands />
-        <Catalog />
         <Motorsport />
         <BrandsCarousel />
         <AboutUs />

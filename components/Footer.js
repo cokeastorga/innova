@@ -18,8 +18,7 @@ export default function Footer() {
           
           <nav className="footer__nav">
             <a href="#inicio" className="footer__link">Inicio</a>
-            <a href="#marcas" className="footer__link">Marcas</a>
-            <a href="#productos" className="footer__link">Productos</a>
+            <a href="#marcas" className="footer__link">Marcas &amp; Repuestos</a>
             <a href="#nosotros" className="footer__link">Nosotros</a>
             <a href="#contacto" className="footer__link">Contacto</a>
           </nav>

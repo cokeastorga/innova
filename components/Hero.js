@@ -68,9 +68,9 @@ export default function Hero() {
           >
             <button 
               className="btn btn--primary" 
-              onClick={(e) => handleSmoothScroll(e, 'productos')}
+              onClick={(e) => handleSmoothScroll(e, 'marcas')}
             >
-              Explorar Catálogo
+              Explorar Repuestos
             </button>
             <a 
               href="https://wa.me/56961546709" 
