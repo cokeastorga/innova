@@ -24,11 +24,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <BrandsCarousel />
-        <AboutUs />
         <Brands />
         <Catalog />
         <Motorsport />
+        <BrandsCarousel />
+        <AboutUs />
         <WhyBuyHere />
         <Contact />
       </main>

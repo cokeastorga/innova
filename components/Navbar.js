@@ -46,9 +46,9 @@ export default function Navbar() {
             </svg>
           </button>
           <a href="#inicio" className="navbar__link" onClick={(e) => handleSmoothScroll(e, 'inicio')}>Inicio</a>
-          <a href="#nosotros" className="navbar__link" onClick={(e) => handleSmoothScroll(e, 'nosotros')}>Nosotros</a>
           <a href="#marcas" className="navbar__link" onClick={(e) => handleSmoothScroll(e, 'marcas')}>Marcas</a>
           <a href="#productos" className="navbar__link" onClick={(e) => handleSmoothScroll(e, 'productos')}>Productos</a>
+          <a href="#nosotros" className="navbar__link" onClick={(e) => handleSmoothScroll(e, 'nosotros')}>Nosotros</a>
           <a href="#contacto" className="navbar__link" onClick={(e) => handleSmoothScroll(e, 'contacto')}>Contacto</a>
         </div>
 
