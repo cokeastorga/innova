@@ -1,274 +1,124 @@
 /* ============================================================
-   INNOVA CAMIONETAS — Video Preloader Cinemático
+   Aesthetic Minimalist Spinner Preloader (Sin logo, sin letras)
    ============================================================ */
 
-.preloader-cinematic {
+.preloader-aesthetic {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   z-index: 999999;
-  background-color: #040507;
+  background-color: #0A0C10;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   overflow: hidden;
   user-select: none;
   touch-action: none;
   opacity: 1;
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.55s ease;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.6s ease;
 }
 
-.preloader-cinematic--fading {
+.preloader-aesthetic--fading {
   opacity: 0;
   pointer-events: none;
-  transform: scale(1.02);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Ambient glow points matching golden/amber reflections */
-.preloader-cinematic__ambient {
+/* Ambient glow in background */
+.preloader-aesthetic__glow {
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
-  filter: blur(150px);
+  background: radial-gradient(circle, rgba(235, 94, 40, 0.16) 0%, rgba(132, 204, 22, 0.06) 45%, transparent 70%);
+  filter: blur(60px);
   pointer-events: none;
-  opacity: 0.22;
-  animation: ambientPulse 5s ease-in-out infinite alternate;
+  animation: aestheticGlowPulse 2.5s ease-in-out infinite alternate;
 }
 
-.preloader-cinematic__ambient--gold {
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.6) 0%, transparent 70%);
-}
-
-.preloader-cinematic__ambient--cyan {
-  bottom: 10%;
-  left: 15%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, transparent 70%);
-  animation-delay: -2.5s;
-}
-
-/* Top bar controls */
-.preloader-cinematic__top-controls {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 28px;
-  z-index: 50;
-}
-
-.preloader-cinematic__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(20, 24, 32, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: rgba(255, 255, 255, 0.85);
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
-  padding: 7px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.preloader-cinematic__btn:hover {
-  background: rgba(30, 36, 48, 0.9);
-  color: #FFFFFF;
-  border-color: rgba(234, 179, 8, 0.5);
-  box-shadow: 0 0 16px rgba(234, 179, 8, 0.2);
-  transform: translateY(-1px);
-}
-
-.preloader-cinematic__btn--sound svg {
-  color: #EAB308;
-}
-
-.preloader-cinematic__skip-icon {
-  font-size: 0.75rem;
-  opacity: 0.7;
-}
-
-/* Video Viewport */
-.preloader-cinematic__viewport {
-  flex: 1;
-  width: 100%;
-  max-width: 1100px;
+/* Spinner Container */
+.preloader-aesthetic__spinner {
+  position: relative;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
-  z-index: 10;
+  z-index: 2;
 }
 
-.preloader-cinematic__video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 860px;
-  aspect-ratio: 16 / 9;
-  border-radius: 18px;
-  overflow: hidden;
-  background-color: #040507;
-  box-shadow: 
-    0 24px 60px -15px rgba(0, 0, 0, 0.95),
-    0 0 45px -10px rgba(234, 179, 8, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-.preloader-cinematic__video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  background-color: #040507;
-}
-
-/* Edge glow */
-.preloader-cinematic__video-glow {
+/* Outer Ring */
+.preloader-aesthetic__ring {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 30px rgba(4, 5, 7, 0.6);
-  border-radius: 18px;
-}
-
-/* HUD Tachometer & Status */
-.preloader-cinematic__hud {
-  width: 100%;
-  max-width: 680px;
-  padding: 0 24px calc(24px + env(safe-area-inset-bottom, 12px));
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 50;
-}
-
-.preloader-cinematic__hud-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.preloader-cinematic__hud-status {
-  font-family: var(--font-heading, system-ui, sans-serif);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.85);
-  text-transform: uppercase;
-}
-
-.preloader-cinematic__hud-percent {
-  font-family: var(--font-heading, system-ui, sans-serif);
-  font-size: 0.92rem;
-  font-weight: 800;
-  color: #EAB308;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
-}
-
-.preloader-cinematic__track {
-  position: relative;
-  width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 9999px;
-  overflow: visible;
-}
-
-.preloader-cinematic__fill {
-  height: 100%;
-  background: linear-gradient(90deg, #38BDF8 0%, #EAB308 55%, #F97316 100%);
-  border-radius: 9999px;
-  box-shadow: 0 0 14px rgba(234, 179, 8, 0.8);
-  transition: width 0.08s linear;
-}
-
-.preloader-cinematic__laser-point {
-  position: absolute;
-  top: 50%;
-  width: 9px;
-  height: 9px;
   border-radius: 50%;
-  background: #FFFFFF;
-  box-shadow: 0 0 12px 3px #EAB308;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: left 0.08s linear;
 }
 
-.preloader-cinematic__footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 2px;
+.preloader-aesthetic__ring--outer {
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: var(--color-accent, #EB5E28);
+  border-right-color: rgba(235, 94, 40, 0.35);
+  animation: aestheticSpinClockwise 1.1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+  box-shadow: 0 0 16px rgba(235, 94, 40, 0.2);
 }
 
-.preloader-cinematic__subtext {
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.4);
+/* Inner Ring */
+.preloader-aesthetic__ring--inner {
+  inset: 9px;
+  border: 2px solid transparent;
+  border-bottom-color: var(--color-lime, #84CC16);
+  border-left-color: rgba(132, 204, 22, 0.3);
+  animation: aestheticSpinCounter 0.85s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite reverse;
 }
 
-/* Animations */
-@keyframes ambientPulse {
+/* Center Glowing Dot */
+.preloader-aesthetic__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px #FFFFFF, 0 0 20px rgba(235, 94, 40, 0.8);
+  animation: aestheticDotPulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes aestheticSpinClockwise {
   0% {
-    transform: translateX(-50%) scale(0.9);
-    opacity: 0.16;
+    transform: rotate(0deg);
   }
   100% {
-    transform: translateX(-50%) scale(1.1);
-    opacity: 0.28;
+    transform: rotate(360deg);
   }
 }
 
-/* Mobile responsive */
-@media (max-width: 640px) {
-  .preloader-cinematic__top-controls {
-    padding: 16px 18px;
+@keyframes aestheticSpinCounter {
+  0% {
+    transform: rotate(0deg);
   }
-
-  .preloader-cinematic__btn {
-    padding: 6px 12px;
-    font-size: 0.72rem;
+  100% {
+    transform: rotate(360deg);
   }
+}
 
-  .preloader-cinematic__viewport {
-    padding: 0 12px;
+@keyframes aestheticDotPulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
   }
-
-  .preloader-cinematic__video-wrapper {
-    border-radius: 12px;
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+    box-shadow: 0 0 14px #FFFFFF, 0 0 24px var(--color-accent, #EB5E28);
   }
+}
 
-  .preloader-cinematic__hud {
-    padding: 0 18px calc(18px + env(safe-area-inset-bottom, 8px));
+@keyframes aestheticGlowPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.12;
   }
-
-  .preloader-cinematic__hud-status {
-    font-size: 0.7rem;
-  }
-
-  .preloader-cinematic__hud-percent {
-    font-size: 0.85rem;
-  }
-
-  .preloader-cinematic__subtext {
-    font-size: 0.62rem;
+  100% {
+    transform: scale(1.15);
+    opacity: 0.22;
   }
 }
