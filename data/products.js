@@ -15,126 +15,336 @@
    ============================================================ */
 export const brands = [
   {
-    id: 'maxus',
-    name: 'Maxus',
-    featured: true,
-    logo: '/img/brands/maxus.svg',
-    description: 'Distribuidor especializado en Maxus con todos sus modelos.',
-    models: [
-      { name: 'T60', years: '2017-2024', image: '/img/models/maxus/t60.jpg', type: 'Pickup 4x4 / 4x2' },
-      { name: 'T90', years: '2023-2024', image: '/img/models/maxus/t90-black.jpg', type: 'Pickup Bi-Turbo' },
-      { name: 'V80', years: '2015-2024', image: '/img/models/maxus/v80.jpg', type: 'Furgón Cargo / Pasajeros' },
-      { name: 'V90', years: '2020-2024', image: '/img/models/maxus/v80.jpg', type: 'Furgón Maxi Cargo' },
-      { name: 'G10', years: '2015-2024', image: '/img/models/maxus/g10.jpg', type: 'Van Pasajeros / Cargo' },
-      { name: 'D60', years: '2021-2024', image: '/img/models/maxus/d60.jpg', type: 'SUV Familiar' },
-      { name: 'D90', years: '2022-2024', image: '/img/models/maxus/d90.jpg', type: 'SUV 4x4 Offroad' },
-      { name: 'eDeliver 3', years: '2022-2024', image: '/img/models/maxus/edeliver3.jpg', type: '100% Eléctrico' },
-    ],
+    "id": "maxus",
+    "name": "Maxus",
+    "featured": true,
+    "logo": "/img/brands/maxus.svg",
+    "description": "Distribuidor especializado en Maxus con todos sus modelos.",
+    "models": [
+      {
+        "name": "T60",
+        "years": "2017-2024",
+        "image": "/img/models/maxus/t60.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "T90",
+        "years": "2023-2024",
+        "image": "/img/models/maxus/t90-black.jpg",
+        "type": "Pickup Bi-Turbo"
+      },
+      {
+        "name": "V80",
+        "years": "2015-2024",
+        "image": "/img/models/maxus/v80.jpg",
+        "type": "Furgón Cargo / Pasajeros"
+      },
+      {
+        "name": "V90",
+        "years": "2020-2024",
+        "image": "/img/models/maxus/v80.jpg",
+        "type": "Furgón Maxi Cargo"
+      },
+      {
+        "name": "G10",
+        "years": "2015-2024",
+        "image": "/img/models/maxus/g10.jpg",
+        "type": "Van Pasajeros / Cargo"
+      },
+      {
+        "name": "D60",
+        "years": "2021-2024",
+        "image": "/img/models/maxus/d60.jpg",
+        "type": "SUV Familiar"
+      },
+      {
+        "name": "D90",
+        "years": "2022-2024",
+        "image": "/img/models/maxus/d90.jpg",
+        "type": "SUV 4x4 Offroad"
+      },
+      {
+        "name": "eDeliver 3",
+        "years": "2022-2024",
+        "image": "/img/models/maxus/edeliver3.jpg",
+        "type": "100% Eléctrico"
+      }
+    ]
   },
   {
-    id: 'toyota',
-    name: 'Toyota',
-    logo: '/img/brands/toyota.svg',
-    models: [
-      { name: 'Hilux', years: '2005-2024' },
-      { name: 'Hilux Revo', years: '2016-2024' },
-      { name: 'Land Cruiser Prado', years: '2010-2024' },
-      { name: 'Fortuner', years: '2016-2024' },
-    ],
+    "id": "toyota",
+    "name": "Toyota",
+    "logo": "/img/brands/toyota.svg",
+    "models": [
+      {
+        "name": "Hilux",
+        "years": "2005-2024",
+        "image": "/img/models/toyota/hilux.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Hilux Revo",
+        "years": "2016-2024",
+        "image": "/img/models/toyota/hilux-revo.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Land Cruiser Prado",
+        "years": "2010-2024",
+        "image": "/img/models/toyota/prado.jpg",
+        "type": "SUV 4x4 Offroad"
+      },
+      {
+        "name": "Fortuner",
+        "years": "2016-2024",
+        "image": "/img/models/toyota/fortuner.jpg",
+        "type": "SUV 4x4 Familiar"
+      }
+    ]
   },
   {
-    id: 'nissan',
-    name: 'Nissan',
-    logo: '/img/brands/nissan.svg',
-    models: [
-      { name: 'NP300', years: '2008-2024' },
-      { name: 'Frontier', years: '2015-2024' },
-      { name: 'Navara', years: '2015-2024' },
-      { name: 'X-Trail', years: '2014-2024' },
-    ],
+    "id": "nissan",
+    "name": "Nissan",
+    "logo": "/img/brands/nissan.svg",
+    "models": [
+      {
+        "name": "NP300",
+        "years": "2008-2024",
+        "image": "/img/models/nissan/np300.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Frontier",
+        "years": "2015-2024",
+        "image": "/img/models/nissan/frontier.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Navara",
+        "years": "2015-2024",
+        "image": "/img/models/nissan/navara.jpg",
+        "type": "Pickup 4x4"
+      },
+      {
+        "name": "X-Trail",
+        "years": "2014-2024",
+        "image": "/img/models/nissan/xtrail.jpg",
+        "type": "SUV Familiar"
+      }
+    ]
   },
   {
-    id: 'mitsubishi',
-    name: 'Mitsubishi',
-    logo: '/img/brands/mitsubishi.svg',
-    models: [
-      { name: 'L200', years: '2006-2024' },
-      { name: 'L200 Triton', years: '2015-2024' },
-      { name: 'Montero Sport', years: '2016-2024' },
-    ],
+    "id": "mitsubishi",
+    "name": "Mitsubishi",
+    "logo": "/img/brands/mitsubishi.svg",
+    "models": [
+      {
+        "name": "L200",
+        "years": "2006-2024",
+        "image": "/img/models/mitsubishi/l200.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "L200 Triton",
+        "years": "2015-2024",
+        "image": "/img/models/mitsubishi/l200-triton.jpg",
+        "type": "Pickup 4x4 Heavy Duty"
+      },
+      {
+        "name": "Montero Sport",
+        "years": "2016-2024",
+        "image": "/img/models/mitsubishi/montero-sport.jpg",
+        "type": "SUV 4x4 Offroad"
+      }
+    ]
   },
   {
-    id: 'volkswagen',
-    name: 'Volkswagen',
-    logo: '/img/brands/volkswagen.svg',
-    models: [
-      { name: 'Amarok', years: '2010-2024' },
-      { name: 'Amarok V6', years: '2018-2024' },
-    ],
+    "id": "volkswagen",
+    "name": "Volkswagen",
+    "logo": "/img/brands/volkswagen.svg",
+    "models": [
+      {
+        "name": "Amarok",
+        "years": "2010-2024",
+        "image": "/img/models/volkswagen/amarok.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Amarok V6",
+        "years": "2018-2024",
+        "image": "/img/models/volkswagen/amarok-v6.jpg",
+        "type": "Pickup V6 4Motion"
+      }
+    ]
   },
   {
-    id: 'greatwall',
-    name: 'Great Wall',
-    logo: '/img/brands/greatwall.svg',
-    models: [
-      { name: 'Poer', years: '2021-2024' },
-      { name: 'Wingle 6', years: '2015-2022' },
-      { name: 'Wingle 7', years: '2018-2024' },
-    ],
+    "id": "greatwall",
+    "name": "Great Wall",
+    "logo": "/img/brands/greatwall.svg",
+    "models": [
+      {
+        "name": "Poer",
+        "years": "2021-2024",
+        "image": "/img/models/greatwall/poer.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Wingle 6",
+        "years": "2015-2022",
+        "image": "/img/models/greatwall/wingle6.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Wingle 7",
+        "years": "2018-2024",
+        "image": "/img/models/greatwall/wingle7.jpg",
+        "type": "Pickup 4x4 Turbo Diésel"
+      }
+    ]
   },
   {
-    id: 'jac',
-    name: 'JAC',
-    logo: '/img/brands/jac.svg',
-    models: [
-      { name: 'T6', years: '2016-2024' },
-      { name: 'T8', years: '2019-2024' },
-      { name: 'T8 Pro', years: '2021-2024' },
-      { name: 'Sunray', years: '2018-2024' },
-    ],
+    "id": "jac",
+    "name": "JAC",
+    "logo": "/img/brands/jac.svg",
+    "models": [
+      {
+        "name": "T6",
+        "years": "2016-2024",
+        "image": "/img/models/jac/t6.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "T8",
+        "years": "2019-2024",
+        "image": "/img/models/jac/t8.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "T8 Pro",
+        "years": "2021-2024",
+        "image": "/img/models/jac/t8-pro.jpg",
+        "type": "Pickup 4x4 Turbo"
+      },
+      {
+        "name": "Sunray",
+        "years": "2018-2024",
+        "image": "/img/models/jac/sunray.jpg",
+        "type": "Furgón Cargo / Minibús"
+      }
+    ]
   },
   {
-    id: 'jmc',
-    name: 'JMC',
-    logo: '/img/brands/jmc.svg',
-    models: [
-      { name: 'Vigus', years: '2015-2024' },
-      { name: 'Vigus Pro', years: '2021-2024' },
-      { name: 'Boarding', years: '2016-2024' },
-      { name: 'Carrying', years: '2012-2024' },
-    ],
+    "id": "jmc",
+    "name": "JMC",
+    "logo": "/img/brands/jmc.svg",
+    "models": [
+      {
+        "name": "Vigus",
+        "years": "2015-2024",
+        "image": "/img/models/jmc/vigus.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Vigus Pro",
+        "years": "2021-2024",
+        "image": "/img/models/jmc/vigus-pro.jpg",
+        "type": "Pickup 4x4 Automática"
+      },
+      {
+        "name": "Boarding",
+        "years": "2016-2024",
+        "image": "/img/models/jmc/boarding.jpg",
+        "type": "Pickup 4x2 Trabajo"
+      },
+      {
+        "name": "Carrying",
+        "years": "2012-2024",
+        "image": "/img/models/jmc/carrying.jpg",
+        "type": "Camión Ligero Chasis"
+      }
+    ]
   },
   {
-    id: 'dfsk',
-    name: 'DFSK',
-    logo: '/img/brands/dfsk.svg',
-    models: [
-      { name: 'Glory 580', years: '2019-2024' },
-      { name: 'EC35', years: '2020-2024' },
-      { name: 'C31', years: '2015-2024' },
-      { name: 'K01', years: '2016-2024' },
-    ],
+    "id": "dfsk",
+    "name": "DFSK",
+    "logo": "/img/brands/dfsk.svg",
+    "models": [
+      {
+        "name": "Glory 580",
+        "years": "2019-2024",
+        "image": "/img/models/dfsk/glory580.jpg",
+        "type": "SUV Familiar 7 Pasajeros"
+      },
+      {
+        "name": "EC35",
+        "years": "2020-2024",
+        "image": "/img/models/dfsk/ec35.jpg",
+        "type": "Furgón 100% Eléctrico"
+      },
+      {
+        "name": "C31",
+        "years": "2015-2024",
+        "image": "/img/models/dfsk/c31.jpg",
+        "type": "Minitruck Cabina Simple"
+      },
+      {
+        "name": "K01",
+        "years": "2016-2024",
+        "image": "/img/models/dfsk/k01.jpg",
+        "type": "Minitruck Utilitario"
+      }
+    ]
   },
   {
-    id: 'ssangyong',
-    name: 'SsangYong',
-    logo: '/img/brands/ssangyong.svg',
-    models: [
-      { name: 'Actyon Sports', years: '2012-2022' },
-      { name: 'Musso', years: '2018-2024' },
-      { name: 'Musso Grand', years: '2020-2024' },
-      { name: 'Rexton', years: '2018-2024' },
-    ],
+    "id": "ssangyong",
+    "name": "SsangYong",
+    "logo": "/img/brands/ssangyong.svg",
+    "models": [
+      {
+        "name": "Actyon Sports",
+        "years": "2012-2022",
+        "image": "/img/models/ssangyong/actyon-sports.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Musso",
+        "years": "2018-2024",
+        "image": "/img/models/ssangyong/musso.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Musso Grand",
+        "years": "2020-2024",
+        "image": "/img/models/ssangyong/musso-grand.jpg",
+        "type": "Pickup 4x4 Gran Capacidad"
+      },
+      {
+        "name": "Rexton",
+        "years": "2018-2024",
+        "image": "/img/models/ssangyong/rexton.jpg",
+        "type": "SUV 4x4 Familiar"
+      }
+    ]
   },
   {
-    id: 'changan',
-    name: 'Changan',
-    logo: '/img/brands/changan.svg',
-    models: [
-      { name: 'Hunter', years: '2021-2024' },
-      { name: 'Hunter Plus', years: '2022-2024' },
-    ],
-  },
+    "id": "changan",
+    "name": "Changan",
+    "logo": "/img/brands/changan.svg",
+    "models": [
+      {
+        "name": "Hunter",
+        "years": "2021-2024",
+        "image": "/img/models/changan/hunter.jpg",
+        "type": "Pickup 4x4 / 4x2"
+      },
+      {
+        "name": "Hunter Plus",
+        "years": "2022-2024",
+        "image": "/img/models/changan/hunter-plus.jpg",
+        "type": "Pickup 4x4 Turbo Diésel"
+      }
+    ]
+  }
 ];
 
 /* ============================================================
