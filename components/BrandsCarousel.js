@@ -55,7 +55,10 @@ export default function BrandsCarousel() {
                   <span className="brands-carousel__fallback">{brand.name.charAt(0)}</span>
                 )}
               </div>
-              <span className="brands-carousel__name">{brand.name}</span>
+              <div className="brands-carousel__info">
+                <span className="brands-carousel__name">{brand.name}</span>
+                <span className="brands-carousel__subtitle">{brand.models?.length || 0} modelos</span>
+              </div>
             </a>
           ))}
         </div>

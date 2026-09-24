@@ -129,7 +129,7 @@
 }
 
 .brand-card__logo-wrapper {
-  height: 36px;
+  height: 42px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -138,14 +138,14 @@
 }
 
 .brand-card__logo {
-  max-width: 78px;
-  max-height: 32px;
+  max-width: 50px;
+  max-height: 38px;
   object-fit: contain;
   transition: transform 0.2s ease;
 }
 
 .brand-card--carousel:hover .brand-card__logo {
-  transform: scale(1.06);
+  transform: scale(1.1);
 }
 
 .brand-card__logo-fallback {

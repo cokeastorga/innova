@@ -1,9 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
-  <!-- JAC 5-pointed star in oval -->
-  <g transform="translate(18, 16)">
-    <ellipse cx="24" cy="24" rx="23" ry="18" stroke="#DC2626" stroke-width="2.5" fill="none" />
-    <!-- 5-pointed Star lines -->
-    <polygon points="24,10 28,19 38,19 30,25 33,35 24,29 15,35 18,25 10,19 20,19" stroke="#DC2626" stroke-width="1.8" fill="none" />
-  </g>
-  <text x="80" y="49" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" letter-spacing="4" fill="#111827">JAC</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60" width="80" height="60" fill="none">
+  <!-- JAC 5-pointed star in oval centered -->
+  <ellipse cx="40" cy="30" rx="36" ry="26" stroke="#DC2626" stroke-width="3.8" fill="none" />
+  <polygon points="40,10 46,23 60,23 48,31 53,44 40,36 27,44 32,31 20,23 34,23" stroke="#DC2626" stroke-width="2.6" fill="none" stroke-linejoin="round" />
 </svg>
