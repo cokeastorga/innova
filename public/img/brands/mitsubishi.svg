@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 70" width="80" height="70" fill="none">
-  <!-- Mitsubishi 3 Red Diamonds Centered -->
-  <!-- Top Diamond -->
-  <polygon points="40,4 53,26 40,48 27,26" fill="#E60012" />
-  <!-- Bottom Left Diamond -->
-  <polygon points="27,26 14,48 27,70 40,48" fill="#E60012" />
-  <!-- Bottom Right Diamond -->
-  <polygon points="53,26 40,48 53,70 66,48" fill="#E60012" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2156" viewBox="8 6 480 414"><path d="M248 6l82 139-82 139-82-138L248 6zm0 278h160l80 136H328l-80-136zm0 0H88L8 420h160l80-136z" fill="#e60012"/></svg>
