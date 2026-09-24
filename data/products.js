@@ -172,10 +172,10 @@ export const categories = [
     description: 'Pastillas, discos, tambores, cilindros y kits de reparación de frenos.',
   },
   {
-    id: 'electrico',
-    name: 'Eléctrico & Iluminación',
-    icon: 'electric',
-    description: 'Ampolletas, alternadores, motores de partida, sensores y componentes eléctricos.',
+    id: 'carroceria',
+    name: 'Carrocería',
+    icon: 'carroceria',
+    description: 'Ópticos, focos, ampolletas, espejos y componentes de carrocería e iluminación.',
   },
 ];
 
@@ -222,7 +222,7 @@ export const products = [
   },
   {
     id: 'empaquetaduras',
-    name: 'Juego de Empaquetaduras Motor',
+    name: 'Empaquetaduras',
     category: 'motor',
     image: '/img/products/kit-distribucion.jpg',
     description: 'Juegos de empaquetaduras de culata multilámina, múltiple de admisión/escape y tapa de válvulas reforzadas para turbo diésel.',
@@ -363,10 +363,10 @@ export const products = [
   },
   {
     id: 'aceite-5w30',
-    name: 'Aceite Wolver 5W-30 Sintético 4L',
+    name: 'Aceites',
     category: 'filtros',
     image: '/img/products/aceite-5w30.jpg',
-    description: 'Aceite 100% sintético Wolver especificación ACEA C3 / API SN. 4 litros. Máxima protección del motor, ideal para filtros DPF diésel.',
+    description: 'Aceites sintéticos y semi-sintéticos de alta especificación para motores diésel y gasolina con o sin DPF.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
     compatibleModels: {
       'Maxus': ['T60', 'T90', 'V80', 'V90', 'G10', 'D60', 'D90'],
@@ -381,6 +381,47 @@ export const products = [
       'Changan': ['Hunter', 'Hunter Plus']
     },
     badge: 'Premium',
+  },
+  {
+    id: 'refrigerantes',
+    name: 'Refrigerantes',
+    category: 'filtros',
+    image: '/img/products/aceite-5w30.jpg',
+    description: 'Líquido refrigerante y anticongelante de alta gama para protección óptima del sistema de enfriamiento del motor.',
+    compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
+    compatibleModels: {
+      'Maxus': ['T60', 'T90', 'V80', 'V90', 'G10', 'D60', 'D90'],
+      'Toyota': ['Hilux', 'Hilux Revo', 'Fortuner', 'Land Cruiser Prado'],
+      'Nissan': ['NP300', 'Frontier', 'Navara', 'X-Trail'],
+      'Mitsubishi': ['L200', 'L200 Triton', 'Montero Sport'],
+      'Volkswagen': ['Amarok', 'Amarok V6'],
+      'Great Wall': ['Poer', 'Wingle 6', 'Wingle 7'],
+      'JAC': ['T6', 'T8', 'T8 Pro'],
+      'JMC': ['Vigus', 'Vigus Pro'],
+      'SsangYong': ['Actyon Sports', 'Musso'],
+      'Changan': ['Hunter', 'Hunter Plus']
+    },
+    badge: 'Esencial',
+  },
+  {
+    id: 'aditivos',
+    name: 'Aditivos',
+    category: 'filtros',
+    image: '/img/products/desengrasante.jpg',
+    description: 'Aditivos de alto rendimiento para combustible diésel y bencina, limpiadores de inyectores y tratamientos de motor.',
+    compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC', 'Great Wall', 'DFSK', 'SsangYong', 'Changan'],
+    compatibleModels: {
+      'Maxus': ['T60', 'T90', 'V80', 'V90', 'G10', 'D60', 'D90'],
+      'Toyota': ['Hilux', 'Hilux Revo', 'Fortuner', 'Land Cruiser Prado'],
+      'Nissan': ['NP300', 'Frontier', 'Navara', 'X-Trail'],
+      'Mitsubishi': ['L200', 'L200 Triton', 'Montero Sport'],
+      'Volkswagen': ['Amarok', 'Amarok V6'],
+      'Great Wall': ['Poer', 'Wingle 6', 'Wingle 7'],
+      'JAC': ['T6', 'T8', 'T8 Pro'],
+      'JMC': ['Vigus', 'Vigus Pro'],
+      'SsangYong': ['Actyon Sports', 'Musso'],
+      'Changan': ['Hunter', 'Hunter Plus']
+    },
   },
   {
     id: 'aceite-transmision',
@@ -599,11 +640,45 @@ export const products = [
     },
   },
   {
-    id: 'tambor-freno',
-    name: 'Tambores y Balatas Traseras',
+    id: 'bomba-freno',
+    name: 'Bombas de Freno',
+    category: 'frenos',
+    image: '/img/products/cilindro-freno.jpg',
+    description: 'Bomba de freno cilindro maestro con depósito para máxima presión y seguridad de frenado.',
+    compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC'],
+    compatibleModels: {
+      'Maxus': ['T60', 'T90', 'V80'],
+      'Toyota': ['Hilux', 'Hilux Revo'],
+      'Nissan': ['NP300', 'Frontier', 'Navara'],
+      'Mitsubishi': ['L200', 'L200 Triton'],
+      'Volkswagen': ['Amarok'],
+      'Great Wall': ['Poer', 'Wingle 7'],
+      'JAC': ['T6', 'T8']
+    },
+  },
+  {
+    id: 'balatas-freno',
+    name: 'Balatas',
     category: 'frenos',
     image: '/img/products/tambor-freno.jpg',
-    description: 'Tambor de freno trasero mecanizado con precisión y juego de balatas de frenado uniforme para pick-ups de carga.',
+    description: 'Juego de balatas de freno traseras de alto coeficiente de fricción y compuesto libre de asbesto para tambores de pick-up y carga.',
+    compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall'],
+    compatibleModels: {
+      'Maxus': ['T60', 'V80'],
+      'Toyota': ['Hilux'],
+      'Nissan': ['NP300'],
+      'Mitsubishi': ['L200'],
+      'Great Wall': ['Wingle 6', 'Wingle 7'],
+      'JAC': ['T6'],
+      'JMC': ['Vigus', 'Boarding']
+    },
+  },
+  {
+    id: 'tambor-freno',
+    name: 'Tambores de Freno',
+    category: 'frenos',
+    image: '/img/products/tambor-freno.jpg',
+    description: 'Tambor de freno trasero mecanizado con precisión y balanceado de fábrica para pick-ups de trabajo y carga pesada.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'JAC', 'JMC', 'Great Wall', 'Mitsubishi'],
     compatibleModels: {
       'Maxus': ['T60', 'V80'],
@@ -631,11 +706,32 @@ export const products = [
     },
   },
 
-  /* ---- Eléctrico & Iluminación ---- */
+  /* ---- Carrocería ---- */
+  {
+    id: 'opticos-focos',
+    name: 'Ópticos y Focos',
+    category: 'carroceria',
+    image: '/img/products/ampolletas.jpg',
+    description: 'Focos principales delanteros, ópticos halógenos y LED, neblineros y focos traseros de alta visibilidad.',
+    compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'DFSK', 'SsangYong', 'Changan'],
+    compatibleModels: {
+      'Maxus': ['T60', 'T90', 'V80', 'G10', 'D60'],
+      'Toyota': ['Hilux', 'Hilux Revo', 'Fortuner'],
+      'Nissan': ['NP300', 'Frontier', 'Navara'],
+      'Mitsubishi': ['L200', 'L200 Triton'],
+      'Volkswagen': ['Amarok'],
+      'Great Wall': ['Poer', 'Wingle 7'],
+      'JAC': ['T6', 'T8'],
+      'DFSK': ['Glory 580'],
+      'SsangYong': ['Actyon Sports', 'Musso'],
+      'Changan': ['Hunter']
+    },
+    featured: true,
+  },
   {
     id: 'ampolletas',
     name: 'Kit de Ampolletas Halógenas / LED',
-    category: 'electrico',
+    category: 'carroceria',
     image: '/img/products/ampolletas.jpg',
     description: 'Ampolletas de alta potencia y visibilidad H4, H7, H11 en 12V con filtro UV para focos de camioneta.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'JMC', 'Great Wall', 'Volkswagen', 'DFSK', 'SsangYong', 'Changan'],
@@ -656,7 +752,7 @@ export const products = [
   {
     id: 'alternador',
     name: 'Alternador de Alto Amperaje',
-    category: 'electrico',
+    category: 'carroceria',
     image: '/img/products/alternador.jpg',
     description: 'Alternador nuevo con regulador de voltaje incorporado y polea libre (OAP) para abastecer baterías y accesorios 4x4.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'JAC'],
@@ -672,7 +768,7 @@ export const products = [
   {
     id: 'motor-partida',
     name: 'Motor de Partida / Arranque Reforzado',
-    category: 'electrico',
+    category: 'carroceria',
     image: '/img/products/motor-partida.jpg',
     description: 'Motor de partida con piñón Bendix reforzado y solenoide de alta potencia para arranques inmediatos en frío.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'JAC', 'Great Wall'],
@@ -688,7 +784,7 @@ export const products = [
   {
     id: 'sensor-abs',
     name: 'Sensor de Velocidad ABS',
-    category: 'electrico',
+    category: 'carroceria',
     image: '/img/products/sensor-abs.jpg',
     description: 'Sensor de rueda ABS con cable apantallado y conector sellado original para control de tracción y estabilidad.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall'],
@@ -703,7 +799,7 @@ export const products = [
   },
   {
     id: 'desengrasante',
-    name: 'Desengrasante Automotriz Concentrado',
+    name: 'Desengrasantes',
     category: 'filtros',
     image: '/img/products/desengrasante.jpg',
     description: 'Desengrasante biodegradable de grado profesional para lavado de motor, chasis y componentes mecánicos.',

@@ -19,12 +19,17 @@
   }
 }
 
-.footer__logo {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
-  letter-spacing: 0.05em;
+.footer__logo-img {
+  height: 48px;
+  width: auto;
+  max-width: 190px;
+  object-fit: contain;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer__logo-img:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
 }
 
 .footer__nav {

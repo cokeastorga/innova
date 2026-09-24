@@ -29,15 +29,21 @@
 }
 
 .navbar__logo {
-  font-family: var(--font-heading, 'Outfit', sans-serif);
-  font-size: 1.25rem;
-  color: var(--color-text);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: -0.02em;
 }
 
-.navbar__logo strong {
-  font-weight: 800;
+.navbar__logo-img {
+  height: 44px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__logo:hover .navbar__logo-img {
+  transform: scale(1.03);
 }
 
 .navbar__links {
@@ -138,6 +144,19 @@
 
 /* Mobile Styles */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 12px 0;
+  }
+
+  .navbar--scrolled {
+    padding: 10px 0;
+  }
+
+  .navbar__logo-img {
+    height: 36px;
+    max-width: 140px;
+  }
+
   .navbar__links {
     position: fixed;
     top: 0;

@@ -30,8 +30,12 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
-        <a href="#inicio" className="navbar__logo" onClick={(e) => handleSmoothScroll(e, 'inicio')}>
-          <strong>INNOVA</strong>CAMIONETAS
+        <a href="#inicio" className="navbar__logo" onClick={(e) => handleSmoothScroll(e, 'inicio')} aria-label="Innova Camionetas - Ir al Inicio">
+          <img 
+            src="/img/logo.png" 
+            alt="Innova Camionetas" 
+            className="navbar__logo-img" 
+          />
         </a>
 
         <div className={`navbar__links ${mobileMenuOpen ? 'navbar__links--open' : ''}`}>

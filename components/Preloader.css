@@ -1,0 +1,298 @@
+/* ============================================================
+   INNOVA CAMIONETAS — 3D Parallax Preloader
+   ============================================================ */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: #080A0E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.5s ease;
+}
+
+.preloader--fading {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.02);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Background Ambient Lighting */
+.preloader__ambient {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.25;
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+.preloader__ambient--orange {
+  top: 15%;
+  left: 20%;
+  background: radial-gradient(circle, #F97316 0%, transparent 70%);
+}
+
+.preloader__ambient--lime {
+  bottom: 15%;
+  right: 20%;
+  background: radial-gradient(circle, #A3E635 0%, transparent 70%);
+  animation-delay: -2s;
+}
+
+.preloader__grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Skip intro button */
+.preloader__skip {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.preloader__skip:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 3D Stage */
+.preloader__stage {
+  perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding: 20px;
+  max-width: 520px;
+  width: 90%;
+  z-index: 2;
+}
+
+.preloader__3d-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 44px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+  animation: floatAmbient 3.5s ease-in-out infinite alternate;
+}
+
+/* Card Backplate with 3D depth and metallic rim */
+.preloader__card-backplate {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(25, 30, 40, 0.85) 0%, rgba(12, 15, 20, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 24px 48px -12px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 0 40px -10px rgba(249, 115, 22, 0.15);
+  transform: translateZ(0);
+}
+
+.preloader__backplate-inner {
+  position: absolute;
+  inset: 2px;
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Logo Floating in 3D */
+.preloader__logo-wrapper {
+  position: relative;
+  transform: translateZ(45px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.6));
+}
+
+.preloader__logo-img {
+  width: 100%;
+  max-width: 290px;
+  height: auto;
+  object-fit: contain;
+  animation: logoEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Shimmer Light Sweep Effect */
+.preloader__shimmer {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: shimmerSweep 2.2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.preloader__tagline {
+  transform: translateZ(25px);
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Progress bar container */
+.preloader__progress-container {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preloader__progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.preloader__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #A3E635 0%, #F97316 100%);
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.6);
+  transition: width 0.05s linear;
+}
+
+.preloader__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.78rem;
+}
+
+.preloader__status {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
+}
+
+.preloader__percent {
+  color: #A3E635;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Animations */
+@keyframes floatAmbient {
+  0% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+  }
+  100% {
+    transform: translateY(4px) rotateX(-2deg) rotateY(2deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.18;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0.32;
+  }
+}
+
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    left: -150%;
+  }
+  40%, 100% {
+    left: 200%;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .preloader__3d-card {
+    padding: 36px 20px 24px;
+  }
+
+  .preloader__logo-img {
+    max-width: 220px;
+  }
+
+  .preloader__tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .preloader__skip {
+    top: 16px;
+    right: 16px;
+  }
+}

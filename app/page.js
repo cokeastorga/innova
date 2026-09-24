@@ -1,6 +1,7 @@
 'use client';
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import Preloader from '@/components/Preloader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import BrandsCarousel from '@/components/BrandsCarousel';
@@ -19,6 +20,7 @@ export default function Home() {
 
   return (
     <>
+      <Preloader />
       <Navbar />
       <main>
         <Hero />

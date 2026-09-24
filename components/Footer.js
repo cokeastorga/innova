@@ -7,7 +7,13 @@ export default function Footer() {
       <div className="container">
         <div className="footer__top">
           <div className="footer__brand">
-            <h3 className="footer__logo">INNOVA CAMIONETAS</h3>
+            <a href="#inicio" aria-label="Innova Camionetas - Inicio">
+              <img 
+                src="/img/logo.png" 
+                alt="Innova Camionetas" 
+                className="footer__logo-img" 
+              />
+            </a>
           </div>
           
           <nav className="footer__nav">

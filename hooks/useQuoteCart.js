@@ -38,38 +38,77 @@ export function QuoteCartProvider({ children }) {
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
 
-  /* Format cart as WhatsApp message */
-  const getWhatsAppMessage = useCallback((notes = '') => {
-    let msg = 'Hola, quiero cotizar los siguientes repuestos:%0A%0A';
-    items.forEach((item, i) => {
-      msg += `${i + 1}. ${item.name}`;
-      if (item.compatibleBrands?.length) {
-        msg += ` (${item.compatibleBrands.slice(0, 3).join(', ')})`;
-      }
-      msg += '%0A';
-    });
-    if (notes) {
-      msg += `%0ANotas adicionales: ${encodeURIComponent(notes)}`;
+  /* Format cart as WhatsApp message (clean text with \n, encoded by caller) */
+  const getWhatsAppMessage = useCallback((notes = '', vehicle = '') => {
+    const lines = [
+      '👋 *¡Hola Innova Camionetas!*',
+      'Quisiera consultar disponibilidad y cotizar los siguientes repuestos:',
+      ''
+    ];
+
+    if (vehicle && vehicle.trim()) {
+      lines.push(`🚙 *Vehículo:* ${vehicle.trim()}`);
+      lines.push('');
     }
-    msg += '%0A%0AGracias!';
-    return msg;
+
+    lines.push('📦 *Repuestos solicitados:*');
+    items.forEach((item, i) => {
+      let line = `  ${i + 1}. *${item.name}*`;
+      if (item.compatibleBrands?.length) {
+        line += ` _[${item.compatibleBrands.slice(0, 3).join(', ')}]_`;
+      }
+      lines.push(line);
+    });
+
+    if (notes && notes.trim()) {
+      lines.push('');
+      lines.push('📝 *Consulta / Notas adicionales:*');
+      lines.push(`"${notes.trim()}"`);
+    }
+
+    lines.push('');
+    lines.push('¿Me podrían indicar disponibilidad y valor con despacho? ¡Muchas gracias!');
+
+    return lines.join('\n');
   }, [items]);
 
-  /* Format cart as email body */
-  const getEmailData = useCallback((notes = '') => {
-    const subject = encodeURIComponent(`Cotización de Repuestos - Innova Camionetas (${items.length} productos)`);
-    let body = 'Hola, quiero cotizar los siguientes repuestos:%0A%0A';
-    items.forEach((item, i) => {
-      body += `${i + 1}. ${item.name}`;
-      if (item.compatibleBrands?.length) {
-        body += ` (${item.compatibleBrands.slice(0, 3).join(', ')})`;
-      }
-      body += '%0A';
-    });
-    if (notes) {
-      body += `%0ANotas adicionales: ${encodeURIComponent(notes)}`;
+  /* Format cart as email body (plain text, encoded by caller) */
+  const getEmailData = useCallback((notes = '', vehicle = '') => {
+    const count = items.length;
+    const subject = `Cotización de Repuestos (${count} ${count === 1 ? 'producto' : 'productos'}) - Innova Camionetas`;
+    
+    const lines = [
+      'Estimado equipo de Innova Camionetas,',
+      '',
+      'Deseo cotizar los siguientes repuestos para mi vehículo:',
+      ''
+    ];
+
+    if (vehicle && vehicle.trim()) {
+      lines.push(`Vehículo: ${vehicle.trim()}`);
+      lines.push('');
     }
-    return { subject, body };
+
+    lines.push('Lista de repuestos:');
+    items.forEach((item, i) => {
+      let line = `  ${i + 1}. ${item.name}`;
+      if (item.compatibleBrands?.length) {
+        line += ` (Compatible con: ${item.compatibleBrands.slice(0, 3).join(', ')})`;
+      }
+      lines.push(line);
+    });
+
+    if (notes && notes.trim()) {
+      lines.push('');
+      lines.push(`Notas adicionales: ${notes.trim()}`);
+    }
+
+    lines.push('');
+    lines.push('Agradeceré me puedan indicar disponibilidad, formas de pago y valor de envío.');
+    lines.push('');
+    lines.push('Saludos cordiales.');
+
+    return { subject, body: lines.join('\n') };
   }, [items]);
 
   const value = useMemo(() => ({
