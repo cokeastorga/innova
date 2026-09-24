@@ -36,17 +36,6 @@ export default function Hero() {
 
   return (
     <section id="inicio" className="hero" ref={heroRef}>
-      {/* Mobile Backdrop: Camioneta Maxus T90 negra difuminada con blur */}
-      <div className="hero__mobile-backdrop" aria-hidden="true">
-        <img 
-          src="/img/hero-maxus-t90-black.jpg" 
-          alt="" 
-          className="hero__mobile-backdrop-img"
-          loading="eager"
-        />
-        <div className="hero__mobile-backdrop-scrim" />
-      </div>
-
       <div className="hero__container">
         
         {/* Left Side: Content */}
