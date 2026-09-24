@@ -19,7 +19,7 @@ export const brands = [
     name: 'Maxus',
     featured: true,
     logo: '/img/brands/maxus.svg',
-    description: 'Distribuidor especializado en toda la línea Maxus. Repuestos genuinos y alternativos de alta durabilidad.',
+    description: 'Distribuidor especializado en Maxus con todos sus modelos.',
     models: [
       { name: 'T60', years: '2017-2024', image: '/img/models/maxus/t60.jpg', type: 'Pickup 4x4 / 4x2' },
       { name: 'T90', years: '2023-2024', image: '/img/models/maxus/t90.jpg', type: 'Pickup Bi-Turbo' },
