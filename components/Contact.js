@@ -130,7 +130,7 @@ ${formData.message}`;
               <a href={`https://wa.me/${contactInfo.whatsapp1.number}`} target="_blank" rel="noopener noreferrer" className="contact__card">
                 <span className="contact__card-icon">📱</span>
                 <div className="contact__card-content">
-                  <h4 className="contact__card-title">Ventas</h4>
+                  <h4 className="contact__card-title">1° Contacto • Brahyan Padilla</h4>
                   <p className="contact__card-text">{contactInfo.whatsapp1.display}</p>
                 </div>
               </a>
@@ -138,7 +138,7 @@ ${formData.message}`;
               <a href={`https://wa.me/${contactInfo.whatsapp2.number}`} target="_blank" rel="noopener noreferrer" className="contact__card">
                 <span className="contact__card-icon">📱</span>
                 <div className="contact__card-content">
-                  <h4 className="contact__card-title">Consultas</h4>
+                  <h4 className="contact__card-title">2° Contacto • Cristian Yáñez</h4>
                   <p className="contact__card-text">{contactInfo.whatsapp2.display}</p>
                 </div>
               </a>
@@ -175,15 +175,24 @@ ${formData.message}`;
             <div className="contact__team">
               <h4 className="contact__team-title">Nuestro Equipo</h4>
               <div className="contact__team-grid">
-                {/* Reemplazar con fotos y datos reales del equipo */}
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="contact__team-member">
+                {contactInfo.team?.map((member, idx) => (
+                  <div key={idx} className="contact__team-member">
                     <div className="contact__team-avatar">
-                      {/* <img src="/path/to/photo.jpg" alt="Team member" /> */}
-                      <span>IM</span>
+                      <span>{member.initials}</span>
                     </div>
-                    <h5 className="contact__team-name">Integrante {i}</h5>
-                    <p className="contact__team-role">Cargo</p>
+                    <span className="contact__team-tag">{member.role}</span>
+                    <h5 className="contact__team-name">{member.name}</h5>
+                    <a 
+                      href={`https://wa.me/${member.number}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="contact__team-phone"
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      </svg>
+                      <span>{member.phone}</span>
+                    </a>
                   </div>
                 ))}
               </div>

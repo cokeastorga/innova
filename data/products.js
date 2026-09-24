@@ -867,15 +867,33 @@ export const maintenanceTips = [
    ============================================================ */
 export const contactInfo = {
   whatsapp1: {
-    number: '56961546709',
-    display: '+56 9 6154 6709',
-    label: 'Ventas',
+    number: '56963890325',
+    display: '+56 9 6389 0325',
+    label: '1° Contacto • Brahyan Padilla',
+    name: 'Brahyan Padilla',
   },
   whatsapp2: {
     number: '56968163883',
     display: '+56 9 6816 3883',
-    label: 'Consultas',
+    label: '2° Contacto • Cristian Yáñez',
+    name: 'Cristian Yáñez',
   },
+  team: [
+    {
+      name: 'Brahyan Padilla',
+      role: '1° Contacto',
+      phone: '+56 9 6389 0325',
+      number: '56963890325',
+      initials: 'BP',
+    },
+    {
+      name: 'Cristian Yáñez',
+      role: '2° Contacto',
+      phone: '+56 9 6816 3883',
+      number: '56968163883',
+      initials: 'CY',
+    },
+  ],
   email: 'innovacamionetasspa@gmail.com',
   location: 'Valdivia, Chile',
   companyName: 'Innova Camionetas SpA',
