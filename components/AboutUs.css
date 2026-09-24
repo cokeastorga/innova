@@ -157,15 +157,53 @@
   }
   
   .about-us__stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
   .about-us__stat-card {
-    padding: 24px 12px;
+    padding: 20px 10px;
+  }
+
+  .about-us__stat-number {
+    font-size: 2rem;
+  }
+
+  .about-us__stat-label {
+    font-size: 0.82rem;
   }
   
   .about-us__pillars {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .about-us__pillar-card {
+    padding: 18px 12px;
+  }
+
+  .about-us__pillar-card:last-child {
+    grid-column: span 2;
+  }
+
+  .about-us__pillar-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 12px;
+  }
+
+  .about-us__pillar-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .about-us__pillar-title {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .about-us__pillar-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
   }
 }

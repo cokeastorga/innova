@@ -381,8 +381,33 @@ a.contact__card:hover {
 
 @media (max-width: 480px) {
   .contact__team-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .contact__team-member {
+    padding: 14px 8px;
+  }
+
+  .contact__team-avatar {
+    width: 46px;
+    height: 46px;
+    font-size: 0.95rem;
+  }
+
+  .contact__team-name {
+    font-size: 0.85rem;
+  }
+
+  .contact__team-tag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .contact__team-phone {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+    gap: 4px;
   }
 }
 

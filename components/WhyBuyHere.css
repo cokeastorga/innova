@@ -150,11 +150,78 @@
   }
 
   .why-buy__tabs {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 32px;
   }
 
   .why-buy__tab-btn {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.85rem;
     text-align: center;
+    white-space: normal;
+  }
+
+  .why-buy__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .why-buy__card {
+    padding: 18px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .why-buy__icon {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 12px;
+  }
+
+  .why-buy__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .why-buy__card-header {
+    margin-bottom: 12px;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .why-buy__interval-badge {
+    padding: 2px 8px;
+    font-size: 0.7rem;
+  }
+
+  .why-buy__card-title {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+
+  .why-buy__card-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-buy__grid {
+    gap: 10px;
+  }
+
+  .why-buy__card {
+    padding: 14px 10px;
+  }
+
+  .why-buy__card-title {
+    font-size: 0.88rem;
+  }
+
+  .why-buy__card-desc {
+    font-size: 0.75rem;
   }
 }
