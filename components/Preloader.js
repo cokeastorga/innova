@@ -6,46 +6,55 @@ import './Preloader.css';
 export default function Preloader() {
   const [mounted, setMounted] = useState(true);
   const [fading, setFading] = useState(false);
+  const [stage, setStage] = useState(1); // 1: Blueprint, 2: 3D Solid, 3: Cinematic Flare
   const [progress, setProgress] = useState(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [statusText, setStatusText] = useState('Iniciando sistema...');
+  const [statusText, setStatusText] = useState('ESCANEANDO MODELOS...');
   const cardRef = useRef(null);
 
   useEffect(() => {
-    // Lock scroll while preloader is active
+    // Lock scroll during preloader
     document.body.style.overflow = 'hidden';
 
-    // Status sequence over 3 seconds
-    const t1 = setTimeout(() => setStatusText('Cargando catálogo & marcas...'), 900);
-    const t2 = setTimeout(() => setStatusText('Preparando repuestos premium...'), 1800);
-    const t3 = setTimeout(() => setStatusText('¡Listo para rodar!'), 2500);
+    // Cinematic Storyboard Stage Timeline:
+    // 0.0s - 1.0s : Step 1 -> Blueprint Hologram wireframe with anamorphic beam
+    // 1.0s - 1.9s : Step 2 -> Materialize 3D metallic solid logo
+    // 1.9s - 2.8s : Step 3 -> Specular flare sweep across hood + Cargando HUD
+    const stage2Timer = setTimeout(() => {
+      setStage(2);
+      setStatusText('MATERIALIZANDO REPUESTOS OEM...');
+    }, 1000);
 
-    // Progress bar counter
+    const stage3Timer = setTimeout(() => {
+      setStage(3);
+      setStatusText('SISTEMA INNOVA 100% OPERATIVO');
+    }, 1900);
+
+    // Progress counter (0 to 100% over 2.7s)
     const startTime = Date.now();
-    const duration = 2600; // ms to reach 100%
+    const duration = 2700;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const pct = Math.min(Math.round((elapsed / duration) * 100), 100);
       setProgress(pct);
       if (pct >= 100) clearInterval(interval);
-    }, 30);
+    }, 25);
 
-    // Start fade-out at 2.6s (total display time ~3.0s)
+    // Start cinematic fade-out at 2.9s
     const fadeTimer = setTimeout(() => {
       setFading(true);
-    }, 2600);
+    }, 2900);
 
-    // Completely unmount and restore scroll at 3.1s
+    // Remove component and restore scrolling at 3.3s
     const removeTimer = setTimeout(() => {
       setMounted(false);
       document.body.style.overflow = '';
-    }, 3100);
+    }, 3350);
 
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
+      clearTimeout(stage2Timer);
+      clearTimeout(stage3Timer);
       clearInterval(interval);
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);
@@ -53,21 +62,19 @@ export default function Preloader() {
     };
   }, []);
 
-  // 3D Parallax Tilt Handler on pointer move
+  // Real-time 3D parallax tilt on pointer move
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
-    // Normalize -1 to 1
+
     const normX = (e.clientX - centerX) / (window.innerWidth / 2);
     const normY = (e.clientY - centerY) / (window.innerHeight / 2);
 
-    // Max rotation 18 degrees
     setTilt({
-      x: -normY * 16,
-      y: normX * 18,
+      x: -normY * 14,
+      y: normX * 16,
     });
   };
 
@@ -75,12 +82,32 @@ export default function Preloader() {
     setTilt({ x: 0, y: 0 });
   };
 
+  // Device orientation support for mobile gyroscope 3D tilt
+  useEffect(() => {
+    const handleOrientation = (e) => {
+      if (e.beta !== null && e.gamma !== null) {
+        const tiltX = Math.max(Math.min((e.beta - 45) * 0.4, 12), -12);
+        const tiltY = Math.max(Math.min(e.gamma * 0.4, 14), -14);
+        setTilt({ x: -tiltX, y: tiltY });
+      }
+    };
+
+    if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', handleOrientation);
+    }
+    return () => {
+      if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
+        window.removeEventListener('deviceorientation', handleOrientation);
+      }
+    };
+  }, []);
+
   const handleSkip = () => {
     setFading(true);
     setTimeout(() => {
       setMounted(false);
       document.body.style.overflow = '';
-    }, 400);
+    }, 350);
   };
 
   if (!mounted) return null;
@@ -93,11 +120,16 @@ export default function Preloader() {
       role="status"
       aria-label="Cargando Innova Camionetas"
     >
-      {/* Ambient background glow points */}
+      {/* Textured metal background */}
+      <div className="preloader__metal-backdrop" />
+      <div className="preloader__vignette" />
+
+      {/* Atmospheric ambient glows */}
+      <div className="preloader__ambient preloader__ambient--cyan" />
       <div className="preloader__ambient preloader__ambient--orange" />
       <div className="preloader__ambient preloader__ambient--lime" />
-      <div className="preloader__grid-lines" />
 
+      {/* Skip button */}
       <button 
         className="preloader__skip" 
         onClick={handleSkip} 
@@ -106,48 +138,75 @@ export default function Preloader() {
         Saltar intro ✕
       </button>
 
-      {/* 3D Parallax Stage */}
+      {/* 3D Cinematic Stage */}
       <div className="preloader__stage">
         <div 
           className="preloader__3d-card"
           ref={cardRef}
           style={{
-            transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+            transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           }}
         >
-          {/* Glowing backplate with metallic rim */}
-          <div className="preloader__card-backplate">
-            <div className="preloader__backplate-inner" />
+          {/* Card titanium bezel and chamfered border */}
+          <div className="preloader__card-frame">
+            <div className="preloader__corner-accent preloader__corner--tl" />
+            <div className="preloader__corner-accent preloader__corner--tr" />
+            <div className="preloader__corner-accent preloader__corner--bl" />
+            <div className="preloader__corner-accent preloader__corner--br" />
           </div>
 
-          {/* Logo element floating in 3D */}
-          <div className="preloader__logo-wrapper">
+          {/* Viewport for the 3 cinematic layers */}
+          <div className="preloader__viewport">
+            {/* Step 1: Blueprint Hologram with Laser Flare */}
             <img 
-              src="/img/logo.png" 
-              alt="Innova Camionetas" 
-              className="preloader__logo-img" 
+              src="/img/cinematic-stage-2.jpg" 
+              alt="Holograma Blueprint" 
+              className={`preloader__layer preloader__layer--blueprint ${stage === 1 ? 'preloader__layer--active' : ''}`}
             />
-            {/* Shimmer light sweep */}
-            <div className="preloader__shimmer" />
+
+            {/* Step 2: 3D Solid Metallic Logo */}
+            <img 
+              src="/img/cinematic-stage-3.jpg" 
+              alt="Logo 3D Metálico" 
+              className={`preloader__layer preloader__layer--solid ${stage === 2 ? 'preloader__layer--active' : ''}`}
+            />
+
+            {/* Step 3: Anamorphic Flare Sweep */}
+            <img 
+              src="/img/cinematic-stage-4.jpg" 
+              alt="Destello Cinemático" 
+              className={`preloader__layer preloader__layer--flare ${stage === 3 ? 'preloader__layer--active' : ''}`}
+            />
+
+            {/* Laser scanning horizontal line in stage 1 */}
+            {stage === 1 && <div className="preloader__laser-scanner" />}
+
+            {/* Anamorphic optical horizontal streak in stage 3 */}
+            {stage === 3 && <div className="preloader__anamorphic-flare" />}
           </div>
 
-          <div className="preloader__tagline">
-            ESPECIALISTAS EN REPUESTOS
-          </div>
-        </div>
+          {/* HUD Tachometer & Status Footer */}
+          <div className="preloader__hud">
+            <div className="preloader__cargando-row">
+              <span className="preloader__cargando-title">CARGANDO...</span>
+              <span className="preloader__percent-number">{progress}%</span>
+            </div>
 
-        {/* Tachometer-style progress bar */}
-        <div className="preloader__progress-container">
-          <div className="preloader__progress-track">
-            <div 
-              className="preloader__progress-fill" 
-              style={{ width: `${progress}%` }} 
-            />
-          </div>
-          
-          <div className="preloader__meta">
-            <span className="preloader__status">{statusText}</span>
-            <span className="preloader__percent">{progress}%</span>
+            <div className="preloader__progress-track">
+              <div 
+                className="preloader__progress-bar" 
+                style={{ width: `${progress}%` }} 
+              />
+              <div 
+                className="preloader__progress-laser" 
+                style={{ left: `${progress}%` }} 
+              />
+            </div>
+
+            <div className="preloader__meta-row">
+              <span className="preloader__status-text">{statusText}</span>
+              <span className="preloader__badge-tag">DISTRIBUIDOR OFICIAL</span>
+            </div>
           </div>
         </div>
       </div>
