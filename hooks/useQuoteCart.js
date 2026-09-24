@@ -8,27 +8,55 @@ export function QuoteCartProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
 
-  const addItem = useCallback((product) => {
+  const addItem = useCallback((product, vehicleContext = null) => {
+    const brand = vehicleContext?.brand?.trim() || null;
+    const model = vehicleContext?.model?.trim() || null;
+    const years = vehicleContext?.years?.trim() || null;
+    const brandKey = brand ? brand.toLowerCase() : '';
+    const modelKey = model ? model.toLowerCase() : '';
+    const cartItemId = `${product.id}__${brandKey || 'gen'}__${modelKey || 'gen'}`;
+
     setItems(prev => {
-      /* Don't add duplicates */
-      if (prev.some(item => item.id === product.id)) return prev;
-      return [...prev, { ...product, addedAt: Date.now() }];
+      /* Don't add duplicates for exact same product + vehicle */
+      if (prev.some(item => (item.cartItemId === cartItemId) || (!brandKey && !modelKey && item.id === product.id))) {
+        return prev;
+      }
+      return [
+        ...prev,
+        {
+          ...product,
+          cartItemId,
+          selectedBrand: brand,
+          selectedModel: model,
+          selectedYears: years,
+          addedAt: Date.now()
+        }
+      ];
     });
     /* Trigger bounce animation on badge */
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 600);
   }, []);
 
-  const removeItem = useCallback((productId) => {
-    setItems(prev => prev.filter(item => item.id !== productId));
+  const removeItem = useCallback((identifier) => {
+    setItems(prev => prev.filter(item => item.cartItemId !== identifier && item.id !== identifier));
   }, []);
 
   const clearCart = useCallback(() => {
     setItems([]);
   }, []);
 
-  const isInCart = useCallback((productId) => {
-    return items.some(item => item.id === productId);
+  const isInCart = useCallback((productId, brand = null, model = null) => {
+    return items.some(item => {
+      if (item.id !== productId) return false;
+      if (brand && item.selectedBrand && item.selectedBrand.toLowerCase() !== brand.toLowerCase()) {
+        return false;
+      }
+      if (model && item.selectedModel && item.selectedModel.toLowerCase() !== model.toLowerCase()) {
+        return false;
+      }
+      return true;
+    });
   }, [items]);
 
   const toggleCart = useCallback(() => {
@@ -47,14 +75,20 @@ export function QuoteCartProvider({ children }) {
     ];
 
     if (vehicle && vehicle.trim()) {
-      lines.push(`🚙 *Vehículo:* ${vehicle.trim()}`);
+      lines.push(`🚙 *Vehículo Principal:* ${vehicle.trim()}`);
       lines.push('');
     }
 
     lines.push('📦 *Repuestos solicitados:*');
     items.forEach((item, i) => {
       let line = `  ${i + 1}. *${item.name}*`;
-      if (item.compatibleBrands?.length) {
+      if (item.selectedBrand || item.selectedModel) {
+        const vehicleParts = [];
+        if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
+        if (item.selectedModel) vehicleParts.push(item.selectedModel);
+        if (item.selectedYears) vehicleParts.push(`(${item.selectedYears})`);
+        line += `\n     └ 🚙 *Vehículo:* ${vehicleParts.join(' ')}`;
+      } else if (item.compatibleBrands?.length) {
         line += ` _[${item.compatibleBrands.slice(0, 3).join(', ')}]_`;
       }
       lines.push(line);
@@ -85,14 +119,20 @@ export function QuoteCartProvider({ children }) {
     ];
 
     if (vehicle && vehicle.trim()) {
-      lines.push(`Vehículo: ${vehicle.trim()}`);
+      lines.push(`Vehículo Principal: ${vehicle.trim()}`);
       lines.push('');
     }
 
     lines.push('Lista de repuestos:');
     items.forEach((item, i) => {
       let line = `  ${i + 1}. ${item.name}`;
-      if (item.compatibleBrands?.length) {
+      if (item.selectedBrand || item.selectedModel) {
+        const vehicleParts = [];
+        if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
+        if (item.selectedModel) vehicleParts.push(item.selectedModel);
+        if (item.selectedYears) vehicleParts.push(`(${item.selectedYears})`);
+        line += ` — Vehículo: ${vehicleParts.join(' ')}`;
+      } else if (item.compatibleBrands?.length) {
         line += ` (Compatible con: ${item.compatibleBrands.slice(0, 3).join(', ')})`;
       }
       lines.push(line);

@@ -307,7 +307,11 @@ export default function Catalog() {
           <div className="catalog__grid stagger">
             {filteredProducts.map((product, index) => (
               <div key={product.id} style={{ animationDelay: `${Math.min(index * 0.04, 0.35)}s` }}>
-                <ProductCard product={product} />
+                <ProductCard 
+                  product={product} 
+                  selectedBrand={selectedBrand}
+                  selectedModel={selectedModel}
+                />
               </div>
             ))}
           </div>

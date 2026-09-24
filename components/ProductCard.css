@@ -107,7 +107,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .product-card__brand-chip {
@@ -115,8 +115,125 @@
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   font-size: 12px;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  line-height: 1.2;
+}
+
+.product-card__brand-chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: rgba(249, 115, 22, 0.04);
+}
+
+.product-card__brand-chip--active {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border-color: var(--color-accent);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.25);
+}
+
+.product-card__brand-chip--more {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.product-card__brand-chip--more:hover {
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg);
+}
+
+/* Vehicle selection indicator bar */
+.product-card__vehicle-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.product-card__vehicle-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card__vehicle-icon {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.product-card__vehicle-text {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card__vehicle-text strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.product-card__model-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.product-card__model-select {
+  appearance: none;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 3px 20px 3px 8px;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  max-width: 110px;
+}
+
+.product-card__model-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.product-card__select-arrow {
+  position: absolute;
+  right: 6px;
+  pointer-events: none;
+  color: var(--color-text-muted);
+}
+
+.product-card__model-pill {
+  background-color: rgba(249, 115, 22, 0.1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .product-card__actions {

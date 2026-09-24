@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { useQuoteCart } from '@/hooks/useQuoteCart';
 import { contactInfo } from '@/data/products';
 import './QuoteCart.css';
@@ -7,7 +8,29 @@ import './QuoteCart.css';
 export default function QuoteCart() {
   const { items, isOpen, closeCart, removeItem, clearCart, getWhatsAppMessage, getEmailData } = useQuoteCart();
   const [vehicle, setVehicle] = useState('');
+  const [isVehicleUserEdited, setIsVehicleUserEdited] = useState(false);
   const [notes, setNotes] = useState('');
+
+  // Auto-fill vehicle input from cart items if user hasn't edited manually
+  useEffect(() => {
+    if (!isVehicleUserEdited) {
+      const vehiclesInCart = items
+        .filter(item => item.selectedBrand || item.selectedModel)
+        .map(item => {
+          const parts = [item.selectedBrand, item.selectedModel].filter(Boolean);
+          if (item.selectedYears) parts.push(`(${item.selectedYears})`);
+          return parts.join(' ');
+        })
+        .filter(Boolean);
+
+      const uniqueVehicles = [...new Set(vehiclesInCart)];
+      if (uniqueVehicles.length > 0) {
+        setVehicle(uniqueVehicles.join(' / '));
+      } else if (items.length === 0) {
+        setVehicle('');
+      }
+    }
+  }, [items, isVehicleUserEdited]);
 
   if (!isOpen) return null;
 
@@ -22,11 +45,19 @@ export default function QuoteCart() {
     window.location.href = `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  const handleClear = () => {
+    clearCart();
+    setIsVehicleUserEdited(false);
+    setVehicle('');
+  };
+
   return (
     <div className="quote-cart__overlay" onClick={closeCart}>
       <div className="quote-cart__panel" onClick={(e) => e.stopPropagation()}>
         <div className="quote-cart__header">
-          <h2 className="quote-cart__title">Tu Cotización <span className="quote-cart__count">({items.length})</span></h2>
+          <h2 className="quote-cart__title">
+            Tu Cotización <span className="quote-cart__count">({items.length})</span>
+          </h2>
           <button className="quote-cart__close" onClick={closeCart} aria-label="Cerrar">&times;</button>
         </div>
 
@@ -39,29 +70,49 @@ export default function QuoteCart() {
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
               </svg>
               <p className="quote-cart__empty-text">Agrega productos para cotizar</p>
+              <span className="quote-cart__empty-hint">
+                Explora el catálogo o las marcas y presiona &ldquo;+ Cotizar&rdquo;
+              </span>
             </div>
           ) : (
             <ul className="quote-cart__list">
-              {items.map((item, index) => (
-                <li key={item.id || `quote-item-${index}`} className="quote-cart__item">
-                  <div className="quote-cart__item-info">
-                    <h4 className="quote-cart__item-name">{item.name}</h4>
-                    {item.compatibleBrands && item.compatibleBrands.length > 0 && (
-                      <span className="quote-cart__item-brands">{item.compatibleBrands.join(', ')}</span>
-                    )}
-                  </div>
-                  <button 
-                    className="quote-cart__item-remove" 
-                    onClick={() => removeItem(item.id)} 
-                    aria-label={`Eliminar ${item.name} de la cotización`}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                  </button>
-                </li>
-              ))}
+              {items.map((item, index) => {
+                const itemKey = item.cartItemId || item.id || `quote-item-${index}`;
+                const hasVehicle = item.selectedBrand || item.selectedModel;
+
+                return (
+                  <li key={itemKey} className="quote-cart__item">
+                    <div className="quote-cart__item-info">
+                      <h4 className="quote-cart__item-name">{item.name}</h4>
+                      
+                      {hasVehicle ? (
+                        <div className="quote-cart__item-vehicle-badge">
+                          <span className="quote-cart__vehicle-badge-icon">🚙</span>
+                          <span className="quote-cart__vehicle-badge-text">
+                            <strong>{item.selectedBrand}</strong> {item.selectedModel} {item.selectedYears && <small className="quote-cart__vehicle-years">({item.selectedYears})</small>}
+                          </span>
+                        </div>
+                      ) : item.compatibleBrands && item.compatibleBrands.length > 0 ? (
+                        <span className="quote-cart__item-brands">
+                          Compatibles: {item.compatibleBrands.slice(0, 3).join(', ')}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <button 
+                      className="quote-cart__item-remove" 
+                      onClick={() => removeItem(item.cartItemId || item.id)} 
+                      aria-label={`Eliminar ${item.name} de la cotización`}
+                      title="Eliminar de la lista"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
@@ -71,14 +122,17 @@ export default function QuoteCart() {
             <div className="quote-cart__fields">
               <div className="quote-cart__field-group">
                 <label htmlFor="quote-vehicle" className="quote-cart__field-label">
-                  🚙 Modelo de tu camioneta (recomendado)
+                  🚙 Modelo de tu camioneta (detectado automáticamente)
                 </label>
                 <input 
                   id="quote-vehicle" 
                   type="text"
                   className="quote-cart__input" 
                   value={vehicle} 
-                  onChange={(e) => setVehicle(e.target.value)}
+                  onChange={(e) => {
+                    setVehicle(e.target.value);
+                    setIsVehicleUserEdited(true);
+                  }}
                   placeholder="Ej: Maxus T60 2021 2.8 / Hilux 2019..."
                 />
               </div>
@@ -93,7 +147,7 @@ export default function QuoteCart() {
                   rows="2" 
                   value={notes} 
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Ej: ¿Tienen stock inmediato y envío a mi ciudad?..."
+                  placeholder="Ej: ¿Tienen stock inmediato y envío a mi región?..."
                 ></textarea>
               </div>
             </div>
@@ -115,7 +169,7 @@ export default function QuoteCart() {
               </button>
             </div>
 
-            <button className="quote-cart__clear" onClick={clearCart}>
+            <button className="quote-cart__clear" onClick={handleClear}>
               Vaciar lista de cotización
             </button>
           </div>

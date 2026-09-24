@@ -344,7 +344,7 @@ export default function Brands() {
                 {/* Lista de Repuestos para este modelo */}
                 <div className="model-repuestos-drawer__grid">
                   {modelProducts.map((product) => {
-                    const inCart = isInCart(product.id);
+                    const inCart = isInCart(product.id, activeBrand.name, selectedModel.name);
                     const whatsappMsg = `👋 Hola Innova Camionetas! Quiero consultar disponibilidad del repuesto "${product.name}" para mi ${activeBrand.name} ${selectedModel.name} (${selectedModel.years}).`;
                     const whatsappUrl = `https://wa.me/56961546709?text=${encodeURIComponent(whatsappMsg)}`;
 
@@ -378,7 +378,12 @@ export default function Brands() {
                             <button
                               type="button"
                               className={`btn btn-sm ${inCart ? 'btn-outline' : 'btn-lime'}`}
-                              onClick={() => addItem(product)}
+                              onClick={() => addItem(product, {
+                                brand: activeBrand.name,
+                                model: selectedModel.name,
+                                years: selectedModel.years,
+                                type: selectedModel.type
+                              })}
                               disabled={inCart}
                             >
                               {inCart ? 'Agregado ✓' : '+ Cotizar'}
