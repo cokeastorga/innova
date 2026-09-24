@@ -58,7 +58,7 @@ export default function Hero() {
             className="hero__subtitle hero__animated" 
             style={{ '--stagger-index': 3 }}
           >
-            Somos distribuidores especializados en Valdivia. Encontramos la pieza exacta 
+            Somos distribuidores especializados en Maxus y las principales marcas en Valdivia. Encontramos la pieza exacta 
             para tu camioneta con atención rápida, experta y garantizada.
           </p>
           
@@ -73,7 +73,7 @@ export default function Hero() {
               Explorar Repuestos
             </button>
             <a 
-              href="https://wa.me/56961546709" 
+              href="https://wa.me/56963890325" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn btn--outline"
@@ -99,13 +99,36 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Side: Geometric Pattern */}
+        {/* Right Side: Camioneta Maxus T90 Negra Showcase */}
         <div className="hero__visual hero__animated" style={{ '--stagger-index': 3 }}>
-          <div className="hero__shape hero__shape--circle-1"></div>
-          <div className="hero__shape hero__shape--circle-2"></div>
-          <div className="hero__shape hero__shape--line-1"></div>
-          <div className="hero__shape hero__shape--line-2"></div>
-          <div className="hero__shape hero__shape--dots"></div>
+          <div className="hero__truck-card">
+            {/* Ambient Background Aura */}
+            <div className="hero__truck-aura" />
+
+            <div className="hero__truck-image-box">
+              <img 
+                src="/img/hero-maxus-t90-black.jpg" 
+                alt="Camioneta Maxus T90 Negra - Innova Camionetas" 
+                className="hero__truck-img"
+                loading="eager"
+              />
+              <div className="hero__truck-glare" />
+            </div>
+
+            {/* Floating Info Badges */}
+            <div className="hero__truck-tag hero__truck-tag--model">
+              <span className="hero__truck-tag-icon">🚙</span>
+              <div className="hero__truck-tag-text">
+                <span className="hero__truck-tag-name">Maxus T90 Bi-Turbo</span>
+                <span className="hero__truck-tag-sub">Línea Completa de Repuestos</span>
+              </div>
+            </div>
+
+            <div className="hero__truck-tag hero__truck-tag--status">
+              <span className="hero__truck-tag-pulse" />
+              <span>Especialistas Maxus</span>
+            </div>
+          </div>
         </div>
 
       </div>

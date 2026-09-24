@@ -20,8 +20,8 @@
 }
 
 .hero__content {
-  flex: 0 0 60%;
-  max-width: 60%;
+  flex: 0 0 52%;
+  max-width: 52%;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -156,73 +156,151 @@
   color: var(--color-text-secondary);
 }
 
-/* Right Side: Visual Pattern */
+/* Right Side: Camioneta Maxus T90 Showcase */
 .hero__visual {
   flex: 1;
   position: relative;
-  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 380px;
+  z-index: 2;
 }
 
-.hero__shape {
+.hero__truck-card {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__truck-aura {
   position: absolute;
-  border-radius: 50%;
-}
-
-.hero__shape--circle-1 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%);
-  top: 10%;
-  right: 10%;
-  animation: float 6s ease-in-out infinite;
-}
-
-.hero__shape--circle-2 {
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, var(--color-lime-light) 0%, transparent 70%);
-  bottom: 10%;
-  left: 20%;
-  animation: float 8s ease-in-out infinite reverse;
-}
-
-.hero__shape--line-1 {
-  width: 1px;
-  height: 150px;
-  background-color: var(--color-accent);
-  opacity: 0.2;
-  transform: rotate(45deg);
-  top: 20%;
-  left: 30%;
-}
-
-.hero__shape--line-2 {
-  width: 150px;
-  height: 1px;
-  background-color: var(--color-lime);
-  opacity: 0.2;
-  transform: rotate(-30deg);
-  bottom: 30%;
-  right: 20%;
-}
-
-.hero__shape--dots {
-  width: 100px;
-  height: 100px;
-  background-image: radial-gradient(var(--color-border) 1.5px, transparent 1.5px);
-  background-size: 16px 16px;
   top: 50%;
-  right: 5%;
-  opacity: 0.5;
-  border-radius: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  background: radial-gradient(ellipse at center, rgba(235, 94, 40, 0.2) 0%, rgba(132, 204, 22, 0.08) 45%, transparent 70%);
+  filter: blur(28px);
+  z-index: 0;
+  pointer-events: none;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-20px) scale(1.05); }
+.hero__truck-image-box {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: #111;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.hero__truck-image-box:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 25px 45px -12px rgba(235, 94, 40, 0.28), 0 0 0 1px rgba(235, 94, 40, 0.35);
+}
+
+.hero__truck-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__truck-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+}
+
+/* Floating Info Badges */
+.hero__truck-tag {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: floatTruckTag 5s ease-in-out infinite;
+}
+
+.hero__truck-tag--model {
+  bottom: -16px;
+  left: 12px;
+  background: rgba(18, 20, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 10px 16px;
+  gap: 12px;
+}
+
+.hero__truck-tag-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.hero__truck-tag-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hero__truck-tag-name {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.hero__truck-tag-sub {
+  font-size: 0.72rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero__truck-tag--status {
+  top: -12px;
+  right: 16px;
+  background: rgba(18, 20, 24, 0.92);
+  border: 1px solid rgba(132, 204, 22, 0.35);
+  color: #fff;
+  padding: 8px 14px;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  animation-delay: -2.5s;
+}
+
+.hero__truck-tag-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-lime);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(132, 204, 22, 0.25);
+  animation: pulse 2s infinite;
+}
+
+@keyframes floatTruckTag {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* Scroll Animations & Entrances */
@@ -272,6 +350,49 @@
   }
   
   .hero__visual {
-    display: none; /* Hide visual pattern on mobile */
+    display: flex;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 520px;
+    min-height: auto;
+    margin-top: 12px;
+  }
+
+  .hero__truck-tag--model {
+    bottom: -12px;
+    left: 8px;
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .hero__truck-tag--status {
+    top: -10px;
+    right: 8px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero__truck-tag--model {
+    bottom: -10px;
+    left: 6px;
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .hero__truck-tag-name {
+    font-size: 0.82rem;
+  }
+
+  .hero__truck-tag-sub {
+    font-size: 0.65rem;
+  }
+
+  .hero__truck-tag--status {
+    top: -10px;
+    right: 6px;
+    padding: 5px 8px;
+    font-size: 0.7rem;
   }
 }

@@ -22,7 +22,7 @@ export const brands = [
     description: 'Distribuidor especializado en Maxus con todos sus modelos.',
     models: [
       { name: 'T60', years: '2017-2024', image: '/img/models/maxus/t60.jpg', type: 'Pickup 4x4 / 4x2' },
-      { name: 'T90', years: '2023-2024', image: '/img/models/maxus/t90.jpg', type: 'Pickup Bi-Turbo' },
+      { name: 'T90', years: '2023-2024', image: '/img/models/maxus/t90-black.jpg', type: 'Pickup Bi-Turbo' },
       { name: 'V80', years: '2015-2024', image: '/img/models/maxus/v80.jpg', type: 'Furgón Cargo / Pasajeros' },
       { name: 'V90', years: '2020-2024', image: '/img/models/maxus/v80.jpg', type: 'Furgón Maxi Cargo' },
       { name: 'G10', years: '2015-2024', image: '/img/models/maxus/g10.jpg', type: 'Van Pasajeros / Cargo' },
