@@ -117,6 +117,41 @@ export default function Contact() {
 ${formData.message.trim() ? `📝 *Detalle:* ${formData.message.trim()}` : ''}`;
   };
 
+  const getEmailContent = () => {
+    const finalBrand = formData.brand === 'otra' ? (formData.customBrand.trim() || 'Otra marca') : formData.brand;
+    const finalModel = (formData.brand === 'otra' || formData.model === 'otro') ? (formData.customModel.trim() || 'Otro modelo') : formData.model;
+    const finalYear = formData.year === 'otro' ? formData.customYear.trim() : formData.year;
+    const finalProduct = formData.product === 'otro' ? (formData.customProduct.trim() || 'Otro repuesto / Consulta general') : formData.product;
+
+    const vehicleParts = [];
+    if (finalBrand) vehicleParts.push(finalBrand);
+    if (finalModel) vehicleParts.push(finalModel);
+    if (finalYear) vehicleParts.push(`(Año: ${finalYear})`);
+    const vehicleText = vehicleParts.length > 0 ? vehicleParts.join(' ') : 'No especificado';
+
+    return `Estimado equipo de Innova Camionetas,
+
+Junto con saludar, solicito la cotización del siguiente requerimiento:
+
+========================================
+DATOS DEL CLIENTE
+========================================
+• Nombre: ${formData.name.trim() || 'No indicado'}
+• Teléfono / WhatsApp: ${formData.phone.trim() || 'No indicado'}
+
+========================================
+VEHÍCULO Y REPUESTO SOLICITADO
+========================================
+• Vehículo: ${vehicleText}
+• Repuesto: ${finalProduct || 'Consulta general / Varios repuestos'}
+${formData.message.trim() ? `• Detalles / N° Chasis (VIN): ${formData.message.trim()}\n` : ''}========================================
+
+Agradezco de antemano su pronta respuesta con disponibilidad y precios.
+
+Saludos cordiales,
+${formData.name.trim()}`;
+  };
+
   const validateForm = () => {
     if (!formData.name.trim()) {
       alert('Por favor, ingresa tu nombre.');
@@ -141,10 +176,14 @@ ${formData.message.trim() ? `📝 *Detalle:* ${formData.message.trim()}` : ''}`;
   const handleEmail = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    const text = getMessageContent();
-    const finalBrand = formData.brand === 'otra' ? formData.customBrand : formData.brand;
-    const finalModel = (formData.brand === 'otra' || formData.model === 'otro') ? formData.customModel : formData.model;
-    const subject = `Cotización web de ${formData.name} - ${finalBrand || 'Vehículo'} ${finalModel || ''}`.trim();
+    const text = getEmailContent();
+    const finalBrand = formData.brand === 'otra' ? formData.customBrand.trim() : formData.brand;
+    const finalModel = (formData.brand === 'otra' || formData.model === 'otro') ? formData.customModel.trim() : formData.model;
+    const finalProduct = formData.product === 'otro' ? (formData.customProduct.trim() || 'Repuestos') : formData.product;
+    
+    const vehicleLabel = [finalBrand, finalModel].filter(Boolean).join(' ') || 'Camioneta';
+    const subject = `Cotización: ${finalProduct || 'Repuestos'} - ${vehicleLabel} (${formData.name.trim()})`;
+    
     window.location.href = `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
     setIsSuccess(true);
     setTimeout(() => setIsSuccess(false), 5000);
