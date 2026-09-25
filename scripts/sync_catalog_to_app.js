@@ -85,12 +85,17 @@ const updatedProducts = parsedRows
     const catSlug = categoryMap[row['Categoria']] || 'motor';
     const codigo = row['Codigo'] || row['Nombre_Repuesto'].toLowerCase().replace(/[^a-z0-9]+/g, '-');
     
-    // Buscar si ya tenía imagen asignada
+    // Buscar si existe imagen específica para el código en public/img/products/
     let img = defaultImages[catSlug];
-    const imgRegex = new RegExp(`id:\\s*'${codigo}',[\\s\\S]*?image:\\s*'([^']+)'`);
-    const imgMatch = existingJs.match(imgRegex);
-    if (imgMatch) {
-      img = imgMatch[1];
+    const specificImg = `/img/products/${codigo}.jpg`;
+    if (fs.existsSync(path.join(__dirname, '..', 'public', 'img', 'products', `${codigo}.jpg`))) {
+      img = specificImg;
+    } else {
+      const imgRegex = new RegExp(`id:\\s*'${codigo}',[\\s\\S]*?image:\\s*'([^']+)'`);
+      const imgMatch = existingJs.match(imgRegex);
+      if (imgMatch) {
+        img = imgMatch[1];
+      }
     }
 
     const isFeatured = (row['Destacado'] || '').toUpperCase() === 'SI';
