@@ -20,16 +20,17 @@
 }
 
 .footer__logo-img {
-  height: 48px;
+  height: 52px;
   width: auto;
-  max-width: 190px;
+  max-width: 210px;
   object-fit: contain;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.45));
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .footer__logo-img:hover {
-  opacity: 0.95;
-  transform: scale(1.02);
+  opacity: 1;
+  transform: scale(1.03);
 }
 
 .footer__nav {
