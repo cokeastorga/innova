@@ -469,7 +469,7 @@ export default function QuoteCart() {
                   setCustomerName(e.target.value);
                   if (nameError) setNameError('');
                 }}
-                placeholder="Ej: Rodrigo Larrañaga"
+                placeholder="Ej: Juan Pérez"
                 autoComplete="name"
                 maxLength={60}
               />
