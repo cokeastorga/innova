@@ -695,10 +695,16 @@ export const contactInfo = {
     name: 'Brahyan Padilla',
   },
   whatsapp2: {
+    number: '56979580612',
+    display: '+56 9 7958 0612',
+    label: '2° Contacto • Matías Santana',
+    name: 'Matías Santana',
+  },
+  whatsapp3: {
     number: '56968163883',
     display: '+56 9 6816 3883',
-    label: '2° Contacto • Cristian Yáñez',
-    name: 'Cristian Yáñez',
+    label: '3° Contacto • Cristian',
+    name: 'Cristian',
   },
   team: [
     {
@@ -709,28 +715,51 @@ export const contactInfo = {
       initials: 'BP',
     },
     {
-      name: 'Cristian Yáñez',
+      name: 'Matías Santana',
       role: '2° Contacto',
+      phone: '+56 9 7958 0612',
+      number: '56979580612',
+      initials: 'MS',
+    },
+    {
+      name: 'Cristian',
+      role: '3° Contacto',
       phone: '+56 9 6816 3883',
       number: '56968163883',
-      initials: 'CY',
+      initials: 'CR',
     },
   ],
   email: 'innovacamionetasspa@gmail.com',
   location: 'Valdivia, Chile',
   companyName: 'Innova Camionetas SpA',
-  /* 
-   * DATOS DE TRANSFERENCIA — Reemplaza con los datos reales
-   * Estos se muestran en la sección de contacto
-   */
+  branches: [
+    {
+      id: 'local1',
+      name: 'Local 1 • Ramón Picarte',
+      address: 'Ramón Picarte 2307',
+      city: 'Valdivia, Región de Los Ríos',
+      phone: '+56 9 6389 0325',
+      mapsUrl: 'https://maps.google.com/?q=Ramon+Picarte+2307,+Valdivia,+Chile',
+      embedQuery: 'Ramon+Picarte+2307,+Valdivia,+Chile',
+    },
+    {
+      id: 'local2',
+      name: 'Local 2 • San Martín',
+      address: 'San Martín 492',
+      city: 'Valdivia, Región de Los Ríos',
+      phone: '+56 9 7958 0612',
+      mapsUrl: 'https://maps.google.com/?q=San+Martin+492,+Valdivia,+Chile',
+      embedQuery: 'San+Martin+492,+Valdivia,+Chile',
+    },
+  ],
   bankTransfer: {
-    bank: 'Banco Estado',
-    banco: 'Banco Estado',
-    accountType: 'Cuenta Corriente',
-    tipo: 'Cuenta Corriente',
-    accountNumber: 'XXXX-XXXX-XXXX',
-    numero: 'XXXX-XXXX-XXXX',
-    rut: 'XX.XXX.XXX-X',
+    bank: 'Mercado Pago',
+    banco: 'Mercado Pago',
+    accountType: 'Cuenta Vista',
+    tipo: 'Cuenta Vista',
+    accountNumber: '1023737665',
+    numero: '1023737665',
+    rut: '78.236.683-1',
     holder: 'Innova Camionetas SpA',
     titular: 'Innova Camionetas SpA',
     email: 'innovacamionetasspa@gmail.com',

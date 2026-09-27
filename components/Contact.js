@@ -22,11 +22,13 @@ export default function Contact() {
     customModel: '',
     year: '',
     customYear: '',
+    licensePlate: '',
     product: '',
     customProduct: '',
     message: ''
   });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [activeBranchId, setActiveBranchId] = useState('local1');
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export default function Contact() {
   const selectedBrandObj = brands.find(b => b.name === formData.brand);
   const brandModels = selectedBrandObj ? selectedBrandObj.models : [];
   const selectedModelObj = brandModels.find(m => m.name === formData.model);
+  const activeBranch = contactInfo.branches?.find(b => b.id === activeBranchId) || contactInfo.branches?.[0];
 
   const getMessageContent = () => {
     const finalBrand = formData.brand === 'otra' ? (formData.customBrand.trim() || 'Otra marca') : formData.brand;
@@ -106,6 +109,7 @@ export default function Contact() {
     if (finalBrand) vehicleParts.push(finalBrand);
     if (finalModel) vehicleParts.push(finalModel);
     if (finalYear) vehicleParts.push(`(Año ${finalYear})`);
+    if (formData.licensePlate.trim()) vehicleParts.push(`[Patente: ${formData.licensePlate.trim().toUpperCase()}]`);
     const vehicleText = vehicleParts.length > 0 ? vehicleParts.join(' ') : 'No especificado';
 
     return `¡Hola Innova Camionetas! Quisiera cotizar repuestos para mi vehículo:
@@ -113,7 +117,7 @@ export default function Contact() {
 👤 *Cliente:* ${formData.name.trim() || 'No indicado'}
 📱 *Teléfono:* ${formData.phone.trim() || 'No indicado'}
 🚗 *Vehículo:* ${vehicleText}
-⚙️ *Repuesto:* ${finalProduct || 'Consulta general / Varios'}
+${formData.licensePlate.trim() ? `🔢 *Patente / Chasis:* ${formData.licensePlate.trim().toUpperCase()}\n` : ''}⚙️ *Repuesto:* ${finalProduct || 'Consulta general / Varios'}
 ${formData.message.trim() ? `📝 *Detalle:* ${formData.message.trim()}` : ''}`;
   };
 
@@ -127,6 +131,7 @@ ${formData.message.trim() ? `📝 *Detalle:* ${formData.message.trim()}` : ''}`;
     if (finalBrand) vehicleParts.push(finalBrand);
     if (finalModel) vehicleParts.push(finalModel);
     if (finalYear) vehicleParts.push(`(Año: ${finalYear})`);
+    if (formData.licensePlate.trim()) vehicleParts.push(`[Patente: ${formData.licensePlate.trim().toUpperCase()}]`);
     const vehicleText = vehicleParts.length > 0 ? vehicleParts.join(' ') : 'No especificado';
 
     return `Estimado equipo de Innova Camionetas,
@@ -143,7 +148,7 @@ DATOS DEL CLIENTE
 VEHÍCULO Y REPUESTO SOLICITADO
 ========================================
 • Vehículo: ${vehicleText}
-• Repuesto: ${finalProduct || 'Consulta general / Varios repuestos'}
+${formData.licensePlate.trim() ? `• Patente / Chasis: ${formData.licensePlate.trim().toUpperCase()}\n` : ''}• Repuesto: ${finalProduct || 'Consulta general / Varios repuestos'}
 ${formData.message.trim() ? `• Detalles / N° Chasis (VIN): ${formData.message.trim()}\n` : ''}========================================
 
 Agradezco de antemano su pronta respuesta con disponibilidad y precios.
@@ -319,7 +324,7 @@ ${formData.name.trim()}`;
                 </div>
               </div>
 
-              {/* Año & Repuesto */}
+              {/* Año & Patente */}
               <div className="contact__form-row">
                 <div className="contact__form-group">
                   <label htmlFor="contact-year" className="contact__label">Año del Vehículo</label>
@@ -353,42 +358,59 @@ ${formData.name.trim()}`;
                 </div>
 
                 <div className="contact__form-group">
-                  <label htmlFor="contact-product" className="contact__label">Repuesto o Pieza</label>
-                  <select 
-                    id="contact-product" 
-                    name="product" 
-                    className="contact__select" 
-                    value={formData.product} 
-                    onChange={handleProductChange}
-                  >
-                    <option value="">Selecciona repuesto del catálogo...</option>
-                    {categories.map(cat => {
-                      const catProducts = products.filter(p => p.category === cat.id);
-                      return (
-                        <optgroup key={cat.id} label={cat.name}>
-                          {catProducts.map(p => (
-                            <option key={p.id} value={p.name}>{p.name}</option>
-                          ))}
-                        </optgroup>
-                      );
-                    })}
-                    <option value="otro">✏️ Otro repuesto / Varias piezas...</option>
-                  </select>
-
-                  {formData.product === 'otro' && (
-                    <div className="contact__subinput-wrap">
-                      <input 
-                        type="text" 
-                        name="customProduct" 
-                        className="contact__input contact__subinput" 
-                        value={formData.customProduct} 
-                        onChange={handleChange} 
-                        placeholder="Escribe el repuesto que buscas (ej: Turbo, Sensor)..." 
-                        autoFocus
-                      />
-                    </div>
-                  )}
+                  <label htmlFor="contact-license-plate" className="contact__label">
+                    <span>Patente de tu Camioneta</span>
+                    <span className="contact__label-optional">(Recomendado)</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="contact-license-plate" 
+                    name="licensePlate" 
+                    className="contact__input" 
+                    value={formData.licensePlate} 
+                    onChange={handleChange} 
+                    placeholder="Ej: AB-CD-12 o XX-1234" 
+                  />
                 </div>
+              </div>
+
+              {/* Repuesto o Pieza */}
+              <div className="contact__form-group">
+                <label htmlFor="contact-product" className="contact__label">Repuesto o Pieza</label>
+                <select 
+                  id="contact-product" 
+                  name="product" 
+                  className="contact__select" 
+                  value={formData.product} 
+                  onChange={handleProductChange}
+                >
+                  <option value="">Selecciona repuesto del catálogo...</option>
+                  {categories.map(cat => {
+                    const catProducts = products.filter(p => p.category === cat.id);
+                    return (
+                      <optgroup key={cat.id} label={cat.name}>
+                        {catProducts.map(p => (
+                          <option key={p.id} value={p.name}>{p.name}</option>
+                        ))}
+                      </optgroup>
+                    );
+                  })}
+                  <option value="otro">✏️ Otro repuesto / Varias piezas...</option>
+                </select>
+
+                {formData.product === 'otro' && (
+                  <div className="contact__subinput-wrap">
+                    <input 
+                      type="text" 
+                      name="customProduct" 
+                      className="contact__input contact__subinput" 
+                      value={formData.customProduct} 
+                      onChange={handleChange} 
+                      placeholder="Escribe el repuesto que buscas (ej: Turbo, Sensor)..." 
+                      autoFocus
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Mensaje / Detalle adicional */}
@@ -443,7 +465,7 @@ ${formData.name.trim()}`;
               <a href={`https://wa.me/${contactInfo.whatsapp1.number}`} target="_blank" rel="noopener noreferrer" className="contact__card">
                 <span className="contact__card-icon">📱</span>
                 <div className="contact__card-content">
-                  <h4 className="contact__card-title">1° Contacto • Brahyan Padilla</h4>
+                  <h4 className="contact__card-title">{contactInfo.whatsapp1.label}</h4>
                   <p className="contact__card-text">{contactInfo.whatsapp1.display}</p>
                 </div>
               </a>
@@ -451,8 +473,16 @@ ${formData.name.trim()}`;
               <a href={`https://wa.me/${contactInfo.whatsapp2.number}`} target="_blank" rel="noopener noreferrer" className="contact__card">
                 <span className="contact__card-icon">📱</span>
                 <div className="contact__card-content">
-                  <h4 className="contact__card-title">2° Contacto • Cristian Yáñez</h4>
+                  <h4 className="contact__card-title">{contactInfo.whatsapp2.label}</h4>
                   <p className="contact__card-text">{contactInfo.whatsapp2.display}</p>
+                </div>
+              </a>
+
+              <a href={`https://wa.me/${contactInfo.whatsapp3.number}`} target="_blank" rel="noopener noreferrer" className="contact__card">
+                <span className="contact__card-icon">📱</span>
+                <div className="contact__card-content">
+                  <h4 className="contact__card-title">{contactInfo.whatsapp3.label}</h4>
+                  <p className="contact__card-text">{contactInfo.whatsapp3.display}</p>
                 </div>
               </a>
 
@@ -463,14 +493,6 @@ ${formData.name.trim()}`;
                   <p className="contact__card-text">{contactInfo.email}</p>
                 </div>
               </a>
-
-              <div className="contact__card">
-                <span className="contact__card-icon">📍</span>
-                <div className="contact__card-content">
-                  <h4 className="contact__card-title">Ubicación</h4>
-                  <p className="contact__card-text">Valdivia, Chile</p>
-                </div>
-              </div>
             </div>
 
             <div className="contact__bank-card">
@@ -509,6 +531,73 @@ ${formData.name.trim()}`;
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sucursales & Mapa Google Maps */}
+        <div className="contact__branches-section">
+          <div className="contact__branches-header">
+            <span className="contact__tag">NUESTRAS SUCURSALES EN VALDIVIA</span>
+            <h3 className="contact__branches-title">Visítanos en Nuestros 2 Locales</h3>
+            <p className="contact__branches-desc">
+              Atención presencial, retiro de repuestos y asesoría técnica en la ciudad de Valdivia. Selecciona una sucursal para verla en el mapa.
+            </p>
+          </div>
+
+          <div className="contact__branches-grid">
+            <div className="contact__branches-list">
+              {contactInfo.branches?.map((b, idx) => {
+                const isActive = activeBranchId === b.id;
+                return (
+                  <div 
+                    key={b.id} 
+                    className={`contact__branch-card ${isActive ? 'contact__branch-card--active' : ''}`}
+                    onClick={() => setActiveBranchId(b.id)}
+                  >
+                    <div className="contact__branch-badge">Local {idx + 1}</div>
+                    <h4 className="contact__branch-name">{b.name}</h4>
+                    <p className="contact__branch-address">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                      {b.address}, {b.city}
+                    </p>
+                    <div className="contact__branch-links">
+                      <a 
+                        href={b.mapsUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="contact__branch-link"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span>Abrir en Google Maps</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="contact__map-frame-wrapper">
+              {activeBranch && (
+                <iframe
+                  title={`Ubicación de ${activeBranch.name}`}
+                  src={`https://maps.google.com/maps?q=${activeBranch.embedQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: '380px' }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              )}
             </div>
           </div>
         </div>

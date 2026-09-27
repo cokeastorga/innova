@@ -34,13 +34,27 @@ export default function QuoteCart() {
 
   if (!isOpen) return null;
 
+  const [vehicleError, setVehicleError] = useState(false);
+
+  const validateVehicle = () => {
+    if (!vehicle || !vehicle.trim()) {
+      setVehicleError(true);
+      alert('Por favor, especifica el año o la patente de tu camioneta para cotizar.');
+      return false;
+    }
+    setVehicleError(false);
+    return true;
+  };
+
   const handleWhatsApp = () => {
+    if (!validateVehicle()) return;
     const text = getWhatsAppMessage(notes, vehicle);
     const phoneNumber = contactInfo.whatsapp1.number.replace(/\D/g, '');
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const handleEmail = () => {
+    if (!validateVehicle()) return;
     const { subject, body } = getEmailData(notes, vehicle);
     window.location.href = `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -121,20 +135,29 @@ export default function QuoteCart() {
           <div className="quote-cart__footer">
             <div className="quote-cart__fields">
               <div className="quote-cart__field-group">
-                <label htmlFor="quote-vehicle" className="quote-cart__field-label">
-                  🚙 Modelo de tu camioneta (detectado automáticamente)
+                <label htmlFor="quote-vehicle" className="quote-cart__field-label" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>🚙 Especifica tu año o patente de tu camioneta</span>
+                  <span style={{ color: 'var(--color-accent, #F97316)', fontSize: '0.78rem', fontWeight: 700 }}>* Obligatorio</span>
                 </label>
                 <input 
                   id="quote-vehicle" 
                   type="text"
-                  className="quote-cart__input" 
+                  required
+                  className={`quote-cart__input ${vehicleError && !vehicle.trim() ? 'quote-cart__input--error' : ''}`}
+                  style={vehicleError && !vehicle.trim() ? { borderColor: '#EF4444', backgroundColor: 'rgba(239, 68, 68, 0.05)' } : {}}
                   value={vehicle} 
                   onChange={(e) => {
                     setVehicle(e.target.value);
                     setIsVehicleUserEdited(true);
+                    if (e.target.value.trim()) setVehicleError(false);
                   }}
-                  placeholder="Ej: Maxus T60 2021 2.8 / Hilux 2019..."
+                  placeholder="Ej: Patente AB-CD-12 o Año 2022 (Maxus T60)..."
                 />
+                {vehicleError && !vehicle.trim() && (
+                  <span style={{ color: '#EF4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>
+                    ⚠️ Este campo es obligatorio para validar la compatibilidad exacta.
+                  </span>
+                )}
               </div>
 
               <div className="quote-cart__field-group">

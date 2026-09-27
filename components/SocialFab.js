@@ -47,13 +47,26 @@ const SocialFab = () => {
         </a>
         
         <a 
-          href="https://wa.me/56968163883" 
+          href="https://wa.me/56979580612" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="social-fab__item"
           style={{ '--item-index': 2 }}
         >
-          <span className="social-fab__label">2° Contacto • Cristian</span>
+          <span className="social-fab__label">2° Contacto • Matías</span>
+          <div className="social-fab__icon-sm social-fab__icon-sm--whatsapp">
+            <WhatsAppIcon size={22} />
+          </div>
+        </a>
+
+        <a 
+          href="https://wa.me/56968163883" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-fab__item"
+          style={{ '--item-index': 3 }}
+        >
+          <span className="social-fab__label">3° Contacto • Cristian</span>
           <div className="social-fab__icon-sm social-fab__icon-sm--whatsapp">
             <WhatsAppIcon size={22} />
           </div>
@@ -64,7 +77,7 @@ const SocialFab = () => {
           target="_blank" 
           rel="noopener noreferrer" 
           className="social-fab__item"
-          style={{ '--item-index': 3 }}
+          style={{ '--item-index': 4 }}
         >
           <span className="social-fab__label">Instagram</span>
           <div className="social-fab__icon-sm social-fab__icon-sm--instagram">

@@ -15,9 +15,7 @@ const Motorsport = () => {
             Pasión y Rendimiento en <span className="motorsport__title-accent">Cada Repuesto</span>
           </h2>
           <p className="motorsport__subtitle">
-            En Innova Camionetas apoyamos activamente el deporte motor local en Valdivia. 
-            La misma exigencia de alta velocidad, fiabilidad y precisión en la pista es la que 
-            aplicamos en cada pieza y repuesto que vendemos para tu camioneta.
+            En Innova Camionetas apoyamos activamente el deporte motor local en Valdivia y a nuestro piloto Rodrigo Larrañaga. La misma exigencia de alta velocidad, fiabilidad y precisión en la pista es la que aplicamos en cada pieza y repuesto que vendemos para tu camioneta.
           </p>
           <a 
             href="https://wa.me/56963890325?text=Hola%2C%20los%20vi%20en%20Motorsport%20Valdivia%20y%20quiero%20cotizar" 

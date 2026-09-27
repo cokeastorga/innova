@@ -75,7 +75,7 @@ export function QuoteCartProvider({ children }) {
     ];
 
     if (vehicle && vehicle.trim()) {
-      lines.push(`🚙 *Vehículo Principal:* ${vehicle.trim()}`);
+      lines.push(`🚙 *Vehículo / Año o Patente:* ${vehicle.trim()}`);
       lines.push('');
     }
 
@@ -119,7 +119,7 @@ export function QuoteCartProvider({ children }) {
     ];
 
     if (vehicle && vehicle.trim()) {
-      lines.push(`Vehículo Principal: ${vehicle.trim()}`);
+      lines.push(`Vehículo / Año o Patente: ${vehicle.trim()}`);
       lines.push('');
     }
 

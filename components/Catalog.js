@@ -4,12 +4,14 @@ import { useState, useMemo, useEffect } from 'react';
 import './Catalog.css';
 import { products, brands, categories as categoryList } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
+import ReferenceImageModal from '@/components/ReferenceImageModal';
 
 export default function Catalog() {
   const [selectedBrand, setSelectedBrand] = useState('all');
   const [selectedModel, setSelectedModel] = useState('all');
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isRefModalOpen, setIsRefModalOpen] = useState(false);
 
   // Get models for currently selected brand
   const availableModels = useMemo(() => {
@@ -302,6 +304,26 @@ export default function Catalog() {
           )}
         </div>
 
+        {/* Banner de Imágenes Referenciales */}
+        <div className="catalog__ref-banner" onClick={() => setIsRefModalOpen(true)}>
+          <div className="catalog__ref-banner-content">
+            <span className="catalog__ref-banner-icon">ℹ️</span>
+            <span className="catalog__ref-banner-text">
+              <strong>Imágenes de carácter referencial:</strong> Las fotos son ilustrativas y pueden variar según marca, modelo, versión y año de tu camioneta.
+            </span>
+          </div>
+          <button 
+            type="button" 
+            className="catalog__ref-banner-link"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsRefModalOpen(true);
+            }}
+          >
+            Ver más detalles
+          </button>
+        </div>
+
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
           <div className="catalog__grid stagger">
@@ -348,6 +370,11 @@ export default function Catalog() {
           </div>
         )}
       </div>
+
+      <ReferenceImageModal 
+        isOpen={isRefModalOpen} 
+        onClose={() => setIsRefModalOpen(false)} 
+      />
     </section>
   );
 }
