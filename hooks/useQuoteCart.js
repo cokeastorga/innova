@@ -17,15 +17,23 @@ export function QuoteCartProvider({ children }) {
     const cartItemId = `${product.id}__${brandKey || 'gen'}__${modelKey || 'gen'}`;
 
     setItems(prev => {
-      /* Don't add duplicates for exact same product + vehicle */
-      if (prev.some(item => (item.cartItemId === cartItemId) || (!brandKey && !modelKey && item.id === product.id))) {
-        return prev;
+      /* If already in cart, increment quantity */
+      const existingIdx = prev.findIndex(item => (item.cartItemId === cartItemId) || (!brandKey && !modelKey && item.id === product.id));
+      if (existingIdx >= 0) {
+        const copy = [...prev];
+        copy[existingIdx] = {
+          ...copy[existingIdx],
+          quantity: (copy[existingIdx].quantity || 1) + 1
+        };
+        return copy;
       }
+
       return [
         ...prev,
         {
           ...product,
           cartItemId,
+          quantity: 1,
           selectedBrand: brand,
           selectedModel: model,
           selectedYears: years,
@@ -36,6 +44,19 @@ export function QuoteCartProvider({ children }) {
     /* Trigger bounce animation on badge */
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 600);
+  }, []);
+
+  const updateQuantity = useCallback((identifier, deltaOrQty, isDelta = false) => {
+    setItems(prev => {
+      return prev.map(item => {
+        if (item.cartItemId === identifier || item.id === identifier) {
+          const currentQty = item.quantity || 1;
+          const nextQty = isDelta ? currentQty + deltaOrQty : deltaOrQty;
+          return nextQty > 0 ? { ...item, quantity: nextQty } : null;
+        }
+        return item;
+      }).filter(Boolean);
+    });
   }, []);
 
   const removeItem = useCallback((identifier) => {
@@ -81,15 +102,28 @@ export function QuoteCartProvider({ children }) {
         lines.push('━━━━━━━━━━━━━━━━━━━━');
         const numLabel = vehicleData.length > 1 ? `CAMIONETA ${idx + 1}: ` : 'CAMIONETA: ';
         lines.push(`🚙 *${numLabel}${vg.title}*`);
-        if (vg.year) {
-          lines.push(`📅 *Año:* ${vg.year}`);
+
+        // Check if multiple sub-vehicles (e.g. Hilux 2024 and Hilux 2022) are present
+        if (Array.isArray(vg.subVehicles) && vg.subVehicles.length > 1) {
+          lines.push(`📋 *Vehículos para este modelo (${vg.subVehicles.length}):*`);
+          vg.subVehicles.forEach((sv, sIdx) => {
+            const plateStr = sv.plate && sv.plate.trim() ? ` (Patente: ${sv.plate.trim().toUpperCase()})` : '';
+            lines.push(`   • *${sIdx + 1}ª Camioneta:* Año ${sv.year || 'No especificado'}${plateStr}`);
+          });
+        } else {
+          if (vg.year) {
+            lines.push(`📅 *Año:* ${vg.year}`);
+          }
+          if (vg.plate && vg.plate.trim()) {
+            lines.push(`🏷️ *Patente:* ${vg.plate.trim().toUpperCase()}`);
+          }
         }
-        if (vg.plate && vg.plate.trim()) {
-          lines.push(`🏷️ *Patente:* ${vg.plate.trim().toUpperCase()}`);
-        }
+
         lines.push('📦 *Repuestos solicitados:*');
         vg.items.forEach((item, itemIdx) => {
-          lines.push(`   ${itemIdx + 1}. *${item.name}*`);
+          const qty = item.quantity || 1;
+          const qtyStr = qty > 1 ? ` *(x${qty} unidades)*` : '';
+          lines.push(`   ${itemIdx + 1}. *${item.name}*${qtyStr}`);
         });
         lines.push('');
       });
@@ -99,7 +133,9 @@ export function QuoteCartProvider({ children }) {
       lines.push('');
       lines.push('📦 *Repuestos solicitados:*');
       items.forEach((item, i) => {
-        let line = `  ${i + 1}. *${item.name}*`;
+        const qty = item.quantity || 1;
+        const qtyStr = qty > 1 ? ` *(x${qty} unidades)*` : '';
+        let line = `  ${i + 1}. *${item.name}*${qtyStr}`;
         if (item.selectedBrand || item.selectedModel) {
           const vehicleParts = [];
           if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
@@ -112,7 +148,9 @@ export function QuoteCartProvider({ children }) {
     } else {
       lines.push('📦 *Repuestos solicitados:*');
       items.forEach((item, i) => {
-        let line = `  ${i + 1}. *${item.name}*`;
+        const qty = item.quantity || 1;
+        const qtyStr = qty > 1 ? ` *(x${qty} unidades)*` : '';
+        let line = `  ${i + 1}. *${item.name}*${qtyStr}`;
         if (item.selectedBrand || item.selectedModel) {
           const vehicleParts = [];
           if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
@@ -138,8 +176,8 @@ export function QuoteCartProvider({ children }) {
 
   /* Format cart as email body (plain text, encoded by caller) */
   const getEmailData = useCallback((notes = '', vehicleData = null) => {
-    const count = items.length;
-    const subject = `Cotización de Repuestos (${count} ${count === 1 ? 'producto' : 'productos'}) - Innova Camionetas`;
+    const totalCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const subject = `Cotización de Repuestos (${totalCount} ${totalCount === 1 ? 'unidad' : 'unidades'}) - Innova Camionetas`;
     
     const lines = [
       'Estimado equipo de Innova Camionetas,',
@@ -153,11 +191,21 @@ export function QuoteCartProvider({ children }) {
         const numLabel = vehicleData.length > 1 ? `CAMIONETA ${idx + 1}: ` : 'CAMIONETA: ';
         lines.push(`----------------------------------------`);
         lines.push(`${numLabel}${vg.title}`);
-        if (vg.year) lines.push(`Año: ${vg.year}`);
-        if (vg.plate && vg.plate.trim()) lines.push(`Patente: ${vg.plate.trim().toUpperCase()}`);
+        if (Array.isArray(vg.subVehicles) && vg.subVehicles.length > 1) {
+          lines.push(`Vehículos para este modelo (${vg.subVehicles.length}):`);
+          vg.subVehicles.forEach((sv, sIdx) => {
+            const plateStr = sv.plate && sv.plate.trim() ? ` (Patente: ${sv.plate.trim().toUpperCase()})` : '';
+            lines.push(`  • ${sIdx + 1}ª Camioneta: Año ${sv.year || 'No especificado'}${plateStr}`);
+          });
+        } else {
+          if (vg.year) lines.push(`Año: ${vg.year}`);
+          if (vg.plate && vg.plate.trim()) lines.push(`Patente: ${vg.plate.trim().toUpperCase()}`);
+        }
         lines.push('Repuestos:');
         vg.items.forEach((item, itemIdx) => {
-          lines.push(`  ${itemIdx + 1}. ${item.name}`);
+          const qty = item.quantity || 1;
+          const qtyStr = qty > 1 ? ` (x${qty} unidades)` : '';
+          lines.push(`  ${itemIdx + 1}. ${item.name}${qtyStr}`);
         });
         lines.push('');
       });
@@ -167,12 +215,14 @@ export function QuoteCartProvider({ children }) {
       lines.push('');
       lines.push('Lista de repuestos:');
       items.forEach((item, i) => {
-        lines.push(`  ${i + 1}. ${item.name}`);
+        const qty = item.quantity || 1;
+        lines.push(`  ${i + 1}. ${item.name}${qty > 1 ? ` (x${qty})` : ''}`);
       });
     } else {
       lines.push('Lista de repuestos:');
       items.forEach((item, i) => {
-        lines.push(`  ${i + 1}. ${item.name}`);
+        const qty = item.quantity || 1;
+        lines.push(`  ${i + 1}. ${item.name}${qty > 1 ? ` (x${qty})` : ''}`);
       });
     }
 
@@ -189,13 +239,18 @@ export function QuoteCartProvider({ children }) {
     return { subject, body: lines.join('\n') };
   }, [items]);
 
+  const itemCount = useMemo(() => {
+    return items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  }, [items]);
+
   const value = useMemo(() => ({
     items,
     cart: items,
     isOpen,
     justAdded,
-    itemCount: items.length,
+    itemCount,
     addItem,
+    updateQuantity,
     removeItem,
     clearCart,
     isInCart,
@@ -204,7 +259,7 @@ export function QuoteCartProvider({ children }) {
     closeCart,
     getWhatsAppMessage,
     getEmailData,
-  }), [items, isOpen, justAdded, addItem, removeItem, clearCart, isInCart, toggleCart, openCart, closeCart, getWhatsAppMessage, getEmailData]);
+  }), [items, isOpen, justAdded, itemCount, addItem, updateQuantity, removeItem, clearCart, isInCart, toggleCart, openCart, closeCart, getWhatsAppMessage, getEmailData]);
 
   return (
     <QuoteCartContext.Provider value={value}>

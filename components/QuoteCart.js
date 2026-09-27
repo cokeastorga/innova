@@ -5,7 +5,7 @@ import { useQuoteCart } from '@/hooks/useQuoteCart';
 import { contactInfo } from '@/data/products';
 import './QuoteCart.css';
 
-// Helper to generate years array from range string (e.g. "2015-2024" -> [2024, 2023, ..., 2015])
+// Helper to generate years array from range string (e.g. "2005-2024" -> [2024, 2023, ..., 2005])
 function getYearsList(rangeStr) {
   const currentYear = new Date().getFullYear();
   if (!rangeStr) {
@@ -29,9 +29,18 @@ function getYearsList(rangeStr) {
 }
 
 export default function QuoteCart() {
-  const { items, isOpen, closeCart, removeItem, clearCart, getWhatsAppMessage, getEmailData } = useQuoteCart();
+  const { 
+    items, 
+    isOpen, 
+    closeCart, 
+    removeItem, 
+    updateQuantity, 
+    clearCart, 
+    getWhatsAppMessage, 
+    getEmailData 
+  } = useQuoteCart();
   
-  // State for each vehicle group: { [groupKey]: { year: '', customYear: '', plate: '' } }
+  // State for vehicles of each model group: { [groupKey]: { subVehicles: [ { id, year, customYear, plate } ] } }
   const [vehiclesState, setVehiclesState] = useState({});
   const [notes, setNotes] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
@@ -63,16 +72,54 @@ export default function QuoteCart() {
 
   if (!isOpen) return null;
 
-  const handleVehicleChange = (groupKey, field, value) => {
-    setVehiclesState(prev => ({
-      ...prev,
-      [groupKey]: {
-        ...(prev[groupKey] || { year: '', customYear: '', plate: '' }),
-        [field]: value
-      }
-    }));
+  // Add another sub-vehicle (e.g. second Hilux with different year/plate)
+  const handleAddSubVehicle = (groupKey) => {
+    setVehiclesState(prev => {
+      const current = prev[groupKey] || { subVehicles: [{ id: '1', year: '', customYear: '', plate: '' }] };
+      const nextId = String(Date.now());
+      return {
+        ...prev,
+        [groupKey]: {
+          subVehicles: [
+            ...current.subVehicles,
+            { id: nextId, year: '', customYear: '', plate: '' }
+          ]
+        }
+      };
+    });
+  };
 
-    // Clear validation error when user fills data
+  // Remove a sub-vehicle
+  const handleRemoveSubVehicle = (groupKey, subVehicleId) => {
+    setVehiclesState(prev => {
+      const current = prev[groupKey] || { subVehicles: [{ id: '1', year: '', customYear: '', plate: '' }] };
+      if (current.subVehicles.length <= 1) return prev;
+      return {
+        ...prev,
+        [groupKey]: {
+          subVehicles: current.subVehicles.filter(sv => sv.id !== subVehicleId)
+        }
+      };
+    });
+  };
+
+  // Update a field inside a sub-vehicle
+  const handleSubVehicleChange = (groupKey, subVehicleId, field, value) => {
+    setVehiclesState(prev => {
+      const current = prev[groupKey] || { subVehicles: [{ id: '1', year: '', customYear: '', plate: '' }] };
+      return {
+        ...prev,
+        [groupKey]: {
+          subVehicles: current.subVehicles.map(sv => {
+            if (sv.id === subVehicleId) {
+              return { ...sv, [field]: value };
+            }
+            return sv;
+          })
+        }
+      };
+    });
+
     if (validationErrors[groupKey]) {
       setValidationErrors(prev => {
         const next = { ...prev };
@@ -82,18 +129,18 @@ export default function QuoteCart() {
     }
   };
 
-  // Validate that each vehicle group has at least a Year selected or Patente entered
+  // Validate that each vehicle group has at least a Year selected or Patente entered for its primary entry
   const validateForm = () => {
     const errors = {};
     let hasError = false;
 
     vehicleGroups.forEach(group => {
-      // General items without vehicle don't require vehicle validation
       if (group.isGeneral) return;
 
-      const data = vehiclesState[group.key] || {};
-      const year = data.year === 'otro' ? data.customYear : data.year;
-      const plate = data.plate || '';
+      const data = vehiclesState[group.key] || { subVehicles: [{ id: '1', year: '', customYear: '', plate: '' }] };
+      const primary = data.subVehicles[0] || {};
+      const year = primary.year === 'otro' ? primary.customYear : primary.year;
+      const plate = primary.plate || '';
 
       const hasYear = Boolean(year && String(year).trim());
       const hasPlate = Boolean(plate && plate.trim());
@@ -111,13 +158,22 @@ export default function QuoteCart() {
   // Prepare structured payload for WhatsApp and Email
   const getStructuredData = () => {
     return vehicleGroups.map(group => {
-      const data = vehiclesState[group.key] || {};
-      const finalYear = data.year === 'otro' ? data.customYear : data.year;
+      const data = vehiclesState[group.key] || { subVehicles: [{ id: '1', year: '', customYear: '', plate: '' }] };
+      const subVehiclesList = data.subVehicles.map(sv => ({
+        id: sv.id,
+        year: sv.year === 'otro' ? sv.customYear : sv.year,
+        plate: sv.plate || ''
+      }));
+
+      const firstYear = subVehiclesList[0]?.year || '';
+      const firstPlate = subVehiclesList[0]?.plate || '';
+
       return {
         key: group.key,
         title: group.title,
-        year: finalYear || '',
-        plate: data.plate || '',
+        year: firstYear,
+        plate: firstPlate,
+        subVehicles: subVehiclesList,
         items: group.items
       };
     });
@@ -146,6 +202,7 @@ export default function QuoteCart() {
   };
 
   const isMultipleVehicles = vehicleGroups.length > 1;
+  const totalUnits = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   return (
     <div className="quote-cart__overlay" onClick={closeCart} role="dialog" aria-modal="true">
@@ -155,11 +212,11 @@ export default function QuoteCart() {
         <div className="quote-cart__header">
           <div>
             <h2 className="quote-cart__title">
-              Tu Cotización <span className="quote-cart__count">({items.length} {items.length === 1 ? 'repuesto' : 'repuestos'})</span>
+              Tu Cotización <span className="quote-cart__count">({totalUnits} {totalUnits === 1 ? 'unidad' : 'unidades'})</span>
             </h2>
             {isMultipleVehicles && (
               <span className="quote-cart__multi-note">
-                🚙 {vehicleGroups.length} camionetas distintas seleccionadas
+                🚙 {vehicleGroups.length} modelos de camioneta distintos
               </span>
             )}
           </div>
@@ -183,7 +240,8 @@ export default function QuoteCart() {
           ) : (
             <div className="quote-cart__groups">
               {vehicleGroups.map((group, groupIdx) => {
-                const groupData = vehiclesState[group.key] || { year: '', customYear: '', plate: '' };
+                const groupData = vehiclesState[group.key] || { subVehicles: [{ id: '1', year: '', customYear: '', plate: '' }] };
+                const subVehicles = groupData.subVehicles || [{ id: '1', year: '', customYear: '', plate: '' }];
                 const yearsList = getYearsList(group.yearsRange);
                 const hasError = Boolean(validationErrors[group.key]);
 
@@ -192,7 +250,7 @@ export default function QuoteCart() {
                     key={group.key} 
                     className={`quote-vehicle-card ${hasError ? 'quote-vehicle-card--error' : ''}`}
                   >
-                    {/* Tarjeta de Camioneta */}
+                    {/* Header de Camioneta */}
                     <div className="quote-vehicle-card__header">
                       <div className="quote-vehicle-card__title-row">
                         <span className="quote-vehicle-card__badge">
@@ -204,25 +262,53 @@ export default function QuoteCart() {
                       </div>
                       {group.yearsRange && (
                         <span className="quote-vehicle-card__years">
-                          Generación: {group.yearsRange}
+                          Generación compatible: {group.yearsRange}
                         </span>
                       )}
                     </div>
 
                     {/* Repuestos para esta camioneta */}
                     <div className="quote-vehicle-card__items">
-                      <span className="quote-vehicle-card__items-label">
-                        Repuestos agregados ({group.items.length}):
-                      </span>
+                      <div className="quote-vehicle-card__items-header">
+                        <span className="quote-vehicle-card__items-label">
+                          Repuestos ({group.items.length}):
+                        </span>
+                        <span className="quote-vehicle-card__qty-hint">Puedes ajustar cantidades con [−] y [+]</span>
+                      </div>
+
                       <ul className="quote-vehicle-card__list">
                         {group.items.map((item, itemIdx) => {
                           const itemKey = item.cartItemId || item.id || `item-${itemIdx}`;
+                          const qty = item.quantity || 1;
+
                           return (
                             <li key={itemKey} className="quote-vehicle-card__item">
                               <span className="quote-vehicle-card__item-number">{itemIdx + 1}.</span>
                               <div className="quote-vehicle-card__item-details">
                                 <span className="quote-vehicle-card__item-title">{item.name}</span>
                               </div>
+
+                              {/* Stepper de Cantidad */}
+                              <div className="quote-item-qty" title="Modificar cantidad">
+                                <button 
+                                  type="button" 
+                                  className="quote-item-qty__btn"
+                                  onClick={() => updateQuantity(item.cartItemId || item.id, -1, true)}
+                                  aria-label="Disminuir una unidad"
+                                >
+                                  −
+                                </button>
+                                <span className="quote-item-qty__val" aria-label={`Cantidad: ${qty}`}>{qty}</span>
+                                <button 
+                                  type="button" 
+                                  className="quote-item-qty__btn"
+                                  onClick={() => updateQuantity(item.cartItemId || item.id, 1, true)}
+                                  aria-label="Aumentar una unidad"
+                                >
+                                  +
+                                </button>
+                              </div>
+
                               <button 
                                 type="button"
                                 className="quote-vehicle-card__item-remove"
@@ -238,58 +324,91 @@ export default function QuoteCart() {
                       </ul>
                     </div>
 
-                    {/* Selector de Año y Patente específico para esta camioneta */}
+                    {/* Selector de Año y Patente (con soporte para múltiples años de la misma camioneta) */}
                     {!group.isGeneral && (
                       <div className="quote-vehicle-card__data-box">
-                        <div className="quote-vehicle-card__field">
-                          <label 
-                            htmlFor={`year-${group.key}`} 
-                            className="quote-vehicle-card__label"
-                          >
-                            📅 Año de tu {group.title} <span className="quote-required-tag">* Requerido</span>
-                          </label>
-                          <select
-                            id={`year-${group.key}`}
-                            className={`quote-vehicle-card__select ${hasError && !groupData.year && !groupData.plate ? 'quote-vehicle-card__select--error' : ''}`}
-                            value={groupData.year}
-                            onChange={(e) => handleVehicleChange(group.key, 'year', e.target.value)}
-                          >
-                            <option value="">-- Toca aquí para elegir el año --</option>
-                            {yearsList.map(y => (
-                              <option key={y} value={y}>{y}</option>
-                            ))}
-                            <option value="otro">Otro año no listado...</option>
-                          </select>
+                        {subVehicles.map((sv, svIdx) => (
+                          <div key={sv.id} className="quote-subvehicle-row">
+                            {subVehicles.length > 1 && (
+                              <div className="quote-subvehicle-row__title">
+                                <span>🚙 {svIdx + 1}ª Camioneta {group.title}:</span>
+                                {svIdx > 0 && (
+                                  <button
+                                    type="button"
+                                    className="quote-subvehicle-row__remove"
+                                    onClick={() => handleRemoveSubVehicle(group.key, sv.id)}
+                                    title="Quitar esta camioneta adicional"
+                                  >
+                                    ✕ Quitar
+                                  </button>
+                                )}
+                              </div>
+                            )}
 
-                          {groupData.year === 'otro' && (
-                            <input 
-                              type="number" 
-                              className="quote-vehicle-card__input quote-vehicle-card__input--custom-year"
-                              placeholder="Escribe el año (ej: 2012)"
-                              value={groupData.customYear || ''}
-                              onChange={(e) => handleVehicleChange(group.key, 'customYear', e.target.value)}
-                              min="1990"
-                              max="2030"
-                            />
-                          )}
-                        </div>
+                            <div className="quote-vehicle-card__field">
+                              <label 
+                                htmlFor={`year-${group.key}-${sv.id}`} 
+                                className="quote-vehicle-card__label"
+                              >
+                                <span>📅 Año de tu {subVehicles.length > 1 ? `${svIdx + 1}ª ` : ''}{group.title}:</span>
+                                <span className="quote-required-tag">* Requerido</span>
+                              </label>
+                              <select
+                                id={`year-${group.key}-${sv.id}`}
+                                className={`quote-vehicle-card__select ${hasError && !sv.year && !sv.plate ? 'quote-vehicle-card__select--error' : ''}`}
+                                value={sv.year}
+                                onChange={(e) => handleSubVehicleChange(group.key, sv.id, 'year', e.target.value)}
+                              >
+                                <option value="">-- Toca aquí para elegir el año --</option>
+                                {yearsList.map(y => (
+                                  <option key={y} value={y}>{y}</option>
+                                ))}
+                                <option value="otro">Otro año no listado...</option>
+                              </select>
 
-                        <div className="quote-vehicle-card__field">
-                          <label 
-                            htmlFor={`plate-${group.key}`} 
-                            className="quote-vehicle-card__label"
+                              {sv.year === 'otro' && (
+                                <input 
+                                  type="number" 
+                                  className="quote-vehicle-card__input quote-vehicle-card__input--custom-year"
+                                  placeholder="Escribe el año (ej: 2012)"
+                                  value={sv.customYear || ''}
+                                  onChange={(e) => handleSubVehicleChange(group.key, sv.id, 'customYear', e.target.value)}
+                                  min="1980"
+                                  max="2030"
+                                />
+                              )}
+                            </div>
+
+                            <div className="quote-vehicle-card__field">
+                              <label 
+                                htmlFor={`plate-${group.key}-${sv.id}`} 
+                                className="quote-vehicle-card__label"
+                              >
+                                <span>🏷️ Patente {subVehicles.length > 1 ? `de esta ${svIdx + 1}ª camioneta` : ''}:</span>
+                                <span className="quote-optional-tag">(Opcional)</span>
+                              </label>
+                              <input 
+                                id={`plate-${group.key}-${sv.id}`}
+                                type="text"
+                                maxLength={8}
+                                className="quote-vehicle-card__input"
+                                placeholder="Ej: ABCD12"
+                                value={sv.plate}
+                                onChange={(e) => handleSubVehicleChange(group.key, sv.id, 'plate', e.target.value.toUpperCase())}
+                              />
+                            </div>
+                          </div>
+                        ))}
+
+                        {/* Botón para agregar otra camioneta del mismo modelo con distinto año (ej: Hilux 2024 y Hilux 2022) */}
+                        <div className="quote-add-subvehicle-area">
+                          <button
+                            type="button"
+                            className="quote-add-subvehicle-btn"
+                            onClick={() => handleAddSubVehicle(group.key)}
                           >
-                            🏷️ Patente de esta camioneta <span className="quote-optional-tag">(Opcional)</span>
-                          </label>
-                          <input 
-                            id={`plate-${group.key}`}
-                            type="text"
-                            maxLength={8}
-                            className="quote-vehicle-card__input"
-                            placeholder="Ej: ABCD12"
-                            value={groupData.plate}
-                            onChange={(e) => handleVehicleChange(group.key, 'plate', e.target.value.toUpperCase())}
-                          />
+                            ➕ ¿Cotizas para otra {group.title} con diferente año o patente? Toca aquí
+                          </button>
                         </div>
 
                         {hasError && (
