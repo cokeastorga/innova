@@ -52,18 +52,6 @@ export const brands = [
         "type": "Van Pasajeros / Cargo"
       },
       {
-        "name": "D60",
-        "years": "2021-2024",
-        "image": "/img/models/maxus/d60.jpg",
-        "type": "SUV Familiar"
-      },
-      {
-        "name": "D90",
-        "years": "2022-2024",
-        "image": "/img/models/maxus/d90.jpg",
-        "type": "SUV 4x4 Offroad"
-      },
-      {
         "name": "eDeliver 3",
         "years": "2022-2024",
         "image": "/img/models/maxus/edeliver3.jpg",
@@ -87,18 +75,6 @@ export const brands = [
         "years": "2016-2024",
         "image": "/img/models/toyota/hilux-revo.jpg",
         "type": "Pickup 4x4 / 4x2"
-      },
-      {
-        "name": "Land Cruiser Prado",
-        "years": "2010-2024",
-        "image": "/img/models/toyota/prado.jpg",
-        "type": "SUV 4x4 Offroad"
-      },
-      {
-        "name": "Fortuner",
-        "years": "2016-2024",
-        "image": "/img/models/toyota/fortuner.jpg",
-        "type": "SUV 4x4 Familiar"
       }
     ]
   },
@@ -124,12 +100,6 @@ export const brands = [
         "years": "2015-2024",
         "image": "/img/models/nissan/navara.jpg",
         "type": "Pickup 4x4"
-      },
-      {
-        "name": "X-Trail",
-        "years": "2014-2024",
-        "image": "/img/models/nissan/xtrail.jpg",
-        "type": "SUV Familiar"
       }
     ]
   },
@@ -149,12 +119,6 @@ export const brands = [
         "years": "2015-2024",
         "image": "/img/models/mitsubishi/l200-triton.jpg",
         "type": "Pickup 4x4 Heavy Duty"
-      },
-      {
-        "name": "Montero Sport",
-        "years": "2016-2024",
-        "image": "/img/models/mitsubishi/montero-sport.jpg",
-        "type": "SUV 4x4 Offroad"
       }
     ]
   },
@@ -249,18 +213,6 @@ export const brands = [
         "years": "2021-2024",
         "image": "/img/models/jmc/vigus-pro.jpg",
         "type": "Pickup 4x4 Automática"
-      },
-      {
-        "name": "Boarding",
-        "years": "2016-2024",
-        "image": "/img/models/jmc/boarding.jpg",
-        "type": "Pickup 4x2 Trabajo"
-      },
-      {
-        "name": "Carrying",
-        "years": "2012-2024",
-        "image": "/img/models/jmc/carrying.jpg",
-        "type": "Camión Ligero Chasis"
       }
     ]
   },
@@ -270,16 +222,10 @@ export const brands = [
     "logo": "/img/brands/dfsk.svg",
     "models": [
       {
-        "name": "Glory 580",
-        "years": "2019-2024",
-        "image": "/img/models/dfsk/glory580.jpg",
-        "type": "SUV Familiar 7 Pasajeros"
-      },
-      {
-        "name": "EC35",
-        "years": "2020-2024",
-        "image": "/img/models/dfsk/ec35.jpg",
-        "type": "Furgón 100% Eléctrico"
+        "name": "D1",
+        "years": "2021-2024",
+        "image": "/img/models/dfsk/d1.jpg",
+        "type": "Pickup 4x4 / 4x2 Turbo Diésel"
       },
       {
         "name": "C31",
@@ -317,12 +263,6 @@ export const brands = [
         "years": "2020-2024",
         "image": "/img/models/ssangyong/musso-grand.jpg",
         "type": "Pickup 4x4 Gran Capacidad"
-      },
-      {
-        "name": "Rexton",
-        "years": "2018-2024",
-        "image": "/img/models/ssangyong/rexton.jpg",
-        "type": "SUV 4x4 Familiar"
       }
     ]
   },
@@ -336,12 +276,6 @@ export const brands = [
         "years": "2021-2024",
         "image": "/img/models/changan/hunter.jpg",
         "type": "Pickup 4x4 / 4x2"
-      },
-      {
-        "name": "Hunter Plus",
-        "years": "2022-2024",
-        "image": "/img/models/changan/hunter-plus.jpg",
-        "type": "Pickup 4x4 Turbo Diésel"
       }
     ]
   }
@@ -812,7 +746,7 @@ export const contactInfo = {
    ============================================================ */
 export const companyStats = [
   { value: 11, label: 'Marcas', suffix: '' },
-  { value: 50, label: 'Modelos', suffix: '+' },
+  { value: 30, label: 'Modelos', suffix: '+' },
   { value: 500, label: 'Repuestos', suffix: '+' },
   { value: 100, label: 'Envíos Mensuales', suffix: '+' },
 ];
