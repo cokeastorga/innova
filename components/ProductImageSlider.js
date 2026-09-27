@@ -94,13 +94,13 @@ export default function ProductImageSlider({
 
       {/* Indicador de múltiples variedades */}
       {hasMultiple && (
-        <span className="product-slider__variety-tag" title={`${imageList.length} variedades disponibles`}>
+        <span className="product-slider__variety-tag" title={`${imageList.length} opciones disponibles`}>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="23 4 23 10 17 10"></polyline>
             <polyline points="1 20 1 14 7 14"></polyline>
             <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
           </svg>
-          {imageList.length} variedades
+          {imageList.length >= 4 ? `${imageList.length} variedades` : `${imageList.length} fotos`}
         </span>
       )}
 

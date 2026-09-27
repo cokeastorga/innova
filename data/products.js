@@ -333,6 +333,10 @@ export const products = [
     name: 'Kit de Distribución Completo',
     category: 'motor',
     image: '/img/products/kit-distribucion.jpg',
+    images: [
+      '/img/products/kit-distribucion.jpg',
+      '/img/products/kit-distribucion2.jpg'
+    ],
     description: 'Kit completo con correa o cadena dentada de alta resistencia, tensores automáticos y poleas de guía. Calidad OEM.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
     featured: true,
@@ -343,6 +347,10 @@ export const products = [
     name: 'Bomba de Agua Refrigeración',
     category: 'motor',
     image: '/img/products/bomba-agua.jpg',
+    images: [
+      '/img/products/bomba-agua.jpg',
+      '/img/products/bomba-agua2.jpg'
+    ],
     description: 'Bomba de agua con rodamiento sellado y sellos cerámicos de alta eficiencia para óptima refrigeración del motor.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
   },
@@ -367,6 +375,10 @@ export const products = [
     name: 'Tensor de Correa Automático',
     category: 'motor',
     image: '/img/products/tensor-correa.jpg',
+    images: [
+      '/img/products/tensor-correa.jpg',
+      '/img/products/tensor-correa2.jpg'
+    ],
     description: 'Tensor automático de correa de accesorios con amortiguación interna y polea termoplástica de alta resistencia térmica.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
   },
@@ -394,6 +406,10 @@ export const products = [
     name: 'Filtro de Aire Motor',
     category: 'filtros',
     image: '/img/products/filtro-aire.jpg',
+    images: [
+      '/img/products/filtro-aire.jpg',
+      '/img/products/filtro-aire2.jpg'
+    ],
     description: 'Plisado de alta densidad con sello de poliuretano flexible que garantiza sellado hermético en condiciones polvorientas.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
   },
@@ -402,6 +418,10 @@ export const products = [
     name: 'Filtro de Petróleo / Diésel',
     category: 'filtros',
     image: '/img/products/filtro-petroleo.jpg',
+    images: [
+      '/img/products/filtro-petroleo.jpg',
+      '/img/products/filtro-petroleo2.jpg'
+    ],
     description: 'Separador de agua y sedimentos de alta eficiencia (2 a 5 micras) para proteger sistemas de inyección common rail.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
     featured: true,
@@ -471,6 +491,11 @@ export const products = [
     name: 'Bandeja de Suspensión Delantera',
     category: 'suspension',
     image: '/img/products/bandeja-suspension.jpg',
+    images: [
+      '/img/products/bandeja-suspension.jpg',
+      '/img/products/bandeja-suspension2.jpg',
+      '/img/products/bandeja-suspension3.jpg'
+    ],
     description: 'Bandejas superiores e inferiores de fundición de acero con bujes vulcanizados de alta durabilidad y rótula prensada.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
     featured: true,
@@ -481,6 +506,10 @@ export const products = [
     name: 'Rótulas de Suspensión Reforzadas',
     category: 'suspension',
     image: '/img/products/rotula.jpg',
+    images: [
+      '/img/products/rotula.jpg',
+      '/img/products/rotula2.jpg'
+    ],
     description: 'Rótulas con perno esférico de acero forjado cromado y guardapolvo de poliuretano resistente a grasas y barro.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
   },
@@ -489,6 +518,11 @@ export const products = [
     name: 'Terminales y Axiales de Dirección',
     category: 'suspension',
     image: '/img/products/terminal-direccion.jpg',
+    images: [
+      '/img/products/terminal-direccion.jpg',
+      '/img/products/terminal-direccion2.jpg',
+      '/img/products/terminal-direccion3.jpg'
+    ],
     description: 'Terminales exteriores e interiores (axiales) con rosca mecanizada de precisión para ajuste exacto de alineación.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
   },
@@ -637,6 +671,10 @@ export const products = [
     name: 'Sensor de Velocidad ABS',
     category: 'carroceria',
     image: '/img/products/sensor-abs.jpg',
+    images: [
+      '/img/products/sensor-abs.jpg',
+      '/img/products/sensor-abs2.jpg'
+    ],
     description: 'Sensores inductivos y de efecto Hall para rueda delantera y trasera con conector sellado resistente al agua y barro.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
   }
