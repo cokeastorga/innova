@@ -648,6 +648,27 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
+/* Ensure no floating tags or buttons obscure the spare parts photo */
+.model-repuesto-card .product-slider__variety-tag,
+.model-repuesto-card .product-slider__arrow {
+  display: none !important;
+}
+
+.model-repuesto-card .product-slider__dots {
+  bottom: 3px;
+  padding: 2px 5px;
+  gap: 3px;
+}
+
+.model-repuesto-card .product-slider__dot {
+  width: 4px;
+  height: 4px;
+}
+
+.model-repuesto-card .product-slider__dot--active {
+  width: 10px;
+}
+
 .model-repuesto-card__image-box {
   width: 100%;
   aspect-ratio: 16/9;
@@ -879,10 +900,7 @@
   }
 
   .model-repuesto-card__cat-label {
-    font-size: 7.5px;
-    padding: 1px 4px;
-    bottom: 2px;
-    left: 2px;
+    display: none !important;
   }
 
   .model-repuesto-card__actions {

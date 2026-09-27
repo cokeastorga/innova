@@ -169,6 +169,26 @@
   display: none; /* Chrome, Safari */
 }
 
+/* ---- Hint Bar ---- */
+.promo-carousel__hint-bar {
+  display: inline-block;
+  margin-top: 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.promo-carousel__hint-bar span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* ---- Promo Card ---- */
 .promo-card {
   flex: 0 0 290px;
@@ -180,15 +200,20 @@
   flex-direction: column;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  user-select: none;
   transition: transform 0.28s var(--ease-out), box-shadow 0.28s var(--ease-out), border-color 0.28s var(--ease-out);
 }
 
-.promo-card:hover {
+.promo-card:hover,
+.promo-card:focus-visible {
   transform: translateY(-6px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
-  border-color: #FDBA74;
+  border-color: var(--color-accent);
+  outline: none;
 }
 
+/* Contenedor de imagen 100% despejado sin viñetas sobrepuestas */
 .promo-card__image-container {
   position: relative;
   width: 100%;
@@ -197,24 +222,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 16px;
   border-bottom: 1px solid #F3F4F6;
   overflow: hidden;
-}
-
-.promo-card__badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-  background: #0A0A0A;
-  color: #FFFFFF;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
 }
 
 .promo-card__image {
@@ -229,18 +239,37 @@
 }
 
 .promo-card__content {
-  padding: 18px 20px 20px;
+  padding: 16px 18px 18px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
+/* Fila de metadatos superior (fuera de la foto para no tapar el repuesto) */
+.promo-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
 .promo-card__category {
   font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   color: var(--color-accent);
-  margin-bottom: 6px;
+}
+
+.promo-card__badge-tag {
+  background: #0A0A0A;
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
 }
 
 .promo-card__title {
@@ -261,7 +290,7 @@
   font-size: 0.84rem;
   color: var(--color-text-secondary);
   line-height: 1.5;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -269,34 +298,47 @@
   flex-grow: 1;
 }
 
-.promo-card__footer {
+/* Redirección intuitiva al selector de marcas */
+.promo-card__action-hint {
   margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px dashed var(--color-border);
-}
-
-.promo-card__btn {
-  width: 100%;
-  background: #111827;
-  color: #FFFFFF;
-  border: none;
+  padding: 10px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 11px 16px;
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 700;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 8px;
-  cursor: pointer;
   transition: all var(--duration-fast) var(--ease-out);
 }
 
-.promo-card__btn:hover {
-  background: var(--color-accent);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+.promo-card__action-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.promo-card__action-arrow {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.promo-card:hover .promo-card__action-hint {
+  background: #0A0A0A;
+  border-color: #0A0A0A;
+}
+
+.promo-card:hover .promo-card__action-text {
+  color: #FFFFFF;
+}
+
+.promo-card:hover .promo-card__action-arrow {
+  color: #F97316;
+  transform: translateX(4px);
 }
 
 /* ---- Ribbon Promocional de Confianza ---- */

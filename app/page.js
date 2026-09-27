@@ -4,6 +4,7 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import Preloader from '@/components/Preloader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import HowToQuote from '@/components/HowToQuote';
 import Brands from '@/components/Brands';
 import Motorsport from '@/components/Motorsport';
 import BrandsCarousel from '@/components/BrandsCarousel';
@@ -24,6 +25,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <HowToQuote />
         <Brands />
         <Motorsport />
         <BrandsCarousel />

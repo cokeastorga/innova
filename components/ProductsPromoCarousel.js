@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ProductsPromoCarousel.css';
 import { products } from '@/data/products';
-import { useQuoteCart } from '@/hooks/useQuoteCart';
 
 // Featured products for the promotional showcase
 const promoProductIds = [
@@ -22,7 +21,6 @@ const promoProductIds = [
 ];
 
 export default function ProductsPromoCarousel() {
-  const { addItem, openCart } = useQuoteCart();
   const trackRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -73,9 +71,14 @@ export default function ProductsPromoCarousel() {
     setTimeout(() => setIsPaused(false), 5000);
   };
 
-  const handleQuickQuote = (product) => {
-    addItem(product);
-    openCart();
+  // Redirigir al selector de marcas al tocar cualquier tarjeta
+  const handleSelectCard = () => {
+    const marcasSection = document.getElementById('marcas');
+    if (marcasSection) {
+      marcasSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.hash = 'marcas';
+    }
   };
 
   return (
@@ -95,6 +98,9 @@ export default function ProductsPromoCarousel() {
             Componentes de alta resistencia y durabilidad para faena, ciudad y carretera. 
             <strong> Despacho rápido en el día a todo Chile</strong> y asesoría técnica para asegurar compatibilidad exacta con tu patente.
           </p>
+          <div className="promo-carousel__hint-bar">
+            <span>💡 Toca cualquier repuesto para seleccionarlo con la marca y modelo de tu camioneta</span>
+          </div>
         </div>
 
         {/* Carousel Wrapper */}
@@ -128,9 +134,22 @@ export default function ProductsPromoCarousel() {
               const promoBadge = item.badge || (idx % 3 === 0 ? 'Top Venta' : idx % 2 === 0 ? 'Stock Hoy' : 'Calidad OEM');
               
               return (
-                <div key={item.id} className="promo-card">
+                <div 
+                  key={item.id} 
+                  className="promo-card"
+                  onClick={handleSelectCard}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleSelectCard();
+                    }
+                  }}
+                  title="Presiona para elegir tu marca y cotizar este repuesto"
+                >
+                  {/* Contenedor de Imagen 100% limpia sin viñetas que tapen el repuesto */}
                   <div className="promo-card__image-container">
-                    <span className="promo-card__badge">{promoBadge}</span>
                     <img 
                       src={item.image} 
                       alt={item.name} 
@@ -140,9 +159,16 @@ export default function ProductsPromoCarousel() {
                   </div>
 
                   <div className="promo-card__content">
-                    <span className="promo-card__category">
-                      {item.category.toUpperCase()}
-                    </span>
+                    {/* Meta superior limpia: Categoría y Badge sin tapar la foto */}
+                    <div className="promo-card__meta">
+                      <span className="promo-card__category">
+                        {item.category.toUpperCase()}
+                      </span>
+                      <span className="promo-card__badge-tag">
+                        {promoBadge}
+                      </span>
+                    </div>
+
                     <h3 className="promo-card__title">
                       {item.name}
                     </h3>
@@ -150,14 +176,10 @@ export default function ProductsPromoCarousel() {
                       {item.description}
                     </p>
 
-                    <div className="promo-card__footer">
-                      <button 
-                        type="button" 
-                        className="promo-card__btn"
-                        onClick={() => handleQuickQuote(item)}
-                      >
-                        + Cotizar Pieza
-                      </button>
+                    {/* Acción de redirección intuitiva sin botones de cotizar directos */}
+                    <div className="promo-card__action-hint">
+                      <span className="promo-card__action-text">Ver para mi camioneta</span>
+                      <span className="promo-card__action-arrow">→</span>
                     </div>
                   </div>
                 </div>
