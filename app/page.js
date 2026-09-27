@@ -9,6 +9,7 @@ import Motorsport from '@/components/Motorsport';
 import BrandsCarousel from '@/components/BrandsCarousel';
 import AboutUs from '@/components/AboutUs';
 import WhyBuyHere from '@/components/WhyBuyHere';
+import ProductsPromoCarousel from '@/components/ProductsPromoCarousel';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import QuoteCart from '@/components/QuoteCart';
@@ -28,6 +29,7 @@ export default function Home() {
         <BrandsCarousel />
         <AboutUs />
         <WhyBuyHere />
+        <ProductsPromoCarousel />
         <Contact />
       </main>
       <Footer />
