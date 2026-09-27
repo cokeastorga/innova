@@ -10,6 +10,7 @@ export default function QuoteCart() {
   const [vehicle, setVehicle] = useState('');
   const [isVehicleUserEdited, setIsVehicleUserEdited] = useState(false);
   const [notes, setNotes] = useState('');
+  const [vehicleError, setVehicleError] = useState(false);
 
   // Auto-fill vehicle input from cart items if user hasn't edited manually
   useEffect(() => {
@@ -33,8 +34,6 @@ export default function QuoteCart() {
   }, [items, isVehicleUserEdited]);
 
   if (!isOpen) return null;
-
-  const [vehicleError, setVehicleError] = useState(false);
 
   const validateVehicle = () => {
     if (!vehicle || !vehicle.trim()) {
