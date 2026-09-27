@@ -496,8 +496,16 @@ export const products = [
     name: 'Refrigerantes 50/50 OAT',
     category: 'filtros',
     image: '/img/products/refrigerantes.jpg',
-    description: 'Líquido refrigerante / anticongelante de larga duración orgánico (OAT) premezclado al 50/50, protección de -37°C a +129°C.',
+    images: [
+      '/img/products/refrigerantes.jpg',
+      '/img/products/refrigerantes1.jpg',
+      '/img/products/refrigerantes2.jpg',
+      '/img/products/refrigerantes3.jpg',
+      '/img/products/refrigerantes4.jpg'
+    ],
+    description: 'Líquido refrigerante / anticongelante de larga duración orgánico (OAT) premezclado al 50/50, protección de -37°C a +129°C. Variedad de marcas y formulaciones.',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
+    featured: true,
   },
   {
     id: 'aditivos',

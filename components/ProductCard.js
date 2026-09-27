@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import './ProductCard.css';
+import ProductImageSlider from './ProductImageSlider';
 import { useQuoteCart } from '@/hooks/useQuoteCart';
 import { brands } from '@/data/products';
 
@@ -79,24 +80,12 @@ export default function ProductCard({ product, selectedBrand = 'all', selectedMo
   return (
     <div className="product-card">
       <div className="product-card__image-area">
-        {product.badge && (
-          <span className="product-card__badge">{product.badge}</span>
-        )}
-        {product.image ? (
-          <img 
-            src={product.image} 
-            alt={product.name} 
-            className="product-card__image" 
-            loading="lazy"
-          />
-        ) : (
-          <div className="product-card__placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-            </svg>
-            <span>{product.name}</span>
-          </div>
-        )}
+        <ProductImageSlider
+          images={product.images}
+          image={product.image}
+          alt={product.name}
+          badge={product.badge}
+        />
       </div>
 
       <div className="product-card__content">

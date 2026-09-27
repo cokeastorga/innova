@@ -630,6 +630,7 @@
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
+  z-index: 6;
 }
 
 .model-repuesto-card__info {

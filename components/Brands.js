@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import './Brands.css';
+import ProductImageSlider from './ProductImageSlider';
 import { brands, products, categories } from '@/data/products';
 import { useQuoteCart } from '@/hooks/useQuoteCart';
 
@@ -353,20 +354,11 @@ export default function Brands() {
                     return (
                       <div key={product.id} className="model-repuesto-card">
                         <div className="model-repuesto-card__image-box">
-                          {product.image ? (
-                            <img 
-                              src={product.image} 
-                              alt={product.name} 
-                              className="model-repuesto-card__image" 
-                              loading="lazy" 
-                            />
-                          ) : (
-                            <div className="model-repuesto-card__placeholder">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                              </svg>
-                            </div>
-                          )}
+                          <ProductImageSlider
+                            images={product.images}
+                            image={product.image}
+                            alt={product.name}
+                          />
                           <span className="model-repuesto-card__cat-label">
                             {categories.find(c => c.id === product.category)?.name || product.category}
                           </span>
