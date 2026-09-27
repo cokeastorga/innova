@@ -15,13 +15,10 @@ export default function Brands() {
   const [isPaused, setIsPaused] = useState(false);
   const [isRefModalOpen, setIsRefModalOpen] = useState(false);
   const [pendingModel, setPendingModel] = useState(null);
-  const [hasSeenRefModal, setHasSeenRefModal] = useState(false);
 
   useEffect(() => {
     try {
-      if (sessionStorage.getItem('innova_ref_modal_seen') === 'true') {
-        setHasSeenRefModal(true);
-      }
+      sessionStorage.removeItem('innova_ref_modal_seen');
     } catch (e) {}
   }, []);
 
@@ -82,29 +79,20 @@ export default function Brands() {
     }, 120);
   };
 
-  // Toggle model selection: intercept with popup before showing products
+  // Toggle model selection: intercept always with popup before showing products
   const handleSelectModel = (model) => {
     if (selectedModel?.name === model.name) {
       setSelectedModel(null);
     } else {
-      // Si el cliente aún no ha visto la advertencia en su sesión, desplegar el pop up primero
-      if (!hasSeenRefModal) {
-        setPendingModel(model);
-        setIsRefModalOpen(true);
-        return;
-      }
-      openModelRepuestos(model);
+      // Abre automáticamente la ventana emergente antes de mostrar los repuestos
+      setPendingModel(model);
+      setIsRefModalOpen(true);
     }
   };
 
   // Proceed after acknowledging popup
   const handleProceedRefModal = () => {
     setIsRefModalOpen(false);
-    setHasSeenRefModal(true);
-    try {
-      sessionStorage.setItem('innova_ref_modal_seen', 'true');
-    } catch (e) {}
-
     if (pendingModel) {
       openModelRepuestos(pendingModel);
       setPendingModel(null);
