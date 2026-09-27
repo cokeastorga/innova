@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(10, 13, 18, 0.75);
+  background-color: rgba(10, 13, 18, 0.78);
   backdrop-filter: blur(8px);
   z-index: 10000;
   display: flex;
@@ -26,10 +26,10 @@
 .ref-modal__container {
   background-color: var(--color-surface, #FFFFFF);
   border: 1px solid var(--color-border, #E4E4E7);
-  border-radius: 16px;
-  max-width: 560px;
+  border-radius: 18px;
+  max-width: 540px;
   width: 100%;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   animation: refModalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
@@ -39,7 +39,7 @@
 @keyframes refModalSlideUp {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.96);
+    transform: translateY(22px) scale(0.96);
   }
   to {
     opacity: 1;
@@ -51,7 +51,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 24px 28px 18px;
+  padding: 22px 26px 18px;
   border-bottom: 1px solid var(--color-border, #E4E4E7);
   background-color: var(--color-bg, #FAFAFA);
 }
@@ -63,35 +63,36 @@
 }
 
 .ref-modal__icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
   background: #FFFFFF;
   border: 1px solid var(--color-border, #E4E4E7);
   border-radius: 12px;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .ref-modal__tag {
   display: inline-block;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-accent, #F97316);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .ref-modal__title {
   font-family: var(--font-heading, sans-serif);
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 800;
   color: var(--color-text, #18181B);
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .ref-modal__close-btn {
@@ -101,9 +102,12 @@
   color: var(--color-text-secondary, #71717A);
   cursor: pointer;
   padding: 6px;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: all 0.2s ease;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ref-modal__close-btn:hover {
@@ -112,102 +116,164 @@
 }
 
 .ref-modal__body {
-  padding: 24px 28px;
+  padding: 22px 26px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
-.ref-modal__lead {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: var(--color-text, #18181B);
-  margin: 0;
-}
-
-.ref-modal__grid {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.ref-modal__card {
+/* Advertencia destacada */
+.ref-modal__highlight-box {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  background-color: var(--color-bg, #FAFAFA);
-  border: 1px solid var(--color-border, #E4E4E7);
-  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.09);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
   padding: 14px 16px;
 }
 
-.ref-modal__card-icon {
-  font-size: 1.35rem;
+.ref-modal__highlight-icon {
+  font-size: 1.4rem;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
-.ref-modal__card-title {
+.ref-modal__highlight-title {
   font-family: var(--font-heading, sans-serif);
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-text, #18181B);
+  color: #B45309;
   margin: 0 0 4px 0;
 }
 
-.ref-modal__card-text {
+.ref-modal__highlight-text {
   font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--color-text-secondary, #71717A);
-  margin: 0;
-}
-
-.ref-modal__tip {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(34, 197, 94, 0.08);
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  border-radius: 10px;
-  padding: 12px 16px;
-}
-
-.ref-modal__tip-icon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-
-.ref-modal__tip-text {
-  font-size: 0.84rem;
   line-height: 1.45;
-  color: #15803D;
+  color: #78350F;
   margin: 0;
+}
+
+/* Tarjeta de Solicitud de Año / Patente */
+.ref-modal__attention-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--color-accent, #F97316);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.12);
+}
+
+.ref-modal__attention-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--color-accent, #F97316);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.ref-modal__pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-accent, #F97316);
+  display: inline-block;
+  animation: pulseDot 1.4s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+.ref-modal__attention-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text, #18181B);
+  margin: 0 0 6px 0;
+}
+
+.ref-modal__attention-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary, #52525B);
+  margin: 0;
+}
+
+.ref-modal__attention-text strong {
+  color: var(--color-text, #18181B);
+}
+
+/* Pills de garantía */
+.ref-modal__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ref-modal__pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--color-bg, #F4F4F5);
+  color: var(--color-text, #27272A);
+  border: 1px solid var(--color-border, #E4E4E7);
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
 .ref-modal__footer {
-  padding: 18px 28px 24px;
+  padding: 18px 26px 22px;
   border-top: 1px solid var(--color-border, #E4E4E7);
   background-color: var(--color-bg, #FAFAFA);
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .ref-modal__btn {
   width: 100%;
-  padding: 12px 20px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  padding: 13px 20px;
+  font-size: 0.98rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+  cursor: pointer;
+}
+
+.ref-modal__footer-note {
+  font-size: 0.76rem;
+  color: var(--color-text-muted, #71717A);
+  text-align: center;
 }
 
 @media (max-width: 576px) {
   .ref-modal__header {
-    padding: 18px 20px 14px;
+    padding: 16px 18px 12px;
   }
   .ref-modal__body {
-    padding: 18px 20px;
-    gap: 14px;
+    padding: 16px 18px;
+    gap: 12px;
+  }
+  .ref-modal__title {
+    font-size: 1.1rem;
+  }
+  .ref-modal__attention-title {
+    font-size: 0.95rem;
   }
   .ref-modal__footer {
-    padding: 14px 20px 18px;
+    padding: 14px 18px 18px;
+  }
+  .ref-modal__pills {
+    display: none;
   }
 }

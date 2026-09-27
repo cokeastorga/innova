@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import './Brands.css';
 import ProductImageSlider from './ProductImageSlider';
+import ReferenceImageModal from './ReferenceImageModal';
 import { brands, products, categories } from '@/data/products';
 import { useQuoteCart } from '@/hooks/useQuoteCart';
 
@@ -12,6 +13,17 @@ export default function Brands() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [imgErrors, setImgErrors] = useState({});
   const [isPaused, setIsPaused] = useState(false);
+  const [isRefModalOpen, setIsRefModalOpen] = useState(false);
+  const [pendingModel, setPendingModel] = useState(null);
+  const [hasSeenRefModal, setHasSeenRefModal] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem('innova_ref_modal_seen') === 'true') {
+        setHasSeenRefModal(true);
+      }
+    } catch (e) {}
+  }, []);
 
   const { addItem, isInCart } = useQuoteCart();
   const trackRef = useRef(null);
@@ -59,19 +71,43 @@ export default function Brands() {
     setSelectedCategory('all');
   };
 
-  // Toggle model selection
+  // Open products for a given model
+  const openModelRepuestos = (model) => {
+    setSelectedModel(model);
+    setSelectedCategory('all');
+    setTimeout(() => {
+      if (repuestosSectionRef.current) {
+        repuestosSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 120);
+  };
+
+  // Toggle model selection: intercept with popup before showing products
   const handleSelectModel = (model) => {
     if (selectedModel?.name === model.name) {
       setSelectedModel(null);
     } else {
-      setSelectedModel(model);
-      setSelectedCategory('all');
-      // Smooth scroll to repuestos panel after a brief tick
-      setTimeout(() => {
-        if (repuestosSectionRef.current) {
-          repuestosSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }, 100);
+      // Si el cliente aún no ha visto la advertencia en su sesión, desplegar el pop up primero
+      if (!hasSeenRefModal) {
+        setPendingModel(model);
+        setIsRefModalOpen(true);
+        return;
+      }
+      openModelRepuestos(model);
+    }
+  };
+
+  // Proceed after acknowledging popup
+  const handleProceedRefModal = () => {
+    setIsRefModalOpen(false);
+    setHasSeenRefModal(true);
+    try {
+      sessionStorage.setItem('innova_ref_modal_seen', 'true');
+    } catch (e) {}
+
+    if (pendingModel) {
+      openModelRepuestos(pendingModel);
+      setPendingModel(null);
     }
   };
 
@@ -318,6 +354,23 @@ export default function Brands() {
                   </button>
                 </div>
 
+                {/* Banner de imágenes de referencia */}
+                <div 
+                  className="model-repuestos-drawer__ref-banner" 
+                  onClick={() => setIsRefModalOpen(true)}
+                  role="button"
+                  tabIndex={0}
+                  title="Haz clic para ver más información sobre las imágenes de referencia"
+                >
+                  <div className="model-repuestos-drawer__ref-content">
+                    <span className="model-repuestos-drawer__ref-icon">📸</span>
+                    <span className="model-repuestos-drawer__ref-text">
+                      <strong>Imágenes de referencia:</strong> El repuesto puede variar según la versión. Especifica tu <strong>año o patente</strong> al cotizar para calce 100% exacto.
+                    </span>
+                  </div>
+                  <span className="model-repuestos-drawer__ref-link">Ver aviso ⓘ</span>
+                </div>
+
                 {/* Filtro de Categorías para este modelo */}
                 <div className="model-repuestos-drawer__categories">
                   <button 
@@ -417,6 +470,13 @@ export default function Brands() {
           </div>
         )}
       </div>
+
+      <ReferenceImageModal
+        isOpen={isRefModalOpen}
+        onClose={handleProceedRefModal}
+        onProceed={handleProceedRefModal}
+        modelName={pendingModel ? `${activeBrand?.name} ${pendingModel.name}` : (selectedModel ? `${activeBrand?.name} ${selectedModel.name}` : '')}
+      />
     </section>
   );
 }

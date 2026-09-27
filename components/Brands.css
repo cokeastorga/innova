@@ -518,6 +518,59 @@
   color: #EF4444;
 }
 
+/* Banner de aviso de referencia dentro del drawer */
+.model-repuestos-drawer__ref-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px dashed rgba(245, 158, 11, 0.45);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.model-repuestos-drawer__ref-banner:hover {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: #F59E0B;
+}
+
+.model-repuestos-drawer__ref-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.model-repuestos-drawer__ref-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.model-repuestos-drawer__ref-text {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #78350F;
+}
+
+.model-repuestos-drawer__ref-text strong {
+  color: #451A03;
+}
+
+.model-repuestos-drawer__ref-link {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #D97706;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  flex-shrink: 0;
+}
+
 /* Categorías dentro del drawer */
 .model-repuestos-drawer__categories {
   display: flex;
