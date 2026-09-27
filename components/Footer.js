@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="footer__brand">
             <a href="#inicio" aria-label="Innova Camionetas - Inicio">
               <img 
-                src="/img/logo.png" 
+                src="/img/logo-white.png" 
                 alt="Innova Camionetas" 
                 className="footer__logo-img" 
               />
