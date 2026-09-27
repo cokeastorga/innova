@@ -43,6 +43,8 @@ export default function QuoteCart() {
   // State for vehicles of each model group: { [groupKey]: { subVehicles: [ { id, year, customYear, plate } ] } }
   const [vehiclesState, setVehiclesState] = useState({});
   const [notes, setNotes] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [nameError, setNameError] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
 
   // Group items by vehicle (Brand + Model)
@@ -129,10 +131,22 @@ export default function QuoteCart() {
     }
   };
 
-  // Validate that each vehicle group has at least a Year selected or Patente entered for its primary entry
+  // Validate that customer name is present and each vehicle group has year/plate
   const validateForm = () => {
     const errors = {};
     let hasError = false;
+
+    // Validar nombre del cliente (Obligatorio, mínimo 2 caracteres)
+    const trimmedName = (customerName || '').trim();
+    if (!trimmedName) {
+      setNameError('Por favor ingresa tu nombre');
+      hasError = true;
+    } else if (trimmedName.length < 2) {
+      setNameError('Ingresa un nombre válido (al menos 2 caracteres)');
+      hasError = true;
+    } else {
+      setNameError('');
+    }
 
     vehicleGroups.forEach(group => {
       if (group.isGeneral) return;
@@ -152,6 +166,16 @@ export default function QuoteCart() {
     });
 
     setValidationErrors(errors);
+
+    // Auto-focus al campo de nombre si falta
+    if (!trimmedName || trimmedName.length < 2) {
+      const el = document.getElementById('quote-customer-name');
+      if (el) {
+        el.focus();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
     return !hasError;
   };
 
@@ -182,7 +206,7 @@ export default function QuoteCart() {
   const handleWhatsApp = () => {
     if (!validateForm()) return;
     const structuredPayload = getStructuredData();
-    const text = getWhatsAppMessage(notes, structuredPayload);
+    const text = getWhatsAppMessage(notes, structuredPayload, customerName);
     const phoneNumber = contactInfo.whatsapp1.number.replace(/\D/g, '');
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
   };
@@ -190,7 +214,7 @@ export default function QuoteCart() {
   const handleEmail = () => {
     if (!validateForm()) return;
     const structuredPayload = getStructuredData();
-    const { subject, body } = getEmailData(notes, structuredPayload);
+    const { subject, body } = getEmailData(notes, structuredPayload, customerName);
     window.location.href = `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
@@ -199,6 +223,8 @@ export default function QuoteCart() {
     setVehiclesState({});
     setValidationErrors({});
     setNotes('');
+    setCustomerName('');
+    setNameError('');
   };
 
   const isMultipleVehicles = vehicleGroups.length > 1;
@@ -428,6 +454,32 @@ export default function QuoteCart() {
         {/* Footer */}
         {items.length > 0 && (
           <div className="quote-cart__footer">
+            {/* Campo Nombre Requerido y Validado */}
+            <div className="quote-cart__customer-box">
+              <label htmlFor="quote-customer-name" className="quote-cart__field-label">
+                <span>👤 Tu Nombre y Apellido:</span>
+                <span className="quote-required-tag">* Requerido</span>
+              </label>
+              <input 
+                id="quote-customer-name"
+                type="text"
+                className={`quote-cart__input quote-cart__input--name ${nameError ? 'quote-cart__input--error' : ''}`}
+                value={customerName}
+                onChange={(e) => {
+                  setCustomerName(e.target.value);
+                  if (nameError) setNameError('');
+                }}
+                placeholder="Ej: Rodrigo Larrañaga"
+                autoComplete="name"
+                maxLength={60}
+              />
+              {nameError && (
+                <div className="quote-cart__error-msg">
+                  ⚠️ {nameError}
+                </div>
+              )}
+            </div>
+
             <div className="quote-cart__notes-box">
               <label htmlFor="quote-notes" className="quote-cart__field-label">
                 💬 Consulta o notas adicionales (Opcional):

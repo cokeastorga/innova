@@ -89,12 +89,20 @@ export function QuoteCartProvider({ children }) {
 
   /* Format cart as WhatsApp message (clean text with \n, encoded by caller) */
   /* Format cart as WhatsApp message (clean text with \n, encoded by caller) */
-  const getWhatsAppMessage = useCallback((notes = '', vehicleData = null) => {
+  const getWhatsAppMessage = useCallback((notes = '', vehicleData = null, customerName = '') => {
+    const trimmedName = (customerName || '').trim();
     const lines = [
       '👋 *¡Hola Innova Camionetas!*',
-      'Quisiera consultar disponibilidad y cotizar los siguientes repuestos:',
+      trimmedName 
+        ? `Mi nombre es *${trimmedName}* y quisiera cotizar los siguientes repuestos:`
+        : 'Quisiera consultar disponibilidad y cotizar los siguientes repuestos:',
       ''
     ];
+
+    if (trimmedName) {
+      lines.push(`👤 *Cliente:* ${trimmedName}`);
+      lines.push('');
+    }
 
     // If structured vehicle groups are provided
     if (Array.isArray(vehicleData) && vehicleData.length > 0) {
@@ -175,16 +183,25 @@ export function QuoteCartProvider({ children }) {
   }, [items]);
 
   /* Format cart as email body (plain text, encoded by caller) */
-  const getEmailData = useCallback((notes = '', vehicleData = null) => {
+  const getEmailData = useCallback((notes = '', vehicleData = null, customerName = '') => {
     const totalCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    const subject = `Cotización de Repuestos (${totalCount} ${totalCount === 1 ? 'unidad' : 'unidades'}) - Innova Camionetas`;
+    const trimmedName = (customerName || '').trim();
+    const clientStr = trimmedName ? ` - Cliente: ${trimmedName}` : '';
+    const subject = `Cotización de Repuestos (${totalCount} ${totalCount === 1 ? 'unidad' : 'unidades'})${clientStr} - Innova Camionetas`;
     
     const lines = [
       'Estimado equipo de Innova Camionetas,',
       '',
-      'Deseo cotizar los siguientes repuestos para mi vehículo:',
+      trimmedName 
+        ? `Mi nombre es ${trimmedName} y deseo cotizar los siguientes repuestos para mi vehículo:`
+        : 'Deseo cotizar los siguientes repuestos para mi vehículo:',
       ''
     ];
+
+    if (trimmedName) {
+      lines.push(`Cliente: ${trimmedName}`);
+      lines.push('');
+    }
 
     if (Array.isArray(vehicleData) && vehicleData.length > 0) {
       vehicleData.forEach((vg, idx) => {
@@ -235,6 +252,9 @@ export function QuoteCartProvider({ children }) {
     lines.push('Agradeceré me puedan indicar disponibilidad, formas de pago y valor de envío.');
     lines.push('');
     lines.push('Saludos cordiales.');
+    if (trimmedName) {
+      lines.push(trimmedName);
+    }
 
     return { subject, body: lines.join('\n') };
   }, [items]);
