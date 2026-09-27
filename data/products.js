@@ -483,10 +483,10 @@ export const products = [
   },
   {
     id: 'aceite-5w30',
-    name: 'Aceites de Motor 5W-30 / 5W-40',
+    name: 'Aceites de Motor 5W-30 / 10W-40',
     category: 'filtros',
     image: '/img/products/aceite-5w30.jpg',
-    description: 'Aceite de motor 100% sintético de última generación con especificación ACEA C2/C3 para motores diésel con filtro DPF.',
+    description: 'Aceites de motor en amplia variedad de marcas certficadas',
     compatibleBrands: ['Maxus', 'Toyota', 'Nissan', 'Mitsubishi', 'Volkswagen', 'Great Wall', 'JAC', 'JMC', 'DFSK', 'SsangYong', 'Changan'],
     featured: true,
     badge: 'Recomendado',
@@ -509,7 +509,7 @@ export const products = [
   },
   {
     id: 'aceite-transmision',
-    name: 'Aceite de Transmisión 75W-90 GL-5',
+    name: 'Aceite de Transmisión 75w-90 / 80W-90 GL-5',
     category: 'filtros',
     image: '/img/products/aceite-transmision.jpg',
     description: 'Lubricante sintético de extrema presión para diferenciales, cajas de cambio manuales y cajas de transferencia 4x4.',
