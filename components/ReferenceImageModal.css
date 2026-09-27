@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
-  animation: refModalFadeIn 0.25s ease-out;
+  animation: refModalFadeIn 0.2s ease-out;
 }
 
 @keyframes refModalFadeIn {
@@ -24,256 +24,163 @@
 }
 
 .ref-modal__container {
+  position: relative;
   background-color: var(--color-surface, #FFFFFF);
-  border: 1px solid var(--color-border, #E4E4E7);
-  border-radius: 18px;
-  max-width: 540px;
+  border: 1.5px solid var(--color-border, #E4E4E7);
+  border-radius: 20px;
+  max-width: 440px;
   width: 100%;
+  padding: 30px 24px 24px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  animation: refModalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: refModalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-@keyframes refModalSlideUp {
+@keyframes refModalPop {
   from {
     opacity: 0;
-    transform: translateY(22px) scale(0.96);
+    transform: scale(0.92);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(1);
   }
 }
 
-.ref-modal__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 22px 26px 18px;
-  border-bottom: 1px solid var(--color-border, #E4E4E7);
-  background-color: var(--color-bg, #FAFAFA);
-}
-
-.ref-modal__header-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.ref-modal__icon {
-  font-size: 1.8rem;
-  background: #FFFFFF;
+.ref-modal__close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--color-bg, #F4F4F5);
   border: 1px solid var(--color-border, #E4E4E7);
-  border-radius: 12px;
-  width: 46px;
-  height: 46px;
+  color: var(--color-text-secondary, #71717A);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  line-height: 1;
 }
 
-.ref-modal__tag {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--color-accent, #F97316);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 3px;
+.ref-modal__close-btn:hover {
+  background-color: #E4E4E7;
+  color: var(--color-text, #18181B);
+  transform: scale(1.05);
+}
+
+.ref-modal__icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(249, 115, 22, 0.1);
+  border: 2px solid rgba(249, 115, 22, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 14px;
 }
 
 .ref-modal__title {
   font-family: var(--font-heading, sans-serif);
-  font-size: 1.22rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--color-text, #18181B);
-  margin: 0;
-  line-height: 1.25;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
 }
 
-.ref-modal__close-btn {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  color: var(--color-text-secondary, #71717A);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.ref-modal__model-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-accent, #F97316);
+  background: rgba(249, 115, 22, 0.1);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.ref-modal__close-btn:hover {
-  background-color: var(--color-border, #E4E4E7);
-  color: var(--color-text, #18181B);
-}
-
-.ref-modal__body {
-  padding: 22px 26px;
+.ref-modal__points {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 22px;
+  text-align: left;
 }
 
-/* Advertencia destacada */
-.ref-modal__highlight-box {
+.ref-modal__point {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  background: rgba(245, 158, 11, 0.09);
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  gap: 12px;
+  background-color: var(--color-bg, #FAFAFA);
+  border: 1px solid var(--color-border, #E4E4E7);
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 12px 14px;
 }
 
-.ref-modal__highlight-icon {
-  font-size: 1.4rem;
+.ref-modal__point--highlight {
+  background: rgba(249, 115, 22, 0.06);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.ref-modal__point-icon {
+  font-size: 1.2rem;
   flex-shrink: 0;
   margin-top: 1px;
 }
 
-.ref-modal__highlight-title {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #B45309;
-  margin: 0 0 4px 0;
-}
-
-.ref-modal__highlight-text {
-  font-size: 0.85rem;
+.ref-modal__point p {
+  font-size: 0.88rem;
   line-height: 1.45;
-  color: #78350F;
+  color: var(--color-text-secondary, #3F3F46);
   margin: 0;
 }
 
-/* Tarjeta de Solicitud de Año / Patente */
-.ref-modal__attention-card {
-  background: #FFFFFF;
-  border: 1.5px solid var(--color-accent, #F97316);
-  border-radius: 14px;
-  padding: 16px 18px;
-  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.12);
-}
-
-.ref-modal__attention-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--color-accent, #F97316);
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.ref-modal__pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: var(--color-accent, #F97316);
-  display: inline-block;
-  animation: pulseDot 1.4s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-  0%, 100% {
-    transform: scale(0.9);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 1;
-  }
-}
-
-.ref-modal__attention-title {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 1.05rem;
-  font-weight: 800;
+.ref-modal__point p strong {
   color: var(--color-text, #18181B);
-  margin: 0 0 6px 0;
-}
-
-.ref-modal__attention-text {
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: var(--color-text-secondary, #52525B);
-  margin: 0;
-}
-
-.ref-modal__attention-text strong {
-  color: var(--color-text, #18181B);
-}
-
-/* Pills de garantía */
-.ref-modal__pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.ref-modal__pill {
-  font-size: 0.75rem;
-  font-weight: 600;
-  background-color: var(--color-bg, #F4F4F5);
-  color: var(--color-text, #27272A);
-  border: 1px solid var(--color-border, #E4E4E7);
-  padding: 4px 10px;
-  border-radius: 999px;
-}
-
-.ref-modal__footer {
-  padding: 18px 26px 22px;
-  border-top: 1px solid var(--color-border, #E4E4E7);
-  background-color: var(--color-bg, #FAFAFA);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 .ref-modal__btn {
   width: 100%;
-  padding: 13px 20px;
-  font-size: 0.98rem;
+  padding: 14px 20px;
+  font-size: 1rem;
   font-weight: 800;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.28);
   cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
 }
 
-.ref-modal__footer-note {
-  font-size: 0.76rem;
-  color: var(--color-text-muted, #71717A);
-  text-align: center;
+.ref-modal__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
 }
 
-@media (max-width: 576px) {
-  .ref-modal__header {
-    padding: 16px 18px 12px;
-  }
-  .ref-modal__body {
-    padding: 16px 18px;
-    gap: 12px;
+@media (max-width: 480px) {
+  .ref-modal__container {
+    padding: 26px 18px 20px;
+    max-width: 92vw;
   }
   .ref-modal__title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
-  .ref-modal__attention-title {
-    font-size: 0.95rem;
+  .ref-modal__point {
+    padding: 10px 12px;
   }
-  .ref-modal__footer {
-    padding: 14px 18px 18px;
-  }
-  .ref-modal__pills {
-    display: none;
+  .ref-modal__point p {
+    font-size: 0.82rem;
   }
 }
