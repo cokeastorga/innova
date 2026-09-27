@@ -67,36 +67,66 @@ export function QuoteCartProvider({ children }) {
   const closeCart = useCallback(() => setIsOpen(false), []);
 
   /* Format cart as WhatsApp message (clean text with \n, encoded by caller) */
-  const getWhatsAppMessage = useCallback((notes = '', vehicle = '') => {
+  /* Format cart as WhatsApp message (clean text with \n, encoded by caller) */
+  const getWhatsAppMessage = useCallback((notes = '', vehicleData = null) => {
     const lines = [
       '👋 *¡Hola Innova Camionetas!*',
       'Quisiera consultar disponibilidad y cotizar los siguientes repuestos:',
       ''
     ];
 
-    if (vehicle && vehicle.trim()) {
-      lines.push(`🚙 *Vehículo / Año o Patente:* ${vehicle.trim()}`);
+    // If structured vehicle groups are provided
+    if (Array.isArray(vehicleData) && vehicleData.length > 0) {
+      vehicleData.forEach((vg, idx) => {
+        lines.push('━━━━━━━━━━━━━━━━━━━━');
+        const numLabel = vehicleData.length > 1 ? `CAMIONETA ${idx + 1}: ` : 'CAMIONETA: ';
+        lines.push(`🚙 *${numLabel}${vg.title}*`);
+        if (vg.year) {
+          lines.push(`📅 *Año:* ${vg.year}`);
+        }
+        if (vg.plate && vg.plate.trim()) {
+          lines.push(`🏷️ *Patente:* ${vg.plate.trim().toUpperCase()}`);
+        }
+        lines.push('📦 *Repuestos solicitados:*');
+        vg.items.forEach((item, itemIdx) => {
+          lines.push(`   ${itemIdx + 1}. *${item.name}*`);
+        });
+        lines.push('');
+      });
+      lines.push('━━━━━━━━━━━━━━━━━━━━');
+    } else if (typeof vehicleData === 'string' && vehicleData.trim()) {
+      lines.push(`🚙 *Vehículo / Año o Patente:* ${vehicleData.trim()}`);
       lines.push('');
+      lines.push('📦 *Repuestos solicitados:*');
+      items.forEach((item, i) => {
+        let line = `  ${i + 1}. *${item.name}*`;
+        if (item.selectedBrand || item.selectedModel) {
+          const vehicleParts = [];
+          if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
+          if (item.selectedModel) vehicleParts.push(item.selectedModel);
+          if (item.selectedYears) vehicleParts.push(`(${item.selectedYears})`);
+          line += `\n     └ 🚙 *Vehículo:* ${vehicleParts.join(' ')}`;
+        }
+        lines.push(line);
+      });
+    } else {
+      lines.push('📦 *Repuestos solicitados:*');
+      items.forEach((item, i) => {
+        let line = `  ${i + 1}. *${item.name}*`;
+        if (item.selectedBrand || item.selectedModel) {
+          const vehicleParts = [];
+          if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
+          if (item.selectedModel) vehicleParts.push(item.selectedModel);
+          if (item.selectedYears) vehicleParts.push(`(${item.selectedYears})`);
+          line += `\n     └ 🚙 *Vehículo:* ${vehicleParts.join(' ')}`;
+        }
+        lines.push(line);
+      });
     }
-
-    lines.push('📦 *Repuestos solicitados:*');
-    items.forEach((item, i) => {
-      let line = `  ${i + 1}. *${item.name}*`;
-      if (item.selectedBrand || item.selectedModel) {
-        const vehicleParts = [];
-        if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
-        if (item.selectedModel) vehicleParts.push(item.selectedModel);
-        if (item.selectedYears) vehicleParts.push(`(${item.selectedYears})`);
-        line += `\n     └ 🚙 *Vehículo:* ${vehicleParts.join(' ')}`;
-      } else if (item.compatibleBrands?.length) {
-        line += ` _[${item.compatibleBrands.slice(0, 3).join(', ')}]_`;
-      }
-      lines.push(line);
-    });
 
     if (notes && notes.trim()) {
       lines.push('');
-      lines.push('📝 *Consulta / Notas adicionales:*');
+      lines.push('💬 *Consulta o notas adicionales:*');
       lines.push(`"${notes.trim()}"`);
     }
 
@@ -107,7 +137,7 @@ export function QuoteCartProvider({ children }) {
   }, [items]);
 
   /* Format cart as email body (plain text, encoded by caller) */
-  const getEmailData = useCallback((notes = '', vehicle = '') => {
+  const getEmailData = useCallback((notes = '', vehicleData = null) => {
     const count = items.length;
     const subject = `Cotización de Repuestos (${count} ${count === 1 ? 'producto' : 'productos'}) - Innova Camionetas`;
     
@@ -118,25 +148,33 @@ export function QuoteCartProvider({ children }) {
       ''
     ];
 
-    if (vehicle && vehicle.trim()) {
-      lines.push(`Vehículo / Año o Patente: ${vehicle.trim()}`);
+    if (Array.isArray(vehicleData) && vehicleData.length > 0) {
+      vehicleData.forEach((vg, idx) => {
+        const numLabel = vehicleData.length > 1 ? `CAMIONETA ${idx + 1}: ` : 'CAMIONETA: ';
+        lines.push(`----------------------------------------`);
+        lines.push(`${numLabel}${vg.title}`);
+        if (vg.year) lines.push(`Año: ${vg.year}`);
+        if (vg.plate && vg.plate.trim()) lines.push(`Patente: ${vg.plate.trim().toUpperCase()}`);
+        lines.push('Repuestos:');
+        vg.items.forEach((item, itemIdx) => {
+          lines.push(`  ${itemIdx + 1}. ${item.name}`);
+        });
+        lines.push('');
+      });
+      lines.push(`----------------------------------------`);
+    } else if (typeof vehicleData === 'string' && vehicleData.trim()) {
+      lines.push(`Vehículo / Año o Patente: ${vehicleData.trim()}`);
       lines.push('');
+      lines.push('Lista de repuestos:');
+      items.forEach((item, i) => {
+        lines.push(`  ${i + 1}. ${item.name}`);
+      });
+    } else {
+      lines.push('Lista de repuestos:');
+      items.forEach((item, i) => {
+        lines.push(`  ${i + 1}. ${item.name}`);
+      });
     }
-
-    lines.push('Lista de repuestos:');
-    items.forEach((item, i) => {
-      let line = `  ${i + 1}. ${item.name}`;
-      if (item.selectedBrand || item.selectedModel) {
-        const vehicleParts = [];
-        if (item.selectedBrand) vehicleParts.push(item.selectedBrand);
-        if (item.selectedModel) vehicleParts.push(item.selectedModel);
-        if (item.selectedYears) vehicleParts.push(`(${item.selectedYears})`);
-        line += ` — Vehículo: ${vehicleParts.join(' ')}`;
-      } else if (item.compatibleBrands?.length) {
-        line += ` (Compatible con: ${item.compatibleBrands.slice(0, 3).join(', ')})`;
-      }
-      lines.push(line);
-    });
 
     if (notes && notes.trim()) {
       lines.push('');
