@@ -1,10 +1,11 @@
 /* ============================================================
    INNOVA CAMIONETAS — How To Quote (Paso a Paso)
-   4-Step intuitive guide designed for clarity and 40+ audience
+   Rediseño premium con timeline visual y tarjetas compactas
+   Optimizado para legibilidad 40+ y vista móvil
    ============================================================ */
 
 .how-to-quote {
-  padding: 64px 0 72px;
+  padding: 56px 0 60px;
   background-color: #FFFFFF;
   border-top: 1px solid var(--color-border);
   position: relative;
@@ -20,36 +21,36 @@
 /* ---- Header ---- */
 .how-to-quote__header {
   text-align: center;
-  max-width: 720px;
-  margin: 0 auto 48px;
+  max-width: 600px;
+  margin: 0 auto 40px;
 }
 
 .how-to-quote__tag {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--color-accent);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .how-to-quote__title {
   font-family: var(--font-heading);
-  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
   color: var(--color-text);
   line-height: 1.2;
   letter-spacing: -0.02em;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .how-to-quote__subtitle {
   font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .how-to-quote__subtitle strong {
@@ -57,106 +58,152 @@
   font-weight: 700;
 }
 
-/* ---- Grid de Pasos ---- */
-.how-to-quote__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+/* ============================================================
+   DESKTOP: Timeline horizontal con 4 pasos
+   ============================================================ */
+.how-to-quote__timeline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
   position: relative;
-  margin-bottom: 40px;
 }
 
-.how-to-quote__card {
-  position: relative;
-  background-color: var(--color-surface);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 24px 20px 22px;
+.how-to-quote__step {
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
-}
-
-.how-to-quote__card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-accent);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-  background-color: #FFFFFF;
-}
-
-.how-to-quote__card-top {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  position: relative;
+  flex: 1;
+  max-width: 260px;
 }
 
-.how-to-quote__number {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: var(--color-accent);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.how-to-quote__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+/* Número circular con borde de color */
+.how-to-quote__step-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.35rem;
-  box-shadow: var(--shadow-sm);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  margin-bottom: 14px;
 }
 
-.how-to-quote__card:hover .how-to-quote__icon {
-  background-color: #FFF7ED;
-  border-color: #FDBA74;
+.how-to-quote__step--orange .how-to-quote__step-circle {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
 }
 
-.how-to-quote__card-body {
-  flex-grow: 1;
-  margin-bottom: 16px;
+.how-to-quote__step--lime .how-to-quote__step-circle {
+  background: linear-gradient(135deg, #84CC16 0%, #65A30D 100%);
+}
+
+.how-to-quote__step-num {
+  line-height: 1;
+}
+
+/* Línea conectora horizontal entre pasos (desktop) */
+.how-to-quote__step-line {
+  position: absolute;
+  top: 19px;
+  left: calc(50% + 22px);
+  width: calc(100% - 44px);
+  height: 2px;
+  z-index: 1;
+}
+
+.how-to-quote__step--orange .how-to-quote__step-line {
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-lime) 100%);
+  opacity: 0.4;
+}
+
+.how-to-quote__step--lime .how-to-quote__step-line {
+  background: linear-gradient(90deg, var(--color-lime) 0%, var(--color-accent) 100%);
+  opacity: 0.4;
+}
+
+/* Tarjeta de contenido del paso */
+.how-to-quote__step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 18px 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  width: 100%;
+  transition: all 0.25s var(--ease-out);
+  cursor: default;
+}
+
+.how-to-quote__step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  border-color: transparent;
+}
+
+.how-to-quote__step--orange .how-to-quote__step-card:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.1);
+}
+
+.how-to-quote__step--lime .how-to-quote__step-card:hover {
+  border-color: rgba(132, 204, 22, 0.4);
+  box-shadow: 0 10px 28px rgba(132, 204, 22, 0.1);
+}
+
+/* Ícono dentro de la tarjeta */
+.how-to-quote__step-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.how-to-quote__step--orange .how-to-quote__step-icon {
+  background: #FFF7ED;
+  color: var(--color-accent);
+  border: 1px solid #FDBA74;
+}
+
+.how-to-quote__step--lime .how-to-quote__step-icon {
+  background: #F7FEE7;
+  color: var(--color-lime-hover);
+  border: 1px solid #BEF264;
+}
+
+.how-to-quote__step-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .how-to-quote__step-title {
   font-family: var(--font-heading);
-  font-size: 1.12rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-text);
-  line-height: 1.3;
-  margin-bottom: 8px;
+  line-height: 1.2;
 }
 
 .how-to-quote__step-desc {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: var(--color-text-secondary);
-  line-height: 1.55;
-}
-
-.how-to-quote__card-footer {
-  margin-top: auto;
-}
-
-.how-to-quote__step-pill {
-  display: inline-block;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #15803D;
-  background-color: #DCFCE7;
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.02em;
-}
-
-/* Conectores visuales entre pasos en desktop */
-.how-to-quote__connector {
-  display: none; /* Desactivado para mantener el grid limpio y simétrico */
+  line-height: 1.45;
 }
 
 /* ---- Bottom CTA ---- */
@@ -165,96 +212,200 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .how-to-quote__cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   background-color: var(--color-text);
   color: #FFFFFF;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  padding: 14px 32px;
+  padding: 12px 28px;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   transition: all var(--duration-fast) var(--ease-out);
 }
 
 .how-to-quote__cta-btn:hover {
   background-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
 }
 
-.how-to-quote__cta-arrow {
-  font-size: 1.2rem;
+.how-to-quote__cta-btn svg {
   transition: transform 0.2s ease;
 }
 
-.how-to-quote__cta-btn:hover .how-to-quote__cta-arrow {
+.how-to-quote__cta-btn:hover svg {
   transform: translateY(3px);
 }
 
-.how-to-quote__cta-sub {
-  font-size: 0.84rem;
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
-
-/* ---- Responsive ---- */
-@media (max-width: 1024px) {
-  .how-to-quote__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-}
-
-@media (max-width: 640px) {
+/* ============================================================
+   TABLET ≤ 768px — 2x2 Grid
+   ============================================================ */
+@media (max-width: 768px) {
   .how-to-quote {
-    padding: 44px 0 52px;
+    padding: 40px 0 44px;
   }
 
   .how-to-quote__header {
     margin-bottom: 28px;
-    text-align: left;
   }
 
-  .how-to-quote__grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .how-to-quote__timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
     margin-bottom: 28px;
   }
 
-  .how-to-quote__card {
-    padding: 16px;
-    border-radius: var(--radius-md);
+  .how-to-quote__step-line {
+    display: none;
   }
 
-  .how-to-quote__number {
-    font-size: 1.35rem;
+  .how-to-quote__step {
+    max-width: 100%;
   }
 
-  .how-to-quote__icon {
+  .how-to-quote__step-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+  }
+
+  .how-to-quote__step-card {
+    padding: 14px 10px 12px;
+    border-radius: 12px;
+  }
+
+  .how-to-quote__step-icon {
     width: 38px;
     height: 38px;
-    font-size: 1.15rem;
+    border-radius: 10px;
+    margin-bottom: 8px;
   }
 
   .how-to-quote__step-title {
-    font-size: 1.02rem;
+    font-size: 0.92rem;
   }
 
   .how-to-quote__step-desc {
-    font-size: 0.84rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ============================================================
+   SMARTPHONE ≤ 480px — Layout horizontal compacto tipo lista
+   Cada paso es una fila horizontal: círculo + ícono + texto
+   ============================================================ */
+@media (max-width: 480px) {
+  .how-to-quote {
+    padding: 32px 0 36px;
+  }
+
+  .how-to-quote__header {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .how-to-quote__title {
+    font-size: 1.4rem;
+  }
+
+  .how-to-quote__subtitle {
+    font-size: 0.88rem;
+  }
+
+  .how-to-quote__timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 20px;
+    padding-left: 22px;
+    position: relative;
+  }
+
+  /* Línea vertical de timeline al costado izquierdo */
+  .how-to-quote__timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      var(--color-accent) 0%,
+      var(--color-lime) 50%,
+      var(--color-accent) 100%
+    );
+    opacity: 0.3;
+    border-radius: 2px;
+  }
+
+  .how-to-quote__step {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    max-width: 100%;
+  }
+
+  .how-to-quote__step-circle {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .how-to-quote__step-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 10px;
+    gap: 10px;
+    flex: 1;
+    border-width: 1px;
+  }
+
+  .how-to-quote__step-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 8px;
+    margin-bottom: 0;
+  }
+
+  .how-to-quote__step-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .how-to-quote__step-info {
+    gap: 1px;
+  }
+
+  .how-to-quote__step-title {
+    font-size: 0.88rem;
+  }
+
+  .how-to-quote__step-desc {
+    font-size: 0.75rem;
+    line-height: 1.35;
   }
 
   .how-to-quote__cta-btn {
     width: 100%;
-    padding: 13px 20px;
-    font-size: 0.95rem;
+    padding: 11px 20px;
+    font-size: 0.9rem;
   }
 }
