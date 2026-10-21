@@ -1,5 +1,6 @@
 /* ============================================================
    INNOVA CAMIONETAS — Fondo Global con 2 Barras 3D Diagonales Cruzadas
+   De esquina superior derecha a esquina inferior izquierda
    Fijadas al viewport (siguen la vista del usuario en el scroll)
    Tanto para móvil como escritorio
    ============================================================ */
@@ -19,63 +20,65 @@
 .fixed-3d-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(55px);
-  opacity: 0.18;
+  filter: blur(65px);
+  opacity: 0.20;
   pointer-events: none;
 }
 
+/* Resplandor cálido en la zona superior derecha */
 .fixed-3d-glow--orange {
-  top: 25vh;
-  left: 15vw;
-  width: 500px;
-  height: 500px;
+  top: 10vh;
+  right: 5vw;
+  width: 550px;
+  height: 550px;
   background: radial-gradient(circle, #F97316 0%, transparent 70%);
 }
 
+/* Resplandor verde limón en la zona inferior izquierda */
 .fixed-3d-glow--lime {
-  top: 38vh;
-  left: 30vw;
-  width: 450px;
-  height: 450px;
+  bottom: 12vh;
+  left: 8vw;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle, #84CC16 0%, transparent 70%);
 }
 
-/* Track contenedor que flota suavemente */
+/* Track contenedor centrado que flota suavemente */
 .fixed-3d-track {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   /* Baseline individual transform properties with base identity */
-  translate: 0 0;
+  translate: -50% -50%;
   rotate: 0deg;
   scale: 1;
-  animation: fixedBarsFloat 9s ease-in-out infinite;
+  animation: fixedBarsFloat 10s ease-in-out infinite;
 }
 
 /* Estilo base de cada barra 3D */
 .fixed-3d-bar {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220vmax;
   border-radius: 6px;
   transform-style: preserve-3d;
   will-change: transform;
 }
 
-/* Barra 1: Naranja — Diagonal principal */
+/* Barra 1: Naranja — Diagonal principal de Superior Derecha a Inferior Izquierda */
 .fixed-3d-bar--orange {
-  width: 160vw;
-  height: 46px;
-  top: 36vh;
-  left: -30vw;
+  height: 48px;
   background: linear-gradient(135deg, #FF8A3D 0%, #F97316 45%, #EA580C 100%);
-  border-top: 2.5px solid rgba(255, 255, 255, 0.7);
+  border-top: 2.5px solid rgba(255, 255, 255, 0.72);
   border-left: 2px solid rgba(255, 255, 255, 0.45);
-  /* Transform individual y rotación diagonal */
-  translate: 0 0;
-  rotate: -22deg;
+  /* Centrado y rotación diagonal (-32deg) para ir de esquina sup. derecha a inf. izquierda */
+  translate: -50% -50%;
+  rotate: -32deg;
   scale: 1;
-  transform: skewX(-14deg);
+  transform: skewX(-12deg);
   transform-origin: center center;
   /* Extrusión 3D lateral en capas y resplandor */
   box-shadow: 
@@ -88,22 +91,19 @@
   z-index: 1;
 }
 
-/* Barra 2: Verde Limón — Diagonal cruzada que interseca a la naranja */
+/* Barra 2: Verde Limón — Diagonal cruzada (-26deg) que interseca a la naranja */
 .fixed-3d-bar--lime {
-  width: 160vw;
   height: 34px;
-  top: 42vh;
-  left: -30vw;
   background: linear-gradient(135deg, #BEF264 0%, #84CC16 50%, #65A30D 100%);
-  border-top: 2.5px solid rgba(255, 255, 255, 0.75);
+  border-top: 2.5px solid rgba(255, 255, 255, 0.78);
   border-left: 2px solid rgba(255, 255, 255, 0.5);
-  /* Transform individual y rotación diagonal cruzada opuesta */
-  translate: 0 0;
-  rotate: 18deg;
+  /* Centrado y rotación diagonal (-26deg) creando el cruce en 3D de sup. derecha a inf. izquierda */
+  translate: -50% -50%;
+  rotate: -26deg;
   scale: 1;
-  transform: skewX(12deg);
+  transform: skewX(-8deg);
   transform-origin: center center;
-  /* Extrusión 3D lateral en capas, sombra sobre la barra inferior y resplandor neón */
+  /* Extrusión 3D lateral en capas, sombra sobre la viga naranja y resplandor neón */
   box-shadow: 
     2px 2px 0 #65A30D,
     4px 4px 0 #4D7C0F,
@@ -126,13 +126,13 @@
   pointer-events: none;
 }
 
-/* Animación sutil de respiración flotante */
+/* Animación sutil de respiración flotante usando transformaciones individuales */
 @keyframes fixedBarsFloat {
   0%, 100% {
-    translate: 0 0;
+    translate: -50% -50%;
   }
   50% {
-    translate: 8px -12px;
+    translate: calc(-50% + 8px) calc(-50% - 10px);
   }
 }
 
@@ -143,29 +143,29 @@
 }
 
 /* ============================================================
-   RESPONSIVE MÓVIL
-   Ajuste de grosor, escala e inclinación para smartphones y tablets
+   RESPONSIVE MÓVIL (Orientación vertical de esquina a esquina)
+   Ajuste de inclinación más pronunciada (-54deg y -46deg)
+   para cruzar perfectamente de esquina sup. der. a inf. izq.
    ============================================================ */
 @media (max-width: 992px) {
   .fixed-3d-glow--orange {
-    top: 20vh;
-    left: 5vw;
-    width: 320px;
-    height: 320px;
+    top: 5vh;
+    right: 0vw;
+    width: 340px;
+    height: 340px;
   }
 
   .fixed-3d-glow--lime {
-    top: 32vh;
-    left: 20vw;
-    width: 280px;
-    height: 280px;
+    bottom: 8vh;
+    left: 2vw;
+    width: 300px;
+    height: 300px;
   }
 
   .fixed-3d-bar--orange {
-    height: 30px;
-    top: 32vh;
-    rotate: -24deg;
-    transform: skewX(-12deg);
+    height: 28px;
+    rotate: -54deg;
+    transform: skewX(-10deg);
     box-shadow: 
       2px 2px 0 #C2410C,
       4px 4px 0 #9A3412,
@@ -174,10 +174,9 @@
   }
 
   .fixed-3d-bar--lime {
-    height: 22px;
-    top: 38vh;
-    rotate: 18deg;
-    transform: skewX(10deg);
+    height: 20px;
+    rotate: -46deg;
+    transform: skewX(-8deg);
     box-shadow: 
       2px 2px 0 #4D7C0F,
       4px 4px 0 #365314,
@@ -188,14 +187,12 @@
 
 @media (max-width: 480px) {
   .fixed-3d-bar--orange {
-    height: 24px;
-    top: 28vh;
-    rotate: -26deg;
+    height: 22px;
+    rotate: -58deg;
   }
 
   .fixed-3d-bar--lime {
-    height: 18px;
-    top: 34vh;
-    rotate: 18deg;
+    height: 16px;
+    rotate: -50deg;
   }
 }
