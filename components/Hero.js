@@ -40,21 +40,6 @@ export default function Hero() {
         
         {/* Left Side: Content */}
         <div className="hero__content">
-          {/* 3D Diagonal Background Bars for Contrast & Depth */}
-          <div className="hero__backdrop-bars" aria-hidden="true">
-            <div className="hero__3d-bar hero__3d-bar--lime-accent" />
-            <div className="hero__3d-bar hero__3d-bar--orange">
-              <span className="hero__3d-bar-sheen" />
-            </div>
-            <div className="hero__3d-bar hero__3d-bar--lime">
-              <span className="hero__3d-bar-sheen" />
-            </div>
-            <div className="hero__3d-bar hero__3d-bar--dark">
-              <span className="hero__3d-bar-sheen" />
-            </div>
-            <div className="hero__3d-bar-glow" />
-          </div>
-
           <span 
             className="hero__tagline hero__animated" 
             style={{ '--stagger-index': 1 }}

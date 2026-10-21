@@ -364,3 +364,30 @@ input, textarea, select {
   background: var(--color-accent-subtle);
   color: var(--color-text);
 }
+
+
+/* ============================================================
+   Global 3D Backdrop Integration
+   Permite que las 2 barras 3D diagonales cruzadas se aprecien
+   en el fondo durante el scroll con legibilidad absoluta
+   ============================================================ */
+.hero,
+.how-to-quote,
+.brands,
+.about-us,
+.why-buy,
+.promo-carousel-section,
+.contact {
+  background-color: transparent !important;
+}
+
+.hero__container,
+.how-to-quote__container,
+.brands__container,
+.about-us__container,
+.why-buy__container,
+.promo-carousel-section .promo-carousel__container,
+.contact__container {
+  position: relative;
+  z-index: 2;
+}

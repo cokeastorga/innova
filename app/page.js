@@ -3,6 +3,7 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import Preloader from '@/components/Preloader';
 import Navbar from '@/components/Navbar';
+import Background3DBars from '@/components/Background3DBars';
 import Hero from '@/components/Hero';
 import HowToQuote from '@/components/HowToQuote';
 import Brands from '@/components/Brands';
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <>
       <Preloader />
+      <Background3DBars />
       <Navbar />
       <main>
         <Hero />

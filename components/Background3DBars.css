@@ -1,0 +1,201 @@
+/* ============================================================
+   INNOVA CAMIONETAS — Fondo Global con 2 Barras 3D Diagonales Cruzadas
+   Fijadas al viewport (siguen la vista del usuario en el scroll)
+   Tanto para móvil como escritorio
+   ============================================================ */
+
+.fixed-3d-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Ambient color glow diffusion */
+.fixed-3d-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.fixed-3d-glow--orange {
+  top: 25vh;
+  left: 15vw;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #F97316 0%, transparent 70%);
+}
+
+.fixed-3d-glow--lime {
+  top: 38vh;
+  left: 30vw;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #84CC16 0%, transparent 70%);
+}
+
+/* Track contenedor que flota suavemente */
+.fixed-3d-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Baseline individual transform properties with base identity */
+  translate: 0 0;
+  rotate: 0deg;
+  scale: 1;
+  animation: fixedBarsFloat 9s ease-in-out infinite;
+}
+
+/* Estilo base de cada barra 3D */
+.fixed-3d-bar {
+  position: absolute;
+  border-radius: 6px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Barra 1: Naranja — Diagonal principal */
+.fixed-3d-bar--orange {
+  width: 160vw;
+  height: 46px;
+  top: 36vh;
+  left: -30vw;
+  background: linear-gradient(135deg, #FF8A3D 0%, #F97316 45%, #EA580C 100%);
+  border-top: 2.5px solid rgba(255, 255, 255, 0.7);
+  border-left: 2px solid rgba(255, 255, 255, 0.45);
+  /* Transform individual y rotación diagonal */
+  translate: 0 0;
+  rotate: -22deg;
+  scale: 1;
+  transform: skewX(-14deg);
+  transform-origin: center center;
+  /* Extrusión 3D lateral en capas y resplandor */
+  box-shadow: 
+    2px 2px 0 #E05305,
+    4px 4px 0 #C2410C,
+    7px 7px 0 #9A3412,
+    10px 10px 0 #7C2D12,
+    16px 26px 45px rgba(249, 115, 22, 0.42),
+    0 6px 18px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+/* Barra 2: Verde Limón — Diagonal cruzada que interseca a la naranja */
+.fixed-3d-bar--lime {
+  width: 160vw;
+  height: 34px;
+  top: 42vh;
+  left: -30vw;
+  background: linear-gradient(135deg, #BEF264 0%, #84CC16 50%, #65A30D 100%);
+  border-top: 2.5px solid rgba(255, 255, 255, 0.75);
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  /* Transform individual y rotación diagonal cruzada opuesta */
+  translate: 0 0;
+  rotate: 18deg;
+  scale: 1;
+  transform: skewX(12deg);
+  transform-origin: center center;
+  /* Extrusión 3D lateral en capas, sombra sobre la barra inferior y resplandor neón */
+  box-shadow: 
+    2px 2px 0 #65A30D,
+    4px 4px 0 #4D7C0F,
+    7px 7px 0 #365314,
+    10px 10px 0 #28390F,
+    16px 26px 42px rgba(132, 204, 22, 0.4),
+    0 14px 28px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+}
+
+/* Reflejo y brillo especular a lo largo de las vigas */
+.fixed-3d-bar-sheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Animación sutil de respiración flotante */
+@keyframes fixedBarsFloat {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 8px -12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fixed-3d-track {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE MÓVIL
+   Ajuste de grosor, escala e inclinación para smartphones y tablets
+   ============================================================ */
+@media (max-width: 992px) {
+  .fixed-3d-glow--orange {
+    top: 20vh;
+    left: 5vw;
+    width: 320px;
+    height: 320px;
+  }
+
+  .fixed-3d-glow--lime {
+    top: 32vh;
+    left: 20vw;
+    width: 280px;
+    height: 280px;
+  }
+
+  .fixed-3d-bar--orange {
+    height: 30px;
+    top: 32vh;
+    rotate: -24deg;
+    transform: skewX(-12deg);
+    box-shadow: 
+      2px 2px 0 #C2410C,
+      4px 4px 0 #9A3412,
+      6px 6px 0 #7C2D12,
+      10px 18px 30px rgba(249, 115, 22, 0.38);
+  }
+
+  .fixed-3d-bar--lime {
+    height: 22px;
+    top: 38vh;
+    rotate: 18deg;
+    transform: skewX(10deg);
+    box-shadow: 
+      2px 2px 0 #4D7C0F,
+      4px 4px 0 #365314,
+      6px 6px 0 #28390F,
+      10px 18px 30px rgba(132, 204, 22, 0.36);
+  }
+}
+
+@media (max-width: 480px) {
+  .fixed-3d-bar--orange {
+    height: 24px;
+    top: 28vh;
+    rotate: -26deg;
+  }
+
+  .fixed-3d-bar--lime {
+    height: 18px;
+    top: 34vh;
+    rotate: 18deg;
+  }
+}

@@ -3,7 +3,7 @@
   margin-top: 80px;
   display: flex;
   align-items: center;
-  background-color: var(--color-bg);
+  background-color: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -17,6 +17,8 @@
   justify-content: space-between;
   gap: 64px;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .hero__content {
@@ -27,140 +29,6 @@
   gap: 24px;
   z-index: 2;
   position: relative;
-}
-
-/* ============================================================
-   3D Diagonal Contrast Bars (Naranjo & Verde Limón)
-   ============================================================ */
-.hero__backdrop-bars {
-  position: absolute;
-  top: -24px;
-  left: -36px;
-  pointer-events: none;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 580px;
-  /* Baseline individual transform properties with base identity */
-  translate: 0 0;
-  rotate: -12deg;
-  scale: 1;
-  transform: skewX(-14deg);
-  transform-origin: top left;
-  opacity: 0.94;
-  animation: heroBarsFloat 7s ease-in-out infinite;
-}
-
-.hero__3d-bar {
-  position: relative;
-  border-radius: 6px;
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease;
-  overflow: hidden;
-}
-
-/* Orange Bar — Main hero diagonal beam */
-.hero__3d-bar--orange {
-  width: 480px;
-  height: 42px;
-  background: linear-gradient(135deg, #FF8A3D 0%, #F97316 45%, #EA580C 100%);
-  border-top: 2px solid rgba(255, 255, 255, 0.65);
-  border-left: 2px solid rgba(255, 255, 255, 0.4);
-  /* 3D solid extruded side edges & ambient contrast glow */
-  box-shadow: 
-    2px 2px 0 #E05305,
-    4px 4px 0 #C2410C,
-    6px 6px 0 #9A3412,
-    8px 8px 0 #7C2D12,
-    14px 22px 36px rgba(249, 115, 22, 0.42),
-    0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* Lime Green Bar — Secondary energetic neon beam */
-.hero__3d-bar--lime {
-  width: 410px;
-  height: 28px;
-  margin-left: 36px;
-  background: linear-gradient(135deg, #BEF264 0%, #84CC16 50%, #65A30D 100%);
-  border-top: 2px solid rgba(255, 255, 255, 0.7);
-  border-left: 2px solid rgba(255, 255, 255, 0.45);
-  /* 3D solid extruded side edges & lime glow */
-  box-shadow: 
-    2px 2px 0 #65A30D,
-    4px 4px 0 #4D7C0F,
-    6px 6px 0 #365314,
-    14px 22px 34px rgba(132, 204, 22, 0.38),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-/* Dark Slate Motorsport Accent Bar — Depth anchor */
-.hero__3d-bar--dark {
-  width: 330px;
-  height: 12px;
-  margin-left: 80px;
-  background: linear-gradient(135deg, #2D3748 0%, #1A202C 60%, #0F1318 100%);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 
-    2px 2px 0 #181C22,
-    4px 4px 0 #101216,
-    6px 6px 0 #0A0D10,
-    10px 16px 26px rgba(0, 0, 0, 0.28);
-}
-
-/* Slim Lime Pinstripe — Speed dynamic accent */
-.hero__3d-bar--lime-accent {
-  width: 240px;
-  height: 6px;
-  margin-left: 55px;
-  background: linear-gradient(90deg, #A3E635 0%, #84CC16 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 
-    1px 1px 0 #65A30D,
-    2px 2px 0 #4D7C0F,
-    6px 8px 18px rgba(132, 204, 22, 0.35);
-}
-
-/* Gloss & light reflection sheen running across the 3D bars */
-.hero__3d-bar-sheen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-/* Ambient color aura diffusing behind the 3D bars */
-.hero__3d-bar-glow {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 120%;
-  height: 130%;
-  background: radial-gradient(ellipse at 35% 45%, rgba(249, 115, 22, 0.18) 0%, rgba(132, 204, 22, 0.14) 40%, transparent 72%);
-  filter: blur(32px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Smooth floating animation using individual transform properties */
-@keyframes heroBarsFloat {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 6px -10px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__backdrop-bars {
-    animation: none;
-  }
 }
 
 .hero__tagline {
@@ -184,7 +52,7 @@
   letter-spacing: -0.02em;
   position: relative;
   z-index: 2;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
 }
 
 .hero__title-highlight {
@@ -501,41 +369,6 @@
     text-align: center;
     align-items: center;
   }
-
-  .hero__backdrop-bars {
-    top: -10px;
-    left: 50%;
-    translate: -50% 0;
-    width: 380px;
-    rotate: -8deg;
-    transform: skewX(-10deg);
-    transform-origin: center center;
-    opacity: 0.85;
-    gap: 12px;
-  }
-
-  .hero__3d-bar--orange {
-    width: 320px;
-    height: 30px;
-  }
-
-  .hero__3d-bar--lime {
-    width: 270px;
-    height: 22px;
-    margin-left: 20px;
-  }
-
-  .hero__3d-bar--dark {
-    width: 220px;
-    height: 10px;
-    margin-left: 45px;
-  }
-
-  .hero__3d-bar--lime-accent {
-    width: 180px;
-    height: 5px;
-    margin-left: 30px;
-  }
   
   .hero__subtitle {
     margin: 0 auto;
@@ -552,36 +385,5 @@
   /* Se oculta la camioneta en móvil para una interfaz limpia, legible y ágil */
   .hero__visual {
     display: none !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero__backdrop-bars {
-    width: 290px;
-    top: -6px;
-    gap: 9px;
-  }
-
-  .hero__3d-bar--orange {
-    width: 260px;
-    height: 24px;
-  }
-
-  .hero__3d-bar--lime {
-    width: 210px;
-    height: 18px;
-    margin-left: 14px;
-  }
-
-  .hero__3d-bar--dark {
-    width: 170px;
-    height: 8px;
-    margin-left: 28px;
-  }
-
-  .hero__3d-bar--lime-accent {
-    width: 130px;
-    height: 4px;
-    margin-left: 20px;
   }
 }
